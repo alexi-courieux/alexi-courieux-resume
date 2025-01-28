@@ -1,0 +1,16 @@
+﻿{
+  "resume" : {
+    "experience": {
+      "title": "Experience",
+      "location": "Location",
+      "date": "Date",
+      "description": "Description"
+    },
+    "education": {
+      "title": "Education",
+      "location": "Location",
+      "date": "Date",
+      "description": "Description"
+    }
+  }
+}
