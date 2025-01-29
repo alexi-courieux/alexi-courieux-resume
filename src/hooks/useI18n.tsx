@@ -1,7 +1,7 @@
 ﻿import React, {
-  createContext,
+  createContext, useCallback,
   useContext,
-  useEffect,
+  useEffect, useMemo,
 } from "react";
 import { useTranslation } from "react-i18next";
 import {i18n, TFunction} from "i18next";
@@ -20,23 +20,23 @@ const defaultContextValue: IContextProps = {
   languages: {},
 };
 
-export const I18nContext = createContext<IContextProps>(defaultContextValue);
+const I18nContext = createContext<IContextProps>(defaultContextValue);
 
 interface I18nContextProviderProps {
   children: React.ReactNode;
 }
 
 export const I18nContextProvider : React.FC<I18nContextProviderProps> = ({ children }) => {
-  const languages = {
+  const languages = useMemo(() => ({
     en: { nativeName: "English" },
     fr: { nativeName: "Français" },
-  }
+  }), []);
 
   const { t, i18n } = useTranslation();
 
-  const onChangeLanguage = (language: string) => {
+  const onChangeLanguage = useCallback((language: string) => {
     i18n.changeLanguage(language);
-  }
+  }, [i18n]);
 
   useEffect(() => {
     // Check if the language is set in the URL
