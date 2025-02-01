@@ -30,3 +30,14 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/
           server-dir: public_html/
+          state-name: app_content
+
+      - name: Upload to FTP (public folder)
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: public/
+          server-dir: public_html/
+          state-name: public_content
