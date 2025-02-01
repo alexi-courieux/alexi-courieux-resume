@@ -1,5 +1,5 @@
 ﻿{
-  "resume" : {
+  "resume": {
     "about-me": {
       "title": "À propos de moi",
       "description": "Je suis un ingénieur logiciel passionné par le développement web. J'ai de l'expérience dans la construction d'applications web en utilisant des technologies modernes. Je suis un apprenant rapide et je suis toujours à la recherche de nouveaux défis.",
@@ -7,7 +7,7 @@
         "aria-label": "Ouvrir mon profil GitHub",
         "tooltip": "Ouvrir mon profil GitHub"
       },
-      "linkedin" : {
+      "linkedin": {
         "aria-label": "Ouvrir mon profil LinkedIn",
         "tooltip": "Ouvrir mon profil LinkedIn"
       }
@@ -24,7 +24,7 @@
           "image": "public/images/experience-exco.jpg",
           "image-alt": "Logo Exco FSE"
         },
-        "koedia" : {
+        "koedia": {
           "name": "Koedia",
           "position": "Intégrateur web",
           "date": "Septembre 2018 - Août 2019",
@@ -43,15 +43,15 @@
         "nbc": {
           "name": "Banque Nationale du Canada",
           "position": "Ingénieur logiciel",
-          "date": "Septembre 2022 - Mars 2023",
+          "date": "Septembre 2022 - Mai 2023",
           "description": "Développer et maintenir des applications web pour les clients. Travailler sur le front-end et le back-end des applications.",
           "image": "public/images/fr/experience-nbc.svg",
           "image-alt": "Logo Banque Nationale du Canada"
         },
-        "flo" : {
+        "flo": {
           "name": "Flo",
           "position": "Ingénieur logiciel",
-          "date": "Avril 2023 - Présent",
+          "date": "Juin 2023 - Présent",
           "description": "Développer et maintenir des applications web pour les clients. Travailler sur le front-end et le back-end des applications.",
           "image": "public/images/experience-flo.svg",
           "image-alt": "Logo Flo"
