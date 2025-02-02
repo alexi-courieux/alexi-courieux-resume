@@ -4,8 +4,8 @@
       "title": "About me",
       "description": "I am a software engineer with a passion for web development. I have experience in building web applications using modern technologies. I am a quick learner and I am always looking for new challenges.",
       "github": {
-        "aria-label": "Open my GitHub profile",
-        "tooltip": "Open my GitHub profile"
+        "aria-label": "Open my GitHub portfolio",
+        "tooltip": "See my GitHub portfolio"
       },
       "linkedin": {
         "aria-label": "Open my LinkedIn profile",
@@ -20,42 +20,51 @@
           "name": "Exco FSE",
           "position": "Software Engineer",
           "date": "December 2016 - September 2018",
-          "description": "Developed and maintained web applications for clients. Worked on the front-end and back-end of the applications.",
+          "description": "Developing and maintaining web applications for clients. This involves working closely with clients to understand their requirements and translating them into functional and visually appealing web applications.    Responsibilities include both front-end and back-end development, ensuring seamless integration between the two. On the front-end, tasks include designing user interfaces, implementing responsive design, and optimizing user experience.    On the back-end, tasks include setting up databases, creating APIs, and ensuring data security and integrity. Additionally, the role involves debugging and troubleshooting issues, performing regular updates and maintenance,    and staying up-to-date with the latest web development trends and technologies to continuously improve the applications.",
           "image": "public/images/experience-exco.jpg",
-          "image-alt": "Exco FSE logo"
+          "image-alt": "Exco FSE logo",
+          "shortDescription": "Developed and maintained web applications for clients. Worked on the front-end and back-end of the applications."
         },
         "koedia": {
           "name": "Koedia",
           "position": "Web integrator",
           "date": "September 2018 - August 2019",
-          "description": "Developing and maintaining web applications for clients. Working on the front-end and back-end of the applications.",
+          "description": "Developing and maintaining web applications for clients. This involves working closely with clients to understand their requirements and translating them into functional and visually appealing web applications.    Responsibilities include both front-end and back-end development, ensuring seamless integration between the two. On the front-end, tasks include designing user interfaces, implementing responsive design, and optimizing user experience.    On the back-end, tasks include setting up databases, creating APIs, and ensuring data security and integrity. Additionally, the role involves debugging and troubleshooting issues, performing regular updates and maintenance,    and staying up-to-date with the latest web development trends and technologies to continuously improve the applications.",
           "image": "public/images/experience-koedia.svg",
-          "image-alt": "Koedia logo"
+          "image-alt": "Koedia logo",
+          "shortDescription": "Developing and maintaining web applications for clients. Working on the front-end and back-end of the applications."
         },
         "csm": {
           "name": "Caisses Sociales de Monaco",
           "position": "Software Engineer",
           "date": "October 2019 - June 2022",
-          "description": "Developing and maintaining web applications for clients. Working on the front-end and back-end of the applications.",
-          "image": "public/images/experience-csm.jpg",
-          "image-alt": "Caisses Sociales de Monaco logo"
+          "description": "Developing and maintaining web applications for clients. This involves working closely with clients to understand their requirements and translating them into functional and visually appealing web applications.    Responsibilities include both front-end and back-end development, ensuring seamless integration between the two. On the front-end, tasks include designing user interfaces, implementing responsive design, and optimizing user experience.    On the back-end, tasks include setting up databases, creating APIs, and ensuring data security and integrity. Additionally, the role involves debugging and troubleshooting issues, performing regular updates and maintenance,    and staying up-to-date with the latest web development trends and technologies to continuously improve the applications.",
+          "image": "public/images/experience-csm.svg",
+          "image-alt": "Caisses Sociales de Monaco logo",
+          "shortDescription": "Developing and maintaining web applications for clients. Working on the front-end and back-end of the applications."
         },
         "nbc": {
           "name": "National Bank of Canada",
           "position": "Software Engineer",
           "date": "September 2022 - May 2023",
-          "description": "Developing and maintaining web applications for clients. Working on the front-end and back-end of the applications.",
+          "description": "Developing and maintaining web applications for clients. This involves working closely with clients to understand their requirements and translating them into functional and visually appealing web applications.    Responsibilities include both front-end and back-end development, ensuring seamless integration between the two. On the front-end, tasks include designing user interfaces, implementing responsive design, and optimizing user experience.    On the back-end, tasks include setting up databases, creating APIs, and ensuring data security and integrity. Additionally, the role involves debugging and troubleshooting issues, performing regular updates and maintenance,    and staying up-to-date with the latest web development trends and technologies to continuously improve the applications.",
           "image": "public/images/en/experience-nbc.svg",
-          "image-alt": "National Bank of Canada logo"
+          "image-alt": "National Bank of Canada logo",
+          "shortDescription": "Developing and maintaining web applications for clients. Working on the front-end and back-end of the applications."
         },
         "flo": {
           "name": "Flo",
           "position": "Software Engineer",
           "date": "June 2023 - Present",
-          "description": "Developing and maintaining web applications for clients. Working on the front-end and back-end of the applications.",
+          "description": "Developing and maintaining web applications for clients. This involves working closely with clients to understand their requirements and translating them into functional and visually appealing web applications.    Responsibilities include both front-end and back-end development, ensuring seamless integration between the two. On the front-end, tasks include designing user interfaces, implementing responsive design, and optimizing user experience.    On the back-end, tasks include setting up databases, creating APIs, and ensuring data security and integrity. Additionally, the role involves debugging and troubleshooting issues, performing regular updates and maintenance,    and staying up-to-date with the latest web development trends and technologies to continuously improve the applications.",
           "image": "public/images/experience-flo.svg",
-          "image-alt": "Flo logo"
+          "image-alt": "Flo logo",
+          "shortDescription": "Developing and maintaining web applications for clients. Working on the front-end and back-end of the applications."
         }
+      },
+      "modal": {
+        "position": "Position:",
+        "date": "Date:"
       }
     },
     "education": {

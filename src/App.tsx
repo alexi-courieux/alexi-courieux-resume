@@ -17,6 +17,7 @@ import {
 import {useI18n} from "./hooks/useI18n.tsx";
 import {links} from "./assets/links.ts";
 import Experiences from "./components/experiences.tsx";
+import { Height } from '@mui/icons-material';
 
 function App() {
 
@@ -126,9 +127,11 @@ const style = {
   },
   githubIcon: {
     color: 'black',
+    fontSize: 40,
   },
   linkedinIcon: {
     color: '#0A66C2',
+    fontSize: 40,
   }
 }
 
