@@ -17,7 +17,6 @@ import {
 import {useI18n} from "./hooks/useI18n.tsx";
 import {links} from "./assets/links.ts";
 import Experiences from "./components/experiences.tsx";
-import { Height } from '@mui/icons-material';
 
 function App() {
 

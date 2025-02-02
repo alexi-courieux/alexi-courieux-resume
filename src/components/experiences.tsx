@@ -1,6 +1,6 @@
-﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Modal, Stack, Typography } from "@mui/material";
+﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from "@mui/material";
 import { useI18n } from "../hooks/useI18n.tsx";
-import { FC, useCallback, useState } from "react";
+import { FC, useState } from "react";
 import ExperienceModal from "./experienceModal.tsx";
 
 interface IProps {

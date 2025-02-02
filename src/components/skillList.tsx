@@ -1,4 +1,4 @@
-import { Box, Chip, Divider, Tooltip } from "@mui/material";
+import { Box, Chip, Divider } from "@mui/material";
 import { FC } from "react";
 
 const SkillList: FC = () => {
