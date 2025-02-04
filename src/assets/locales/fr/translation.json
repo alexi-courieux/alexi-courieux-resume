@@ -21,7 +21,7 @@
           "position": "Ingénieur logiciel",
           "date": "Décembre 2016 - Septembre 2018",
           "description": "Développer et maintenir des applications Web pour les clients. \nCela implique de travailler en étroite collaboration avec les clients pour comprendre leurs exigences et les traduire en applications Web fonctionnelles et visuellement attrayantes.    \nLes responsabilités incluent à la fois le développement frontal et back-end, assurant une intégration transparente entre les deux. \nÀ l'avant, les tâches incluent la conception d'interfaces utilisateur, la mise en œuvre de la conception réactive et l'optimisation de l'expérience utilisateur.    \nSur le back-end, les tâches incluent la configuration des bases de données, la création d'API et la garantie de sécurité et d'intégrité des données. \nDe plus, le rôle consiste à déboguer et à dépanner les problèmes, à effectuer des mises à jour et une maintenance régulières, et à rester à jour avec les dernières tendances et technologies de développement Web pour améliorer en continu les applications.",
-          "image": "public/images/experience-exco.jpg",
+          "image": "images/experience-exco.jpg",
           "image-alt": "Logo Exco FSE",
           "shortDescription": "Développé et maintenu des applications web pour les clients. Travaillé sur le front-end et le back-end des applications."
         },
@@ -30,7 +30,7 @@
           "position": "Intégrateur web",
           "date": "Septembre 2018 - Août 2019",
           "description": "Développer et maintenir des applications Web pour les clients. \nCela implique de travailler en étroite collaboration avec les clients pour comprendre leurs exigences et les traduire en applications Web fonctionnelles et visuellement attrayantes.    \nLes responsabilités incluent à la fois le développement frontal et back-end, assurant une intégration transparente entre les deux. \nÀ l'avant, les tâches incluent la conception d'interfaces utilisateur, la mise en œuvre de la conception réactive et l'optimisation de l'expérience utilisateur.    \nSur le back-end, les tâches incluent la configuration des bases de données, la création d'API et la garantie de sécurité et d'intégrité des données. \nDe plus, le rôle consiste à déboguer et à dépanner les problèmes, à effectuer des mises à jour et une maintenance régulières, et à rester à jour avec les dernières tendances et technologies de développement Web pour améliorer en continu les applications.",
-          "image": "public/images/experience-koedia.svg",
+          "image": "images/experience-koedia.svg",
           "image-alt": "Logo Koedia",
           "shortDescription": "Développer et maintenir des applications web pour les clients. Travailler sur le front-end et le back-end des applications."
         },
@@ -39,7 +39,7 @@
           "position": "Ingénieur logiciel",
           "date": "Octobre 2019 - Juin 2022",
           "description": "Développer et maintenir des applications Web pour les clients. \nCela implique de travailler en étroite collaboration avec les clients pour comprendre leurs exigences et les traduire en applications Web fonctionnelles et visuellement attrayantes.    \nLes responsabilités incluent à la fois le développement frontal et back-end, assurant une intégration transparente entre les deux. \nÀ l'avant, les tâches incluent la conception d'interfaces utilisateur, la mise en œuvre de la conception réactive et l'optimisation de l'expérience utilisateur.    \nSur le back-end, les tâches incluent la configuration des bases de données, la création d'API et la garantie de sécurité et d'intégrité des données. \nDe plus, le rôle consiste à déboguer et à dépanner les problèmes, à effectuer des mises à jour et une maintenance régulières, et à rester à jour avec les dernières tendances et technologies de développement Web pour améliorer en continu les applications.",
-          "image": "public/images/experience-csm.svg",
+          "image": "images/experience-csm.svg",
           "image-alt": "Logo Caisses Sociales de Monaco",
           "shortDescription": "Développer et maintenir des applications web pour les clients. Travailler sur le front-end et le back-end des applications."
         },
@@ -48,7 +48,7 @@
           "position": "Ingénieur logiciel",
           "date": "Septembre 2022 - Mai 2023",
           "description": "Développer et maintenir des applications Web pour les clients. \nCela implique de travailler en étroite collaboration avec les clients pour comprendre leurs exigences et les traduire en applications Web fonctionnelles et visuellement attrayantes.    \nLes responsabilités incluent à la fois le développement frontal et back-end, assurant une intégration transparente entre les deux. \nÀ l'avant, les tâches incluent la conception d'interfaces utilisateur, la mise en œuvre de la conception réactive et l'optimisation de l'expérience utilisateur.    \nSur le back-end, les tâches incluent la configuration des bases de données, la création d'API et la garantie de sécurité et d'intégrité des données. \nDe plus, le rôle consiste à déboguer et à dépanner les problèmes, à effectuer des mises à jour et une maintenance régulières, et à rester à jour avec les dernières tendances et technologies de développement Web pour améliorer en continu les applications.",
-          "image": "public/images/fr/experience-nbc.svg",
+          "image": "images/fr/experience-nbc.svg",
           "image-alt": "Logo Banque Nationale du Canada",
           "shortDescription": "Développer et maintenir des applications web pour les clients. Travailler sur le front-end et le back-end des applications."
         },
@@ -57,7 +57,7 @@
           "position": "Ingénieur logiciel",
           "date": "Juin 2023 - Présent",
           "description": "Développer et maintenir des applications Web pour les clients. \nCela implique de travailler en étroite collaboration avec les clients pour comprendre leurs exigences et les traduire en applications Web fonctionnelles et visuellement attrayantes.    \nLes responsabilités incluent à la fois le développement frontal et back-end, assurant une intégration transparente entre les deux. \nÀ l'avant, les tâches incluent la conception d'interfaces utilisateur, la mise en œuvre de la conception réactive et l'optimisation de l'expérience utilisateur.    \nSur le back-end, les tâches incluent la configuration des bases de données, la création d'API et la garantie de sécurité et d'intégrité des données. \nDe plus, le rôle consiste à déboguer et à dépanner les problèmes, à effectuer des mises à jour et une maintenance régulières, et à rester à jour avec les dernières tendances et technologies de développement Web pour améliorer en continu les applications.",
-          "image": "public/images/experience-flo.svg",
+          "image": "images/experience-flo.svg",
           "image-alt": "Logo Flo",
           "shortDescription": "Développer et maintenir des applications web pour les clients. Travailler sur le front-end et le back-end des applications."
         }
@@ -65,7 +65,8 @@
       "modal": {
         "position": "Position :",
         "date": "Date :"
-      }
+      },
+      "loading": "Chargement des expériences"
     },
     "education": {
       "title": "Formations",
@@ -79,5 +80,8 @@
     "skills": {
       "title": "Compétences"
     }
+  },
+  "common": {
+    "loading": "Chargement"
   }
 }

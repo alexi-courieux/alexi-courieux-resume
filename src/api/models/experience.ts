@@ -1,9 +1,14 @@
 import { Skill } from "./skill";
 
-export interface Experience {
-    name: string;
-    date: Date;
+interface Experience {
+    company: string;
+    companyName: string;
+    position: string;
+    startDate: Date;
+    endDate: Date | null;
     shortDescription: string;
     longDescription: string;
     skills: Skill[];
 }
+
+export default Experience;
