@@ -1,11 +1,24 @@
 ﻿name: build-and-deploy
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+      clean-ftp:
+        description: 'Clean FTP server before uploading'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: production
+    environment: ${{ github.event.inputs.environment }}
 
     steps:
       - name: Checkout repository
@@ -33,6 +46,7 @@ jobs:
           local-dir: dist/
           server-dir: public_html/
           state-name: app_content
+          dangerous-clean-slate: ${{ github.event.inputs.clean-ftp }}
 
       - name: Upload to FTP (public folder)
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -43,3 +57,4 @@ jobs:
           local-dir: public/
           server-dir: public_html/public/
           state-name: public_content
+          dangerous-clean-slate: ${{ github.event.inputs.clean-ftp }}
