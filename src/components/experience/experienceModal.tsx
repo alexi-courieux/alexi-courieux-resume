@@ -1,4 +1,5 @@
-import { Modal, Box, CardMedia, Typography, Divider } from "@mui/material";
+import { Modal, Box, CardMedia, Typography, Divider, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import { t } from "i18next";
 import { FC } from "react";
 import SkillList from "./skillList";
@@ -36,6 +37,9 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
                     overflowY: "auto",
                 }}
             >
+                <IconButton onClick={() => setModalExperience(null)} sx={{ position: "absolute", top: 0, right: 0, fontSize: 40 }} aria-label={t("resume.experience.modal.close")}>
+                    <CloseIcon/>
+                </IconButton>
                 {modalExperience && (
                     <>
                         <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
@@ -44,7 +48,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
                                 height="140"
                                 image={t(getI18nKey(modalExperience.company, "image"))}
                                 alt={t(getI18nKey(modalExperience.company, "image-alt"))}
-                                sx={{ objectFit: "contain", mb: 2, width: "140px" }}
+                                sx={{ objectFit: "contain", mb: 2, maxWidth: "200px" }}
                             />
                             <Typography variant="h4" id="modal-title" gutterBottom sx={{flexGrow: 1, textAlign: "center"}}>
                                 {modalExperience.companyName}
@@ -59,7 +63,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
                                 {t("resume.experience.modal.date")} {modalExperience.startDate.toString()} - {modalExperience.endDate ? modalExperience.endDate.toString() : t("resume.experience.present")}
                             </Typography>
                             <Typography variant="body1" sx={{ mt: 2 }}>
-                                {t(getI18nKey(modalExperience.company, "description"))}
+                                {modalExperience.description}
                             </Typography>
                         </Box>
                         <Box sx={{ mt: 2 }}>

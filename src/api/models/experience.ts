@@ -7,7 +7,7 @@ interface Experience {
     startDate: Date;
     endDate: Date | null;
     shortDescription: string;
-    longDescription: string;
+    description: string;
     skills: Skill[];
 }
 

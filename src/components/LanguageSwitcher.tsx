@@ -11,6 +11,10 @@ const LanguageSwitcher: FC = () => {
             return
         }
         i18n.changeLanguage(language);
+        document.documentElement.lang = language;
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', language);
+        window.history.replaceState({}, '', url);
     };
 
     return (

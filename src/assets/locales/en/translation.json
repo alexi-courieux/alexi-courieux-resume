@@ -41,7 +41,8 @@
       },
       "modal": {
         "position": "Position:",
-        "date": "Date:"
+        "date": "Date:",
+        "close": "Close experience details"
       },
       "loading": "Loading experiences",
       "present": "Present",
