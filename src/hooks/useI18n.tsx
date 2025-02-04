@@ -1,18 +1,24 @@
 ﻿import React, {
   createContext, useCallback,
   useContext,
-  useEffect, useMemo,
+  useEffect,
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import {i18n, TFunction} from "i18next";
+
+export interface ILanguage {
+  key: string;
+  flag: string;
+  nativeName: string;
+}
 
 interface IContextProps {
   t: TFunction;
   i18n: i18n;
   loading: boolean; 
   onChangeLanguage: (language: string) => void;
-  languages: Record<string, { nativeName: string }>;
+  languages: ILanguage[];
   currentLanguage?: string;
 }
 
@@ -21,7 +27,10 @@ const defaultContextValue: IContextProps = {
   i18n: {} as i18n,
   loading: true,
   onChangeLanguage: () => {},
-  languages: {},
+  languages: [
+    { key: 'en', flag: 'gb', nativeName: 'English' },
+    { key: 'fr', flag: 'fr', nativeName: 'Français' }
+  ],
 };
 
 const defaultLanguage = 'en';
@@ -35,10 +44,10 @@ interface I18nContextProviderProps {
 export const I18nContextProvider : React.FC<I18nContextProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   
-  const languages = useMemo(() => ({
-    en: { nativeName: "English" },
-    fr: { nativeName: "Français" },
-  }), []);
+  const languages : ILanguage[] = [
+    { key: 'en', flag: 'gb', nativeName: 'English' },
+    { key: 'fr', flag: 'fr', nativeName: 'Français' }
+  ];
 
   const { t, i18n } = useTranslation();
 
@@ -47,16 +56,16 @@ export const I18nContextProvider : React.FC<I18nContextProviderProps> = ({ child
   }, [i18n]);
 
   useEffect(() => {
-    // Check if the language is set in the URL
+    // Check if the language is set in the URL, otherwise use the browser's language, otherwise use the default language
     const params = new URLSearchParams(window.location.search);
-    const preferedLanguage = window.navigator.languages.find((language) => Object.keys(languages).includes(language));
+    const preferedLanguage = window.navigator.languages.find((language) => languages.some(lang => lang.key === language));
     const lang = params.get("lang") || params.get("language") || params.get("lng") || preferedLanguage || defaultLanguage;
     
     onChangeLanguage(lang);
 
     setLoading(false);
 
-  }, [languages, onChangeLanguage]);
+  }, [onChangeLanguage]);
 
   return (
     <I18nContext.Provider value={{ t, i18n, loading, onChangeLanguage, languages }}>{children}</I18nContext.Provider>

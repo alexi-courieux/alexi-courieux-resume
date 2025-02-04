@@ -58,9 +58,12 @@
     },
     "skills": {
       "title": "Compétences"
-    }
+    },
+    "title": "CV Alexi Courieux"
   },
   "common": {
-    "loading": "Chargement"
+    "loading": "Chargement",
+    "retry": "Réessayer",
+    "error": "Une erreur inattendue s'est produite."
   }
 }

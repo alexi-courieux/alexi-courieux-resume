@@ -58,9 +58,12 @@
     },
     "skills": {
       "title": "Skills"
-    }
+    },
+    "title": "Alexi Courieux Resume"
   },
   "common": {
-    "loading": "Loading"
+    "loading": "Loading",
+    "retry": "Retry",
+    "error": "An unexpected error occured."
   }
 }

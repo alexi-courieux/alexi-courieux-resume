@@ -18,15 +18,36 @@ import {
 import { useI18n } from "./hooks/useI18n.tsx";
 import { links } from "./assets/links.ts";
 import Experiences from "./components/experience/experiences.tsx";
+import LanguageSwitcher from "./components/LanguageSwitcher";
+import { useEffect } from 'react';
+
+const style = {
+  container: {
+    marginTop: 4,
+  },
+  linkedinIcon: {
+    fontSize: 40, // Adjust the size as needed
+  },
+  githubIcon: {
+    fontSize: 40, // Adjust the size as needed
+  },
+  accordionContainer: {
+    marginTop: 2,
+  },
+};
 
 function App() {
+  const { t, i18n } = useI18n();
 
-  const { t } = useI18n();
+  useEffect(() => {
+    document.title = t("resume.title");
+  }, [i18n.language]);
 
   return (
     <Container maxWidth={"lg"} sx={style.container}>
       <Fade in={true} timeout={500}>
         <div>
+          <LanguageSwitcher />
           <Card>
             <CardHeader
               title="Alexi Courieux"
@@ -72,71 +93,14 @@ function App() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                malesuada lacus ex, sit amet blandit leo lobortis eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={true} sx={style.accordionContainer}>
-            <AccordionSummary
-              expandIcon={<ArrowDownwardIcon />}
-              aria-controls="panel3-content"
-              id="panel3-header"
-            >
-              <Typography component="span">{t("resume.projects.title")}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                malesuada lacus ex, sit amet blandit leo lobortis eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={true} sx={style.accordionContainer}>
-            <AccordionSummary
-              expandIcon={<ArrowDownwardIcon />}
-              aria-controls="panel4-content"
-              id="panel4-header"
-            >
-              <Typography component="span">{t("resume.skills.title")}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                malesuada lacus ex, sit amet blandit leo lobortis eget.
+                {/* Education content goes here */}
               </Typography>
             </AccordionDetails>
           </Accordion>
         </div>
       </Fade>
     </Container>
-  )
+  );
 }
 
-const style = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '20px',
-    backgroundColor: '#f5f5f5',
-  },
-  card: {
-    width: '100%',
-    marginBottom: '20px',
-  },
-  accordionContainer: {
-    width: '100%',
-  },
-  githubIcon: {
-    color: 'black',
-    fontSize: 40,
-  },
-  linkedinIcon: {
-    color: '#0A66C2',
-    fontSize: 40,
-  }
-}
-
-export default App
+export default App;

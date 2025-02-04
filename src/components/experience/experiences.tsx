@@ -6,6 +6,7 @@ import useExperienceApi from "../../hooks/useExperienceApi.tsx";
 import { State } from "../../models/requestState.ts";
 import Loading from "../loading.tsx";
 import Experience from "../../api/models/experience.ts";
+import Error from "../error.tsx";
 
 interface IProps {
   sx?: any;
@@ -19,7 +20,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
   }
 
   const [modalExperience, setModalExperience] = useState<Experience | null>(null);
-  const { experiences, getState } = useExperienceApi({ getOnLoad: true });
+  const { experiences, getState, list } = useExperienceApi({ getOnLoad: true });
 
   let content;
   switch (getState.state) {
@@ -54,9 +55,11 @@ const Experiences: FC<IProps> = ({ sx }) => {
           </Card>
           <Card sx={{ width: "300px", height: "450px", display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Typography variant="h6" color="error">
-                {t("resume.experience.error")}
-              </Typography>
+              <Fade in={true} timeout={1000}>
+                <div>
+                  <Error retryFunction={list} />
+                </div>
+              </Fade>
             </CardContent>
           </Card>
           <Card sx={{ width: "300px", height: "450px", display: "flex", flexDirection: "column" }}>
@@ -72,38 +75,38 @@ const Experiences: FC<IProps> = ({ sx }) => {
         <>
           {Array.isArray(experiences) && experiences.map((experience) => (
             <Fade in={true} key={experience.company} timeout={1000}>
-            <Card sx={{ width: "300px", height: "450px" }} key={experience.company}>
-              <CardActionArea
-                onClick={() => setModalExperience(experience)}
-                sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-                <CardMedia
-                  component="img"
-                  height="160"
-                  image={t(getI18nKey(experience.company, "image"))}
-                  aria-hidden={true}
-                  alt={t(getI18nKey(experience.company, "image-alt"))}
-                  sx={{ objectFit: "contain", padding: 2 }}
-                />
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Box display={"flex"} flexDirection={"column"} height={"100%"}>
-                    <Typography gutterBottom variant="h5" component="div" height={50} alignItems={"center"} display={"flex"} justifyContent={"center"}>
-                      {experience.companyName}
-                    </Typography>
-                    <Box height={60} alignItems={"center"} display={"flex"} justifyContent={"center"} flexDirection={"column"}>
-                      <Typography variant={"subtitle1"} color="text.secondary">
-                        {experience.position}
+              <Card sx={{ width: "300px", height: "450px" }} key={experience.company}>
+                <CardActionArea
+                  onClick={() => setModalExperience(experience)}
+                  sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+                  <CardMedia
+                    component="img"
+                    height="160"
+                    image={t(getI18nKey(experience.company, "image"))}
+                    aria-hidden={true}
+                    alt={t(getI18nKey(experience.company, "image-alt"))}
+                    sx={{ objectFit: "contain", padding: 2 }}
+                  />
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Box display={"flex"} flexDirection={"column"} height={"100%"}>
+                      <Typography gutterBottom variant="h5" component="div" height={50} alignItems={"center"} display={"flex"} justifyContent={"center"}>
+                        {experience.companyName}
                       </Typography>
-                      <Typography variant={"subtitle2"} color="text.secondary">
-                        {experience.startDate?.toString()} - {experience.endDate ? experience.endDate.toString() : t("resume.experience.present")}
+                      <Box height={60} alignItems={"center"} display={"flex"} justifyContent={"center"} flexDirection={"column"}>
+                        <Typography variant={"subtitle1"} color="text.secondary">
+                          {experience.position}
+                        </Typography>
+                        <Typography variant={"subtitle2"} color="text.secondary">
+                          {experience.startDate?.toString()} - {experience.endDate ? experience.endDate.toString() : t("resume.experience.present")}
+                        </Typography>
+                      </Box>
+                      <Typography variant="body2" sx={{ color: 'text.secondary', flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+                        {experience.shortDescription}
                       </Typography>
                     </Box>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', flexGrow: 1, display: 'flex', alignItems: 'center' }}>
-                      {experience.shortDescription}
-                    </Typography>
-                  </Box>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
             </Fade>
           ))}
         </>
@@ -111,7 +114,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
   }
   return (
     <>
-      <Stack direction={"row"} spacing={2} flexWrap={"wrap"} useFlexGap justifyContent={"center"} sx={{...sx}}>
+      <Stack direction={"row"} spacing={2} flexWrap={"wrap"} useFlexGap justifyContent={"center"} sx={{ ...sx }}>
         {content}
       </Stack>
       <ExperienceModal modalExperience={modalExperience} setModalExperience={setModalExperience} />

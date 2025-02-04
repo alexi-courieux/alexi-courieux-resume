@@ -12,6 +12,8 @@ interface UseExperienceApiProps {
 interface UseExperienceApiResult {
     experiences: Experience[] | Experience;
     getState: RequestState;
+    read: () => Promise<void>;
+    list: () => Promise<void>;
 }
 
 const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiProps): UseExperienceApiResult => {
@@ -59,9 +61,9 @@ const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiP
                 list();
             }
         }
-    }, [experienceId, i18n, i18nLoading, list, read]);
+    }, [experienceId, i18n.language, i18nLoading, list, read]);
 
-    return { experiences, getState };
+    return { experiences, getState, read, list };
 }
 
 export default useExperienceApi;
