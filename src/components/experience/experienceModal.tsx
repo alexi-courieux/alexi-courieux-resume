@@ -1,22 +1,23 @@
-import { Modal, Box, CardMedia, Typography } from "@mui/material";
+import { Modal, Box, CardMedia, Typography, Divider } from "@mui/material";
 import { t } from "i18next";
 import { FC } from "react";
 import SkillList from "./skillList";
+import Experience from "../../api/models/experience";
 
 interface IProps {
-    modalCompany: string | null;
-    setModalCompany: (company: string | null) => void;
+    modalExperience: Experience | null;
+    setModalExperience: (experience: Experience | null) => void;
 }
 
 const getI18nKey = (company: string, key: string) => {
     return `resume.experience.companies.${company}.${key}`;
 }
 
-const ExperienceModal: FC<IProps> = ({ modalCompany, setModalCompany }) => {
+const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModalExperience }) => {
     return (
         <Modal
-            open={modalCompany !== null}
-            onClose={() => setModalCompany(null)}
+            open={modalExperience !== null}
+            onClose={() => setModalExperience(null)}
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
         >
@@ -35,27 +36,30 @@ const ExperienceModal: FC<IProps> = ({ modalCompany, setModalCompany }) => {
                     overflowY: "auto",
                 }}
             >
-                {modalCompany && (
+                {modalExperience && (
                     <>
-                        <CardMedia
-                            component="img"
-                            height="140"
-                            image={t(getI18nKey(modalCompany, "image"))}
-                            alt={t(getI18nKey(modalCompany, "image-alt"))}
-                            sx={{ objectFit: "contain", mb: 2 }}
-                        />
-                        <Typography variant="h4" id="modal-title" gutterBottom>
-                            {t(getI18nKey(modalCompany, "name"))}
-                        </Typography>
+                        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                            <CardMedia
+                                component="img"
+                                height="140"
+                                image={t(getI18nKey(modalExperience.company, "image"))}
+                                alt={t(getI18nKey(modalExperience.company, "image-alt"))}
+                                sx={{ objectFit: "contain", mb: 2, width: "140px" }}
+                            />
+                            <Typography variant="h4" id="modal-title" gutterBottom sx={{flexGrow: 1, textAlign: "center"}}>
+                                {modalExperience.companyName}
+                            </Typography>
+                        </Box>
+                        <Divider />
                         <Box id="modal-description" sx={{ mt: 2 }}>
                             <Typography variant="h6" gutterBottom>
-                                {t("resume.experience.modal.position")} {t(getI18nKey(modalCompany, "position"))}
+                                {t("resume.experience.modal.position")} {modalExperience.position}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
-                                {t("resume.experience.modal.date")} {t(getI18nKey(modalCompany, "date"))}
+                                {t("resume.experience.modal.date")} {modalExperience.startDate.toString()} - {modalExperience.endDate ? modalExperience.endDate.toString() : t("resume.experience.present")}
                             </Typography>
                             <Typography variant="body1" sx={{ mt: 2 }}>
-                                {t(getI18nKey(modalCompany, "description"))}
+                                {t(getI18nKey(modalExperience.company, "description"))}
                             </Typography>
                         </Box>
                         <Box sx={{ mt: 2 }}>

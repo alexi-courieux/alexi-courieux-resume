@@ -6,13 +6,14 @@ import Typography from '@mui/material/Typography';
 
 interface ILoadingProps {
     messageKey?: string;
+    sx?: any;
 }
 
-const Loading : FC<ILoadingProps> = ({messageKey}) => {
+const Loading : FC<ILoadingProps> = ({messageKey, sx}) => {
     const { t } = useI18n();
 
     return (
-        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={sx}>
             <CircularProgress />
             <Typography variant="h6" style={{ marginTop: '16px' }}>
                 {messageKey ? t(messageKey) : t('common.loading')}
