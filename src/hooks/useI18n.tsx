@@ -4,7 +4,7 @@
   useEffect, useMemo,
   useState,
 } from "react";
-import { useSSR, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import {i18n, TFunction} from "i18next";
 
 interface IContextProps {
