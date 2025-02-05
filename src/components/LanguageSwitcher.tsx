@@ -2,7 +2,6 @@ import { FC } from "react";
 import { useI18n } from "../hooks/useI18n";
 import { Box, Button } from "@mui/material";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-
 const LanguageSwitcher: FC = () => {
     const { i18n, languages } = useI18n();
 
@@ -18,7 +17,7 @@ const LanguageSwitcher: FC = () => {
     };
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: "column", justifyContent: 'center', mb: 2 }}>
             {languages.map((language) => (
                 <Button key={language.key}
                     onClick={() => handleChange(language.key)}

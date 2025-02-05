@@ -16,11 +16,11 @@ const SkillList: FC = () => {
             </Box>
             <Divider sx={{ my: 2 }} />
             <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center" gap={1}>
-                <Chip label="Angular" color="info" variant="outlined" />
-                <Chip label="React" color="info" variant="outlined" />
-                <Chip label="Vue" color="info" variant="outlined" />
-                <Chip label="SQL" color="info" variant="outlined" />
-                <Chip label="MongoDB" color="info" variant="outlined" />
+                <Chip label="Angular" color="secondary" variant="filled" />
+                <Chip label="React" color="secondary" variant="filled" />
+                <Chip label="Vue" color="secondary" variant="filled" />
+                <Chip label="SQL" color="secondary" variant="filled" />
+                <Chip label="MongoDB" color="secondary" variant="filled" />
                 <Chip label="Node.js" variant="outlined" />
                 <Chip label="Express" variant="outlined" />
                 <Chip label="Spring" variant="outlined" />

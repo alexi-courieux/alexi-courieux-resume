@@ -4,7 +4,7 @@ import './index.css'
 import App from './App.tsx'
 
 import './i18n.tsx'
-import {I18nContextProvider} from "./hooks/useI18n.tsx";
+import {I18nContextProvider} from './contextProviders/I18nContextProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

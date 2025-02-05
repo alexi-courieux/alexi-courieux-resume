@@ -1,9 +1,9 @@
-import { Modal, Box, CardMedia, Typography, Divider, IconButton } from "@mui/material";
+import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { t } from "i18next";
 import { FC } from "react";
 import SkillList from "./skillList";
 import Experience from "../../api/models/experience";
+import { useI18n } from "../../hooks/useI18n";
 
 interface IProps {
     modalExperience: Experience | null;
@@ -15,6 +15,9 @@ const getI18nKey = (company: string, key: string) => {
 }
 
 const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModalExperience }) => {
+    const { t } = useI18n();
+    const theme = useTheme();
+
     return (
         <Modal
             open={modalExperience !== null}
@@ -29,7 +32,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     width: { xs: "90%", md: "60%" },
-                    bgcolor: "background.paper",
+                    bgcolor: theme.palette.background.default,
                     boxShadow: 24,
                     borderRadius: 2,
                     p: 4,
