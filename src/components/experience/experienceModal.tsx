@@ -49,8 +49,8 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image={t(getI18nKey(modalExperience.company, "image"))}
-                                alt={t(getI18nKey(modalExperience.company, "image-alt"))}
+                                image={t(getI18nKey(modalExperience.id, "image"))}
+                                alt={t(getI18nKey(modalExperience.id, "image-alt"))}
                                 sx={{ objectFit: "contain", mb: 2, maxWidth: "200px" }}
                             />
                             <Typography variant="h4" id="modal-title" gutterBottom sx={{flexGrow: 1, textAlign: "center"}}>

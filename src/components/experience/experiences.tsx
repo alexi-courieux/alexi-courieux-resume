@@ -74,17 +74,17 @@ const Experiences: FC<IProps> = ({ sx }) => {
       content = (
         <>
           {Array.isArray(experiences) && experiences.map((experience) => (
-            <Fade in={true} key={experience.company} timeout={1000}>
-              <Card sx={{ width: "300px", height: "450px" }} key={experience.company}>
+            <Fade in={true} key={experience.id} timeout={1000}>
+              <Card sx={{ width: "300px", height: "450px" }} key={experience.id}>
                 <CardActionArea
                   onClick={() => setModalExperience(experience)}
                   sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
                   <CardMedia
                     component="img"
                     height="160"
-                    image={t(getI18nKey(experience.company, "image"))}
+                    image={t(getI18nKey(experience.id, "image"))}
                     aria-hidden={true}
-                    alt={t(getI18nKey(experience.company, "image-alt"))}
+                    alt={t(getI18nKey(experience.id, "image-alt"))}
                     sx={{ objectFit: "contain", padding: 2 }}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>

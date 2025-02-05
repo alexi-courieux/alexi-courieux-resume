@@ -1,7 +1,7 @@
 import { Skill } from "./skill";
 
 interface Experience {
-    company: string;
+    id: string;
     companyName: string;
     position: string;
     startDate: Date;

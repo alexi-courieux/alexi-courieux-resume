@@ -30,7 +30,7 @@ export const getExperiences = async (language?: string): Promise<Experience[]> =
         }
 
         // Optionally, you can add more validation for each item in the array
-        const requiredFields = ['company', 'position', 'companyName', 'startDate', 'shortDescription', 'description'];
+        const requiredFields = ['id', 'position', 'companyName', 'startDate', 'shortDescription', 'description'];
         data.forEach((item) => {
             requiredFields.forEach((field) => {
                 if (!item[field]) {
