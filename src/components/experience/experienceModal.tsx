@@ -1,9 +1,13 @@
 import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { FC } from "react";
-import SkillList from "./skillList";
+import { FC, useEffect } from "react";
+import SkillList from "./SkillList";
 import Experience from "../../api/models/experience";
 import { useI18n } from "../../hooks/useI18n";
+import useSkillApi from "../../hooks/useSkillApi";
+import Loading from "../loading";
+import { State } from "../../models/requestState";
+import Error from "../error";
 
 interface IProps {
     modalExperience: Experience | null;
@@ -17,6 +21,26 @@ const getI18nKey = (company: string, key: string) => {
 const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModalExperience }) => {
     const { t } = useI18n();
     const theme = useTheme();
+    const { list: listSkills, getState: getSkillsState, skills } = useSkillApi({});
+
+    useEffect(() => {
+        if (modalExperience) {
+            listSkills(modalExperience.id);
+        }
+    }, [modalExperience, listSkills]);
+
+    let skillContent;
+    switch (getSkillsState.state) {
+        case State.PENDING:
+            skillContent = <Loading messageKey="resume.experience.loading-skills" />;
+            break;
+        case State.FAILURE:
+            skillContent = <Error retryFunction={() => listSkills(modalExperience?.id)} />;
+            break;
+        case State.SUCCESS:
+            skillContent = <SkillList skills={skills} />;
+            break;
+    }
 
     return (
         <Modal
@@ -41,7 +65,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
                 }}
             >
                 <IconButton onClick={() => setModalExperience(null)} sx={{ position: "absolute", top: 0, right: 0, fontSize: 40 }} aria-label={t("resume.experience.modal.close")}>
-                    <CloseIcon/>
+                    <CloseIcon />
                 </IconButton>
                 {modalExperience && (
                     <>
@@ -53,7 +77,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
                                 alt={t(getI18nKey(modalExperience.id, "image-alt"))}
                                 sx={{ objectFit: "contain", mb: 2, maxWidth: "200px" }}
                             />
-                            <Typography variant="h4" id="modal-title" gutterBottom sx={{flexGrow: 1, textAlign: "center"}}>
+                            <Typography variant="h4" id="modal-title" gutterBottom sx={{ flexGrow: 1, textAlign: "center" }}>
                                 {modalExperience.companyName}
                             </Typography>
                         </Box>
@@ -69,8 +93,11 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
                                 {modalExperience.description}
                             </Typography>
                         </Box>
+                        <Typography variant="h6" sx={{ mt: 2 }}>
+                            {t("resume.experience.modal.skills")}
+                        </Typography>
                         <Box sx={{ mt: 2 }}>
-                            <SkillList />
+                            {skillContent}
                         </Box>
                     </>
                 )}

@@ -31,7 +31,7 @@ const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiP
             console.error('Error fetching experiences:', error);
             setGetState({ state: State.FAILURE, error: error });
         }
-    }, []);
+    }, [i18n.language]);
 
     const read = useCallback(async () => {
         if (!experienceId) {
@@ -47,7 +47,7 @@ const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiP
             console.error('Error fetching experience:', error);
             setGetState({ state: State.FAILURE, error: error });
         }
-    }, [experienceId]);
+    }, [experienceId, i18n.language]);
 
     useEffect(() => {
         if (getOnLoad) {
@@ -61,7 +61,7 @@ const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiP
                 list();
             }
         }
-    }, [experienceId, i18n.language, i18nLoading, list, read]);
+    }, [experienceId, i18n, i18n.language, i18nLoading, list, read, getOnLoad]);
 
     return { experiences, getState, read, list };
 }

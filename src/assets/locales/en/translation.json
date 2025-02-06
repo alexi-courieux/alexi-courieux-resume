@@ -58,7 +58,9 @@
       "title": "Projects"
     },
     "skills": {
-      "title": "Skills"
+      "title": "Skills",
+      "clickFilter": "Click on a category to filter skills",
+      "hideUnselected": "Hide"
     },
     "title": "Alexi Courieux Resume"
   },

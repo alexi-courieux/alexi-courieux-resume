@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { useI18n } from "./hooks/useI18n.tsx";
 import { links } from "./assets/links.ts";
-import Experiences from "./components/experience/experiences.tsx";
+import Experiences from "./components/experience/Experiences.tsx";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useEffect } from 'react';
 import { ThemeProvider } from './contextProviders/ThemeContextProvider.tsx';
@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     document.title = t("resume.title");
-  }, [i18n.language]);
+  }, [i18n.language, t]);
 
   return (
     <ThemeProvider>
@@ -52,7 +52,7 @@ function App() {
         <ThemeModeSwitcher />
         <LanguageSwitcher />
       </Box>
-      <Container maxWidth={"lg"} sx={style.container}>
+      <Container maxWidth={"xl"} sx={style.container}>
         <Fade in={true} timeout={500}>
           <div>
             <Card>

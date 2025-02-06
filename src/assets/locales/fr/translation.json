@@ -58,7 +58,9 @@
       "title": "Projets"
     },
     "skills": {
-      "title": "Compétences"
+      "title": "Compétences",
+      "clickFilter": "Cliquez sur une catégorie pour filtrer les compétences",
+      "hideUnselected": "Masquer"
     },
     "title": "CV Alexi Courieux"
   },
