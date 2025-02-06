@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { useI18n } from "./hooks/useI18n.tsx";
 import { links } from "./assets/links.ts";
-import Experiences from "./components/experience/Experiences.tsx";
+import Experiences from "./components/experience/experiences.tsx";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useEffect } from 'react';
 import { ThemeProvider } from './contextProviders/ThemeContextProvider.tsx';

@@ -1,7 +1,7 @@
 import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { FC, useEffect } from "react";
-import SkillList from "./SkillList";
+import SkillList from "./skillList";
 import Experience from "../../api/models/experience";
 import { useI18n } from "../../hooks/useI18n";
 import useSkillApi from "../../hooks/useSkillApi";

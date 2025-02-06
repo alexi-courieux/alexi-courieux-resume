@@ -1,7 +1,7 @@
 ﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Fade, Stack, Typography } from "@mui/material";
 import { useI18n } from "../../hooks/useI18n.tsx";
 import { FC, useState } from "react";
-import ExperienceModal from "./ExperienceModal.tsx";
+import ExperienceModal from "./experienceModal.tsx";
 import useExperienceApi from "../../hooks/useExperienceApi.tsx";
 import { State } from "../../models/requestState.ts";
 import Loading from "../loading.tsx";
