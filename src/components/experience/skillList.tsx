@@ -1,4 +1,4 @@
-import { Box, Chip, FormControlLabel, FormGroup, Switch, ToggleButton, Typography } from "@mui/material";
+import { Box, Chip, FormControlLabel, FormGroup, Switch, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { Skill } from "../../api/models/skill";
 import { useI18n } from "../../hooks/useI18n";
@@ -21,17 +21,22 @@ const SkillList: FC<ISkillListProps> = ({ skills }) => {
     const { t } = useI18n();
 
     useEffect(() => {
-        const categories = skills.reduce((acc: Category[], skill) => {
-            const category = acc.find((category) => category.name === skill.category);
-            if (category) {
-                category.skills.push(skill);
-            }
-            else {
-                acc.push({ name: skill.category, skills: [skill] });
-            }
-            return acc;
-        }, []);
-        setCategories(categories);
+        const categoryMap: { [key: string]: Skill[] } = {};
+        skills.forEach(skill => {
+            skill.categories.forEach(categoryName => {
+                if (!categoryMap[categoryName]) {
+                    categoryMap[categoryName] = [];
+                }
+                categoryMap[categoryName].push(skill);
+            });
+        });
+
+        const newCategories = Object.keys(categoryMap).map(categoryName => ({
+            name: categoryName,
+            skills: categoryMap[categoryName],
+        }));
+
+        setCategories(newCategories);
     }, [skills]);
 
     const handleClickAddCategory = (categoryName: string) => {
@@ -47,7 +52,7 @@ const SkillList: FC<ISkillListProps> = ({ skills }) => {
     return (
         <>
             <Typography variant="h6" align="center" gutterBottom>
-                {t('resume.skills.clickFilter')}
+                {t('resume.skill.clickFilter')}
             </Typography>
             <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center" gap={1} mb={2}>
                 {categories.map((category) => {
@@ -59,15 +64,16 @@ const SkillList: FC<ISkillListProps> = ({ skills }) => {
                     }
                 })}
                 <FormGroup>
-                    <FormControlLabel control={<Switch value={hideUnselected} onChange={(e) => setHideUnselected(e.target.checked)} />} label={t("resume.skills.hideUnselected")} />
+                    <FormControlLabel control={<Switch value={hideUnselected} onChange={(e) => setHideUnselected(e.target.checked)} />} label={t("resume.skill.hideUnselected")} />
                 </FormGroup>
             </Box>
             <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center" gap={1}>
                 {skills.map((skill) => {
-                    if (hideUnselected && !activeCategories.includes(skill.category)) {
+                    const isActive = activeCategories.some(category => skill.categories.includes(category));
+                    if (hideUnselected && !isActive) {
                         return null;
                     }
-                    return <Chip key={skill.id} label={skill.name + " " + skill.category} color="secondary" variant={activeCategories.includes(skill.category) ? "filled" : "outlined"} />
+                    return <Chip key={skill.id} label={skill.name} color="secondary" variant={isActive ? "filled" : "outlined"} />
                 })}
             </Box>
         </>

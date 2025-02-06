@@ -32,7 +32,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
     let skillContent;
     switch (getSkillsState.state) {
         case State.PENDING:
-            skillContent = <Loading messageKey="resume.experience.loading-skills" />;
+            skillContent = <Loading messageKey="resume.skill.loading" />;
             break;
         case State.FAILURE:
             skillContent = <Error retryFunction={() => listSkills(modalExperience?.id)} />;

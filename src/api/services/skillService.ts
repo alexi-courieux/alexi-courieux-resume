@@ -15,7 +15,7 @@ export const getExperienceSkills = async (experienceId: string, language?: strin
             params: {
                 language,
             },
-            timeout: 5 * 1000,
+            timeout: 10 * 1000,
         });
 
         // Check if the response status is 200
@@ -30,7 +30,7 @@ export const getExperienceSkills = async (experienceId: string, language?: strin
         }
 
         // Optionally, you can add more validation for each item in the array
-        const requiredFields = ['id', 'name', 'category'];
+        const requiredFields = ['id', 'name', 'categories'];
         data.forEach((item) => {
             requiredFields.forEach((field) => {
                 if (!item[field]) {
@@ -69,7 +69,7 @@ export const getSkills = async (language?: string): Promise<Skill[]> => {
             params: {
                 language,
             },
-            timeout: 5 * 1000,
+            timeout: 10 * 1000,
         });
 
         // Check if the response status is 200
@@ -78,7 +78,7 @@ export const getSkills = async (language?: string): Promise<Skill[]> => {
         }
 
         // Validate the response data structure
-        const requiredFields = ['id', 'name', 'category'];
+        const requiredFields = ['id', 'name', 'categories'];
         const data = response.data;
         requiredFields.forEach((field) => {
             if (!data[field]) {

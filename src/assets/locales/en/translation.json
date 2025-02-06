@@ -42,7 +42,8 @@
       "modal": {
         "position": "Position:",
         "date": "Date:",
-        "close": "Close experience details"
+        "close": "Close experience details",
+        "skills": "Skills"
       },
       "loading": "Loading experiences",
       "present": "Present",
@@ -57,10 +58,11 @@
     "projects": {
       "title": "Projects"
     },
-    "skills": {
+    "skill": {
       "title": "Skills",
       "clickFilter": "Click on a category to filter skills",
-      "hideUnselected": "Hide"
+      "hideUnselected": "Hide",
+      "loading": "Loading skills"
     },
     "title": "Alexi Courieux Resume"
   },

@@ -17,12 +17,10 @@
       "location": "Lieu",
       "companies": {
         "exco": {
-          "description": "Développer et maintenir des applications Web pour les clients. \nCela implique de travailler en étroite collaboration avec les clients pour comprendre leurs exigences et les traduire en applications Web fonctionnelles et visuellement attrayantes.    \nLes responsabilités incluent à la fois le développement frontal et back-end, assurant une intégration transparente entre les deux. \nÀ l'avant, les tâches incluent la conception d'interfaces utilisateur, la mise en œuvre de la conception réactive et l'optimisation de l'expérience utilisateur.    \nSur le back-end, les tâches incluent la configuration des bases de données, la création d'API et la garantie de sécurité et d'intégrité des données. \nDe plus, le rôle consiste à déboguer et à dépanner les problèmes, à effectuer des mises à jour et une maintenance régulières, et à rester à jour avec les dernières tendances et technologies de développement Web pour améliorer en continu les applications.",
           "image": "images/experience-exco.jpg",
           "image-alt": "Logo Exco FSE"
         },
         "koedia": {
-          "position": "Intégrateur web",
           "image": "images/experience-koedia.svg",
           "image-alt": "Logo Koedia"
         },
@@ -42,7 +40,8 @@
       "modal": {
         "position": "Position :",
         "date": "Date :",
-        "close": "Fermer les informations sur l'expérience"
+        "close": "Fermer les informations sur l'expérience",
+        "skills": "Compétences"
       },
       "loading": "Chargement des expériences",
       "present": "Aujourd'hui",
@@ -57,10 +56,11 @@
     "projects": {
       "title": "Projets"
     },
-    "skills": {
+    "skill": {
       "title": "Compétences",
       "clickFilter": "Cliquez sur une catégorie pour filtrer les compétences",
-      "hideUnselected": "Masquer"
+      "hideUnselected": "Masquer",
+      "loading": "Chargement des compétences"
     },
     "title": "CV Alexi Courieux"
   },
