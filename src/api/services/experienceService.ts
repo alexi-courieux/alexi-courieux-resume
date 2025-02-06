@@ -1,12 +1,26 @@
 import axios, { HttpStatusCode } from 'axios';
 import Experience from '../models/experience';
 import ApiError from '../models/apiError';
+import axiosRetry from 'axios-retry';
 
 const API_URL = (import.meta.env.VITE_API_URL || '') + '/v1/experience/';
 
 if (!import.meta.env.VITE_API_URL) {
     throw new Error('VITE_API_URL is not defined in the environment variables');
 }
+
+// Configure axios-retry
+axiosRetry(axios, {
+    retries: 3, // Number of retry attempts
+    retryDelay: (retryCount) => {
+        return retryCount * 1000; // Time between retries in milliseconds
+    },
+    retryCondition: (error) => {
+        // Retry on network errors or 5xx status codes
+        return axiosRetry.isNetworkOrIdempotentRequestError(error) || error.response?.status === HttpStatusCode.InternalServerError;
+    },
+});
+
 
 export const getExperiences = async (language?: string): Promise<Experience[]> => {
     try {
