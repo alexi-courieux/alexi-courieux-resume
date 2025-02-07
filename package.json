@@ -18,6 +18,8 @@
     "@mui/material": "^6.4.0",
     "axios": "^1.7.9",
     "axios-retry": "^4.5.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "flag-icons": "^7.3.2",
     "i18next": "^24.2.2",
     "i18next-localstorage-cache": "^1.1.1",

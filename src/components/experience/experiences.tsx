@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const Experiences: FC<IProps> = ({ sx }) => {
-  const { t } = useI18n();
+  const { t, formatDate } = useI18n();
 
   const getI18nKey = (company: string, key: string) => {
     return `resume.experience.companies.${company}.${key}`;
@@ -97,7 +97,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
                           {experience.position}
                         </Typography>
                         <Typography variant={"subtitle2"} color="text.secondary">
-                          {experience.startDate?.toString()} - {experience.endDate ? experience.endDate.toString() : t("resume.experience.present")}
+                          {formatDate(experience.startDate, "MMMM yyyy", true)} - {experience.endDate ? formatDate(experience.endDate, "MMMM yyyy", true) : t("resume.experience.present")}
                         </Typography>
                       </Box>
                       <Typography variant="body2" sx={{ color: 'text.secondary', flexGrow: 1, display: 'flex', alignItems: 'center' }}>

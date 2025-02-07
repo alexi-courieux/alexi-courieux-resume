@@ -19,7 +19,7 @@ const getI18nKey = (company: string, key: string) => {
 }
 
 const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModalExperience }) => {
-    const { t } = useI18n();
+    const { t, formatDate } = useI18n();
     const theme = useTheme();
     const { list: listSkills, getState: getSkillsState, skills } = useSkillApi({});
 
@@ -87,7 +87,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
                                 {t("resume.experience.modal.position")} {modalExperience.position}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
-                                {t("resume.experience.modal.date")} {modalExperience.startDate.toString()} - {modalExperience.endDate ? modalExperience.endDate.toString() : t("resume.experience.present")}
+                                {t("resume.experience.modal.date")} {formatDate(modalExperience.startDate, "MMMM yyyy", true)} - {modalExperience.endDate ? formatDate(modalExperience.endDate, "MMMM yyyy", true) : t("resume.experience.present")}
                             </Typography>
                             <Typography variant="body1" sx={{ mt: 2 }}>
                                 {modalExperience.description}
