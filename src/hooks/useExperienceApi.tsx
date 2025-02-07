@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import RequestState, { State } from "../models/requestState";
 import { useI18n } from "./useI18n";
-import { ExperienceSchema, listExperiencesV1ExperienceGet, readExperienceV1ExperienceCompanyGet } from "../api/generated";
+import { ExperienceSchema } from "../api/generated";
+import { getExperience, getExperiences } from "../api/services/experienceService";
+import { dateSort } from "../utils/sort";
 
 interface UseExperienceApiProps {
     experienceId?: string;
@@ -23,14 +25,15 @@ const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiP
     const list = useCallback(async () => {
         setGetState({ state: State.PENDING, error: undefined });
         try {
-            const experiences = await listExperiencesV1ExperienceGet({ query: { language: i18n.language } });
-            setExperiences(experiences.data);
+            const experiences = await getExperiences(i18n.language);
+            const sortedExperiences = experiences.sort((a, b) => dateSort(a.startDate, b.startDate, true));
+            setExperiences(sortedExperiences);
             setGetState({ state: State.SUCCESS, error: undefined });
         } catch (error) {
             console.error('Error fetching experiences:', error);
             setGetState({ state: State.FAILURE, error: error });
         }
-    }, [i18n.language]);
+    }, []);
 
     const read = useCallback(async () => {
         if (!experienceId) {
@@ -39,8 +42,8 @@ const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiP
 
         setGetState({ state: State.PENDING, error: undefined });
         try {
-            const experience = await readExperienceV1ExperienceCompanyGet({ path: { company: experienceId }, query: { language: i18n.language } });
-            setExperiences(experience.data);
+            const experience = await getExperience(experienceId, i18n.language);
+            setExperiences(experience);
             setGetState({ state: State.SUCCESS, error: undefined });
         } catch (error) {
             console.error('Error fetching experience:', error);

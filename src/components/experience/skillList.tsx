@@ -2,6 +2,7 @@ import { Box, Chip, FormControlLabel, FormGroup, Switch, Typography } from "@mui
 import { FC, useEffect, useState } from "react";
 import { useI18n } from "../../hooks/useI18n";
 import { SkillSchema } from "../../api/generated";
+import { stringSort } from "../../utils/sort";
 
 interface ISkillListProps {
     skills: SkillSchema[];
@@ -34,7 +35,7 @@ const SkillList: FC<ISkillListProps> = ({ skills }) => {
         const newCategories = Object.keys(categoryMap).map(categoryName => ({
             name: categoryName,
             skills: categoryMap[categoryName],
-        })).sort((a, b) => a.name.localeCompare(b.name));
+        })).sort((a, b) => stringSort(a.name, b.name));
 
         setCategories(newCategories);
     }, [skills]);
