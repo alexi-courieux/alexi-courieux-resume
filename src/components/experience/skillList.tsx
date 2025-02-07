@@ -1,15 +1,15 @@
 import { Box, Chip, FormControlLabel, FormGroup, Switch, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
-import { Skill } from "../../api/models/skill";
 import { useI18n } from "../../hooks/useI18n";
+import { SkillSchema } from "../../api/generated";
 
 interface ISkillListProps {
-    skills: Skill[];
+    skills: SkillSchema[];
 }
 
 interface Category {
     name: string;
-    skills: Skill[];
+    skills: SkillSchema[];
 }
 
 const SkillList: FC<ISkillListProps> = ({ skills }) => {
@@ -21,7 +21,7 @@ const SkillList: FC<ISkillListProps> = ({ skills }) => {
     const { t } = useI18n();
 
     useEffect(() => {
-        const categoryMap: { [key: string]: Skill[] } = {};
+        const categoryMap: { [key: string]: SkillSchema[] } = {};
         skills.forEach(skill => {
             skill.categories.forEach(categoryName => {
                 if (!categoryMap[categoryName]) {

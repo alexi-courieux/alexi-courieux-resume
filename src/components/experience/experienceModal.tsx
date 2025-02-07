@@ -2,16 +2,16 @@ import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme } from
 import CloseIcon from '@mui/icons-material/Close';
 import { FC, useEffect } from "react";
 import SkillList from "./skillList";
-import Experience from "../../api/models/experience";
 import { useI18n } from "../../hooks/useI18n";
 import useSkillApi from "../../hooks/useSkillApi";
 import Loading from "../loading";
 import { State } from "../../models/requestState";
 import Error from "../error";
+import { ExperienceSchema } from "../../api/generated";
 
 interface IProps {
-    modalExperience: Experience | null;
-    setModalExperience: (experience: Experience | null) => void;
+    modalExperience: ExperienceSchema| null;
+    setModalExperience: (experience: ExperienceSchema | null) => void;
 }
 
 const getI18nKey = (company: string, key: string) => {

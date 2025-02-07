@@ -5,8 +5,8 @@ import ExperienceModal from "./experienceModal.tsx";
 import useExperienceApi from "../../hooks/useExperienceApi.tsx";
 import { State } from "../../models/requestState.ts";
 import Loading from "../loading.tsx";
-import Experience from "../../api/models/experience.ts";
 import Error from "../error.tsx";
+import { ExperienceSchema } from "../../api/generated/types.gen.ts";
 
 interface IProps {
   sx?: any;
@@ -19,7 +19,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
     return `resume.experience.companies.${company}.${key}`;
   }
 
-  const [modalExperience, setModalExperience] = useState<Experience | null>(null);
+  const [modalExperience, setModalExperience] = useState<ExperienceSchema | null>(null);
   const { experiences, getState, list } = useExperienceApi({ getOnLoad: true });
 
   let content;

@@ -1,28 +1,28 @@
 import { useCallback, useEffect, useState } from "react";
-import { Skill } from "../api/models/skill";
 import RequestState, { State } from "../models/requestState";
 import { useI18n } from "./useI18n";
-import { getSkills, getExperienceSkills } from "../api/services/skillService";
+import { SkillSchema } from "../api/generated/types.gen";
+import { getExperienceSkills, getSkills } from "../api/services/skillService";
 
 interface UseSkillApiProps {
     getOnLoad?: boolean;
 }
 
 interface UseSkillApiResult {
-    skills: Skill[];
+    skills: SkillSchema[];
     getState: RequestState;
     list: (experienceId?:string) => Promise<void>;
 }
 
 const useSkillApi = ({ getOnLoad = false }: UseSkillApiProps): UseSkillApiResult => {
-    const [skills, setSkills] = useState<Skill[]>([]);
+    const [skills, setSkills] = useState<SkillSchema[]>([]);
     const [getState, setGetState] = useState<RequestState>({ state: State.IDLE, error: undefined });
     const { i18n, loading: i18nLoading } = useI18n();
 
     const list = useCallback(async (experienceId?:string) => {
         setGetState({ state: State.PENDING, error: undefined });
         try {
-            let skills: Skill[];
+            let skills: SkillSchema[];
             if (experienceId) {
                 skills = await getExperienceSkills(experienceId, i18n.language);
             } else {

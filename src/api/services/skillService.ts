@@ -1,6 +1,6 @@
 import axios, { HttpStatusCode } from 'axios';
 import ApiError from '../models/apiError';
-import { Skill } from '../models/skill';
+import { SkillSchema } from '../generated';
 
 const API_URL = (import.meta.env.VITE_API_URL || '') + '/v1/skill/';
 
@@ -8,7 +8,7 @@ if (!import.meta.env.VITE_API_URL) {
     throw new Error('VITE_API_URL is not defined in the environment variables');
 }
 
-export const getExperienceSkills = async (experienceId: string, language?: string): Promise<Skill[]> => {
+export const getExperienceSkills = async (experienceId: string, language?: string): Promise<SkillSchema[]> => {
     try {
         const request = API_URL + experienceId;
         const response = await axios.get(request, {
@@ -39,7 +39,7 @@ export const getExperienceSkills = async (experienceId: string, language?: strin
             });
         });
 
-        return data as Skill[];
+        return data as SkillSchema[];
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error('Error fetching skills:', {
@@ -62,7 +62,7 @@ export const getExperienceSkills = async (experienceId: string, language?: strin
     }
 };
 
-export const getSkills = async (language?: string): Promise<Skill[]> => {
+export const getSkills = async (language?: string): Promise<SkillSchema[]> => {
     try {
         const request = API_URL;
         const response = await axios.get(request, {
@@ -86,7 +86,7 @@ export const getSkills = async (language?: string): Promise<Skill[]> => {
             }
         });
 
-        return data as Skill[];
+        return data as SkillSchema[];
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error('Error fetching skills:', {

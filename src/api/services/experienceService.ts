@@ -1,8 +1,7 @@
 import axios, { HttpStatusCode } from 'axios';
-import Experience from '../models/experience';
 import ApiError from '../models/apiError';
 import axiosRetry from 'axios-retry';
-
+import { ExperienceSchema } from '../generated/types.gen';
 const API_URL = (import.meta.env.VITE_API_URL || '') + '/v1/experience/';
 
 if (!import.meta.env.VITE_API_URL) {
@@ -22,7 +21,7 @@ axiosRetry(axios, {
 });
 
 
-export const getExperiences = async (language?: string): Promise<Experience[]> => {
+export const getExperiences = async (language?: string): Promise<ExperienceSchema[]> => {
     try {
         const request = API_URL;
         const response = await axios.get(request, {
@@ -32,7 +31,7 @@ export const getExperiences = async (language?: string): Promise<Experience[]> =
             timeout: 10 * 1000,
         });
 
-        // Check if the response status is 200
+        // Check if the response status is 2xx
         if (response.status !== HttpStatusCode.Ok) {
             throw new ApiError(`Invalid response status: ${response.status}`, response, response.status);
         }
@@ -40,20 +39,10 @@ export const getExperiences = async (language?: string): Promise<Experience[]> =
         // Validate the response data structure
         const data = response.data;
         if (!Array.isArray(data)) {
-            throw new ApiError('Invalid response data structure', response, 500);
+            throw new ApiError('Invalid response data structure', response, HttpStatusCode.InternalServerError);
         }
 
-        // Optionally, you can add more validation for each item in the array
-        const requiredFields = ['id', 'position', 'companyName', 'startDate', 'shortDescription', 'description'];
-        data.forEach((item) => {
-            requiredFields.forEach((field) => {
-                if (!item[field]) {
-                    throw new ApiError(`Missing required field: ${field}`, response, 500);
-                }
-            });
-        });
-
-        return data as Experience[];
+        return data as ExperienceSchema[];
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error('Error fetching experiences:', {
@@ -76,7 +65,7 @@ export const getExperiences = async (language?: string): Promise<Experience[]> =
     }
 };
 
-export const getExperience = async (id: string, language?: string): Promise<Experience> => {
+export const getExperience = async (id: string, language?: string): Promise<ExperienceSchema | undefined> => {
     try {
         const request = API_URL + id;
         const response = await axios.get(request, {
@@ -91,16 +80,8 @@ export const getExperience = async (id: string, language?: string): Promise<Expe
             throw new ApiError(`Invalid response status: ${response.status}`, response, response.status);
         }
 
-        // Validate the response data structure
-        const requiredFields = ['company', 'position', 'companyName', 'startDate', 'shortDescription', 'description'];
-        const data = response.data;
-        requiredFields.forEach((field) => {
-            if (!data[field]) {
-                throw new ApiError(`Missing required field: ${field}`, response, 500);
-            }
-        });
-
-        return data as Experience;
+        return response.data;
+    
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error(`Error fetching experience (${id}):`, {

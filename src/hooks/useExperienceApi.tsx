@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import Experience from "../api/models/experience";
 import RequestState, { State } from "../models/requestState";
-import { getExperiences, getExperience } from "../api/services/experienceService";
 import { useI18n } from "./useI18n";
+import { ExperienceSchema, listExperiencesV1ExperienceGet, readExperienceV1ExperienceCompanyGet } from "../api/generated";
 
 interface UseExperienceApiProps {
     experienceId?: string;
@@ -10,22 +9,22 @@ interface UseExperienceApiProps {
 }
 
 interface UseExperienceApiResult {
-    experiences: Experience[] | Experience;
+    experiences: ExperienceSchema[] | ExperienceSchema | undefined;
     getState: RequestState;
     read: () => Promise<void>;
     list: () => Promise<void>;
 }
 
 const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiProps): UseExperienceApiResult => {
-    const [experiences, setExperiences] = useState<Experience[] | Experience>([]);
+    const [experiences, setExperiences] = useState<ExperienceSchema[] | ExperienceSchema | undefined>(undefined);
     const [getState, setGetState] = useState<RequestState>({ state: State.IDLE, error: undefined });
     const { i18n, loading: i18nLoading } = useI18n();
 
     const list = useCallback(async () => {
         setGetState({ state: State.PENDING, error: undefined });
         try {
-            const experiences = await getExperiences(i18n.language);
-            setExperiences(experiences);
+            const experiences = await listExperiencesV1ExperienceGet({ query: { language: i18n.language } });
+            setExperiences(experiences.data);
             setGetState({ state: State.SUCCESS, error: undefined });
         } catch (error) {
             console.error('Error fetching experiences:', error);
@@ -40,8 +39,8 @@ const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiP
 
         setGetState({ state: State.PENDING, error: undefined });
         try {
-            const experience = await getExperience(experienceId, i18n.language);
-            setExperiences(experience);
+            const experience = await readExperienceV1ExperienceCompanyGet({ path: { company: experienceId }, query: { language: i18n.language } });
+            setExperiences(experience.data);
             setGetState({ state: State.SUCCESS, error: undefined });
         } catch (error) {
             console.error('Error fetching experience:', error);
