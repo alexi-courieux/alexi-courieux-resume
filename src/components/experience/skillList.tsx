@@ -34,7 +34,7 @@ const SkillList: FC<ISkillListProps> = ({ skills }) => {
         const newCategories = Object.keys(categoryMap).map(categoryName => ({
             name: categoryName,
             skills: categoryMap[categoryName],
-        }));
+        })).sort((a, b) =>
 
         setCategories(newCategories);
     }, [skills]);
