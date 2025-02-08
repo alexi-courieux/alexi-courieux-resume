@@ -2,7 +2,7 @@
   "resume": {
     "about-me": {
       "title": "About me",
-      "description": "I am a software engineer with a passion for web development. I have experience in building web applications using modern technologies. I am a quick learner and I am always looking for new challenges.",
+      "description": "I’m a full stack developer who loves turning ideas into smooth, functional web applications. Whether it’s building scalable backends or crafting intuitive frontends, I enjoy the mix of logic and creativity that comes with development. I’m always up for a challenge—whether that means optimizing performance, learning new technologies, or tackling a tough bug. Outside of coding, you’ll probably find me immersed in game development or exploring new game mechanics, combining my technical skills with my passion for interactive experiences.",
       "github": {
         "aria-label": "Open my GitHub portfolio",
         "tooltip": "See my GitHub portfolio"

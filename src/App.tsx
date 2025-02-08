@@ -31,9 +31,11 @@ const style = {
   },
   linkedinIcon: {
     fontSize: "2rem",
+    color: "#0A66C2"
   },
   githubIcon: {
     fontSize: "2rem",
+    color: "black"
   },
   accordionContainer: {
     marginTop: 2,
@@ -53,31 +55,33 @@ function App() {
         <ThemeModeSwitcher />
         <LanguageSwitcher />
       </Box>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+        <Typography variant="h4" color="primary">
+          Alexi Courieux
+        </Typography>
+        <Box>
+          <IconButton href={links.github} color="inherit">
+            <GithubIcon sx={style.githubIcon} />
+          </IconButton>
+          <IconButton href={links.linkedin} color="inherit">
+            <LinkedInIcon sx={style.linkedinIcon} />
+          </IconButton>
+        </Box>
+      </Box>
       <Container maxWidth={"xl"} sx={style.container}>
-        <Fade in={true} timeout={500}>
+        <Fade in={true} timeout={1000}>
           <div>
             <Card>
-              <CardHeader
-                title="Alexi Courieux"
-                subheader={t("resume.about-me.title")}
-              />
               <CardContent>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  {t("resume.about-me.description")}
-                </Typography>
+                <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" gap={2}>
+                  <Typography component="span" align="left" alignSelf={"flex-start"}>
+                    {t("resume.about-me.title")}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }} align="justify">
+                    {t("resume.about-me.description")}
+                  </Typography>
+                </Box>
               </CardContent>
-              <CardActions disableSpacing sx={{ justifyContent: 'end' }}>
-                <a href={links.linkedin} target="_blank" rel="noreferrer" aria-label={t("resume.about-me.linkedin.aria-label")}>
-                  <IconButton aria-label="linkedIn" title={t("resume.about-me.linkedin.tooltip")}>
-                    <LinkedInIcon sx={style.linkedinIcon} />
-                  </IconButton>
-                </a>
-                <a href={links.github} target="_blank" rel="noreferrer" aria-label={t("resume.about-me.github.aria-label")}>
-                  <IconButton aria-label="github" title={t("resume.about-me.github.tooltip")}>
-                    <GithubIcon sx={style.githubIcon} />
-                  </IconButton>
-                </a>
-              </CardActions>
             </Card>
             <Accordion expanded={true} sx={style.accordionContainer}>
               <AccordionSummary
