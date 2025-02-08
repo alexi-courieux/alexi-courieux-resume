@@ -2,11 +2,12 @@ import axios, { HttpStatusCode } from 'axios';
 import ApiError from '../models/apiError';
 import { SkillSchema } from '../generated';
 
-const API_URL = (import.meta.env.VITE_API_URL || '') + '/v1/skill/';
 
 if (!import.meta.env.VITE_API_URL) {
     throw new Error('VITE_API_URL is not defined in the environment variables');
 }
+
+const API_URL = (import.meta.env.VITE_API_URL) + '/v1/skill/';
 
 export const getExperienceSkills = async (experienceId: string, language?: string): Promise<SkillSchema[]> => {
     try {

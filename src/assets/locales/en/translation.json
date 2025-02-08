@@ -53,7 +53,9 @@
       "title": "Education",
       "location": "Location",
       "date": "Date",
-      "description": "Description"
+      "description": "Description",
+      "image-alt": "logo",
+      "present": "Present"
     },
     "projects": {
       "title": "Projects"

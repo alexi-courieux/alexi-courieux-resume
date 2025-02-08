@@ -51,7 +51,9 @@
       "title": "Formations",
       "location": "Lieu",
       "date": "Date",
-      "description": "Description"
+      "description": "Description",
+      "image-alt": "logo",
+      "present": "Aujourd'hui"
     },
     "projects": {
       "title": "Projets"

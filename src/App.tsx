@@ -23,16 +23,17 @@ import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useEffect } from 'react';
 import { ThemeProvider } from './contextProviders/ThemeContextProvider.tsx';
 import ThemeModeSwitcher from './components/ThemeModeSwitcher.tsx';
+import Educations from './components/education/Educations.tsx';
 
 const style = {
   container: {
     marginTop: 4,
   },
   linkedinIcon: {
-    fontSize: "2rem", // Adjust the size as needed
+    fontSize: "2rem",
   },
   githubIcon: {
-    fontSize: "2rem", // Adjust the size as needed
+    fontSize: "2rem",
   },
   accordionContainer: {
     marginTop: 2,
@@ -48,7 +49,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      <Box sx={{ position: 'fixed', top: 0, right: 0, m: 2}}>
+      <Box sx={{ position: 'fixed', top: 0, right: 0, m: 2, zIndex: 100 }}>
         <ThemeModeSwitcher />
         <LanguageSwitcher />
       </Box>
@@ -99,9 +100,7 @@ function App() {
                 <Typography component="span">{t("resume.education.title")}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>
-                  {/* Education content goes here */}
-                </Typography>
+                <Educations />
               </AccordionDetails>
             </Accordion>
           </div>

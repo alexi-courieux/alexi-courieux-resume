@@ -1,13 +1,13 @@
 import axios, { HttpStatusCode } from 'axios';
 import ApiError from '../models/apiError';
 import axiosRetry from 'axios-retry';
-import { ExperienceSchema } from '../generated/types.gen';
+import { EducationSchema, ExperienceSchema } from '../generated/types.gen';
 
 if (!import.meta.env.VITE_API_URL) {
     throw new Error('VITE_API_URL is not defined in the environment variables');
 }
 
-const API_URL = (import.meta.env.VITE_API_URL) + '/v1/experience/';
+const API_URL = (import.meta.env.VITE_API_URL) + '/v1/education/';
 
 // Configure axios-retry
 axiosRetry(axios, {
@@ -22,7 +22,7 @@ axiosRetry(axios, {
 });
 
 
-export const getExperiences = async (language?: string): Promise<ExperienceSchema[]> => {
+export const getEducations = async (language?: string): Promise<EducationSchema[]> => {
     try {
         const request = API_URL;
         const response = await axios.get(request, {
@@ -43,10 +43,10 @@ export const getExperiences = async (language?: string): Promise<ExperienceSchem
             throw new ApiError('Invalid response data structure', response, HttpStatusCode.InternalServerError);
         }
 
-        return data as ExperienceSchema[];
+        return data as EducationSchema[];
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            console.error('Error fetching experiences:', {
+            console.error('Error fetching educations:', {
                 message: error.message,
                 stack: error.stack,
                 config: error.config,
@@ -57,46 +57,7 @@ export const getExperiences = async (language?: string): Promise<ExperienceSchem
                 } : null,
             });
         } else {
-            console.error('Error fetching experiences:', {
-                message: (error as Error).message,
-                stack: (error as Error).stack,
-            });
-        }
-        throw error;
-    }
-};
-
-export const getExperience = async (id: string, language?: string): Promise<ExperienceSchema | undefined> => {
-    try {
-        const request = API_URL + id;
-        const response = await axios.get(request, {
-            params: {
-                language,
-            },
-            timeout: 5 * 1000,
-        });
-
-        // Check if the response status is 200
-        if (response.status !== HttpStatusCode.Ok) {
-            throw new ApiError(`Invalid response status: ${response.status}`, response, response.status);
-        }
-
-        return response.data;
-    
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            console.error(`Error fetching experience (${id}):`, {
-                message: error.message,
-                stack: error.stack,
-                config: error.config,
-                code: error.code,
-                response: error.response ? {
-                    status: error.response.status,
-                    data: error.response.data,
-                } : null,
-            });
-        } else {
-            console.error('Error fetching experiences:', {
+            console.error('Error fetching educations:', {
                 message: (error as Error).message,
                 stack: (error as Error).stack,
             });
