@@ -17,12 +17,10 @@
       "location": "Location",
       "companies": {
         "exco": {
-          "description": "Developing and maintaining web applications for clients. This involves working closely with clients to understand their requirements and translating them into functional and visually appealing web applications.    Responsibilities include both front-end and back-end development, ensuring seamless integration between the two. On the front-end, tasks include designing user interfaces, implementing responsive design, and optimizing user experience.    On the back-end, tasks include setting up databases, creating APIs, and ensuring data security and integrity. Additionally, the role involves debugging and troubleshooting issues, performing regular updates and maintenance,    and staying up-to-date with the latest web development trends and technologies to continuously improve the applications.",
           "image": "images/experience-exco.jpg",
           "image-alt": "Exco FSE logo"
         },
         "koedia": {
-          "position": "Web integrator",
           "image": "images/experience-koedia.svg",
           "image-alt": "Koedia logo"
         },
@@ -55,7 +53,8 @@
       "date": "Date",
       "description": "Description",
       "image-alt": "logo",
-      "present": "Present"
+      "present": "Present",
+      "loading": "Loading education details"
     },
     "projects": {
       "title": "Projects"
@@ -66,7 +65,10 @@
       "hideUnselected": "Hide",
       "loading": "Loading skills"
     },
-    "title": "Alexi Courieux Resume"
+    "title": "Alexi Courieux Resume",
+    "skills": {
+      "title": "Skills"
+    }
   },
   "common": {
     "loading": "Loading",

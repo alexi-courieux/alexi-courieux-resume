@@ -3,7 +3,8 @@ import { FC, useMemo } from "react";
 import { useI18n } from "../../hooks/useI18n";
 import useEducationApi from "../../hooks/useEducationApi";
 import { State } from "../../models/requestState";
-import Error from "../error";
+import ErrorMessage from "../ErrorMessage";
+import Loading from "../loading";
 
 const Educations: FC = () => {
 
@@ -14,52 +15,53 @@ const Educations: FC = () => {
         switch (getState.state) {
             case State.PENDING:
                 return (
-                    <Card sx={{ width: "300px", height: "450px", display: "flex", flexDirection: "column" }}>
-                        <CardContent sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Card sx={{ mb: 2 }}>
+                        <CardContent>
+                            <Loading messageKey="resume.education.loading" />
                         </CardContent>
                     </Card>
                 );
             case State.FAILURE:
                 return (
-                    <Card sx={{ width: "300px", height: "450px", display: "flex", flexDirection: "column" }}>
+                    <Card sx={{ mb: 2 }}>
                         <CardContent sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <Fade in={true} timeout={1000}>
-                                <div>
-                                    <Error retryFunction={list} />
-                                </div>
-                            </Fade>
+                            <div>
+                                <ErrorMessage retryFunction={list} />
+                            </div>
                         </CardContent>
                     </Card>
                 );
             case State.SUCCESS:
                 return educations.map((education, index) => (
-                    <Card key={index} sx={{ marginBottom: 2 }}>
-                        <CardContent>
-                            <Box display="flex" justifyContent="space-between" alignItems="stretch" flexGrow={0}>
-                                {education.imageUri && (
-                                    <Box>
-                                        <img src={education.imageUri} alt={`${t("resume.education.image-alt")} ${education.school}`} style={{ objectFit: "contain", maxHeight: "100px", padding: "0.5rem" }} />
-                                    </Box>
+                    <Fade in={true} timeout={500 * (index + 1)} key={index}>
+                        <Card key={index} sx={{ marginBottom: 2 }}>
+                            <CardContent>
+                                <Box display="flex" justifyContent="space-between" alignItems="stretch" flexGrow={0}>
+                                    {education.imageUri && (
+                                        <Box>
+                                            <img src={education.imageUri} alt={`${t("resume.education.image-alt")} ${education.school}`} style={{ objectFit: "contain", maxHeight: "100px", padding: "0.5rem" }} />
+                                        </Box>
 
-                                )}
-                                <Box display={"flex"} justifyContent={"space-between"} alignItems={"flex-start"} flexGrow={1} p={1}>
-                                    <Box textAlign={"left"}>
-                                        <Typography variant="h5" component="div" color="textPrimary">
-                                            {education.degree}
-                                        </Typography>
-                                        <Typography variant="subtitle1" color="textSecondary">
-                                            {education.school} - {education.location}
-                                        </Typography>
-                                    </Box>
-                                    <Box textAlign="right">
-                                        <Typography variant="subtitle1" color="textSecondary">
-                                            {education.endDate ? formatDate(education.endDate) : t("resume.education.present")}
-                                        </Typography>
+                                    )}
+                                    <Box display={"flex"} justifyContent={"space-between"} alignItems={"flex-start"} flexGrow={1} p={1}>
+                                        <Box textAlign={"left"}>
+                                            <Typography variant="h5" component="div" color="textPrimary">
+                                                {education.degree}
+                                            </Typography>
+                                            <Typography variant="subtitle1" color="textSecondary">
+                                                {education.school} - {education.location}
+                                            </Typography>
+                                        </Box>
+                                        <Box textAlign="right">
+                                            <Typography variant="subtitle1" color="textSecondary">
+                                                {education.endDate ? formatDate(education.endDate) : t("resume.education.present")}
+                                            </Typography>
+                                        </Box>
                                     </Box>
                                 </Box>
-                            </Box>
-                        </CardContent>
-                    </Card>
+                            </CardContent>
+                        </Card>
+                    </Fade>
                 ));
 
         }

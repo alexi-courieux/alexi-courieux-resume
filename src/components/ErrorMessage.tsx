@@ -12,7 +12,7 @@ interface IErrorProps {
     sx?: any;
 }
 
-const Error : FC<IErrorProps> = ({messageKey, retryFunction, retryMessageKey, sx}) => {
+const ErrorMessage : FC<IErrorProps> = ({messageKey, retryFunction, retryMessageKey, sx}) => {
     const { t } = useI18n();
 
     return (
@@ -30,4 +30,4 @@ const Error : FC<IErrorProps> = ({messageKey, retryFunction, retryMessageKey, sx
     );
 }
 
-export default Error;
+export default ErrorMessage;

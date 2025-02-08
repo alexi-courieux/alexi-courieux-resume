@@ -1,12 +1,12 @@
 import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { FC, useEffect } from "react";
-import SkillList from "./skillList";
+import SkillList from "../skills/skillList";
 import { useI18n } from "../../hooks/useI18n";
 import useSkillApi from "../../hooks/useSkillApi";
 import Loading from "../loading";
 import { State } from "../../models/requestState";
-import Error from "../error";
+import ErrorMessage from "../ErrorMessage";
 import { ExperienceSchema } from "../../api/generated";
 
 interface IProps {
@@ -35,7 +35,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModa
             skillContent = <Loading messageKey="resume.skill.loading" />;
             break;
         case State.FAILURE:
-            skillContent = <Error retryFunction={() => listSkills(modalExperience?.id)} />;
+            skillContent = <ErrorMessage retryFunction={() => listSkills(modalExperience?.id)} />;
             break;
         case State.SUCCESS:
             skillContent = <SkillList skills={skills} />;

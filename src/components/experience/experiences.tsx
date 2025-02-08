@@ -5,7 +5,7 @@ import ExperienceModal from "./experienceModal.tsx";
 import useExperienceApi from "../../hooks/useExperienceApi.tsx";
 import { State } from "../../models/requestState.ts";
 import Loading from "../loading.tsx";
-import Error from "../error.tsx";
+import ErrorMessage from "../ErrorMessage.tsx";
 import { ExperienceSchema } from "../../api/generated/types.gen.ts";
 
 interface IProps {
@@ -57,7 +57,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
             <CardContent sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <Fade in={true} timeout={1000}>
                 <div>
-                  <Error retryFunction={list} />
+                  <ErrorMessage retryFunction={list} />
                 </div>
               </Fade>
             </CardContent>

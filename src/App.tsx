@@ -8,9 +8,7 @@ import {
   AccordionSummary,
   Box,
   Card,
-  CardActions,
   CardContent,
-  CardHeader,
   Container,
   Fade,
   IconButton,
@@ -24,6 +22,7 @@ import { useEffect } from 'react';
 import { ThemeProvider } from './contextProviders/ThemeContextProvider.tsx';
 import ThemeModeSwitcher from './components/ThemeModeSwitcher.tsx';
 import Educations from './components/education/Educations.tsx';
+import Skills from './components/skills/skills.tsx';
 
 const style = {
   container: {
@@ -105,6 +104,18 @@ function App() {
               </AccordionSummary>
               <AccordionDetails>
                 <Educations />
+              </AccordionDetails>
+            </Accordion>
+            <Accordion expanded={true} sx={style.accordionContainer}>
+              <AccordionSummary
+                expandIcon={<ArrowDownwardIcon />}
+                aria-controls="panel2-content"
+                id="panel2-header"
+              >
+                <Typography component="span">{t("resume.skills.title")}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Skills />
               </AccordionDetails>
             </Accordion>
           </div>

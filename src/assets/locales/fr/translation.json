@@ -53,7 +53,8 @@
       "date": "Date",
       "description": "Description",
       "image-alt": "logo",
-      "present": "Aujourd'hui"
+      "present": "Aujourd'hui",
+      "loading": "Chargement des formations"
     },
     "projects": {
       "title": "Projets"
@@ -64,7 +65,10 @@
       "hideUnselected": "Masquer",
       "loading": "Chargement des compétences"
     },
-    "title": "CV Alexi Courieux"
+    "title": "CV Alexi Courieux",
+    "skills": {
+      "title": "Compétences"
+    }
   },
   "common": {
     "loading": "Chargement",
