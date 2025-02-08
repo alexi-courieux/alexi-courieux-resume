@@ -1,11 +1,12 @@
-import { Box, Chip, FormControlLabel, FormGroup, Switch, Typography } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { Autocomplete, Box, Chip, FormControlLabel, FormGroup, Switch, TextField, Typography } from "@mui/material";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { useI18n } from "../../hooks/useI18n";
 import { SkillSchema } from "../../api/generated";
 import { stringSort } from "../../utils/sort";
 
 interface ISkillListProps {
     skills: SkillSchema[];
+    searchBar?: boolean;
 }
 
 interface Category {
@@ -13,11 +14,13 @@ interface Category {
     skills: SkillSchema[];
 }
 
-const SkillList: FC<ISkillListProps> = ({ skills }) => {
+const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
 
     const [categories, setCategories] = useState<Category[]>([]);
     const [activeCategories, setActiveCategories] = useState<string[]>([]);
     const [hideUnselected, setHideUnselected] = useState<boolean>(false);
+    const [searchInput, setSearchInput] = useState<string>('');
+    const hint = useRef<string>('');
 
     const { t } = useI18n();
 
@@ -39,6 +42,20 @@ const SkillList: FC<ISkillListProps> = ({ skills }) => {
 
         setCategories(newCategories);
     }, [skills]);
+
+    const filteredSkills = useMemo(() => {
+        let fSkills = [...skills];
+        
+        if (searchInput) {
+            fSkills = fSkills.filter(skill => skill.name.toLowerCase().includes(searchInput.toLowerCase()));
+        }
+
+        if (activeCategories.length > 0 && hideUnselected) {
+            fSkills = fSkills.filter(skill => activeCategories.some(category => skill.categories.includes(category)));
+        }
+
+        return fSkills;
+    }, [skills, searchInput, activeCategories, hideUnselected]);
 
     const handleClickAddCategory = (categoryName: string) => {
         const newActiveCategories = [...activeCategories, categoryName];
@@ -68,12 +85,72 @@ const SkillList: FC<ISkillListProps> = ({ skills }) => {
                     <FormControlLabel control={<Switch value={hideUnselected} onChange={(e) => setHideUnselected(e.target.checked)} />} label={t("resume.skill.hideUnselected")} />
                 </FormGroup>
             </Box>
+            <Box>
+                {searchBar && (
+                    <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
+                        <Autocomplete
+                            sx={{ width: 300 }}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Tab') {
+                                    if (hint.current) {
+                                        setSearchInput(hint.current);
+                                        e.preventDefault();
+                                    }
+                                }
+                            }}
+                            onClose={() => {
+                                hint.current = '';
+                            }}
+                            onChange={(_, v) => {
+                                setSearchInput(v && v.label ? v.label : '');
+                            }}
+                            disablePortal
+                            inputValue={searchInput}
+                            options={skills.map(skill => ({ label: skill.name }))}
+                            renderInput={(params) => {
+                                return (
+                                    <Box sx={{ position: 'relative' }}>
+                                        <Typography
+                                            sx={{
+                                                position: 'absolute',
+                                                opacity: 0.5,
+                                                left: 14,
+                                                top: 16,
+                                                overflow: 'hidden',
+                                                whiteSpace: 'nowrap',
+                                                width: 'calc(100% - 75px)', // Adjust based on padding of TextField
+                                            }}
+                                        >
+                                            {hint.current}
+                                        </Typography>
+                                        <TextField
+                                            {...params}
+                                            onChange={(e) => {
+                                                const newValue = e.target.value;
+                                                setSearchInput(newValue);
+                                                const matchingOption = skills.map(s => ({ label: s.name })).find((option) =>
+                                                    option.label.startsWith(newValue),
+                                                );
+
+                                                if (newValue && matchingOption) {
+                                                    hint.current = matchingOption.label;
+                                                } else {
+                                                    hint.current = '';
+                                                }
+                                            }}
+                                            label="Skill"
+                                            size="small"
+                                        />
+                                    </Box>
+                                )
+                            }}
+                        />
+                    </Box>
+                )}
+            </Box>
             <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center" gap={1}>
-                {skills.map((skill) => {
+                {filteredSkills.map((skill) => {
                     const isActive = activeCategories.some(category => skill.categories.includes(category));
-                    if (hideUnselected && !isActive) {
-                        return null;
-                    }
                     return <Chip key={skill.id} label={skill.name} color="secondary" variant={isActive ? "filled" : "outlined"} />
                 })}
             </Box>

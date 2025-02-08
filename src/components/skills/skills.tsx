@@ -16,7 +16,7 @@ const Skills : FC = () => {
             case State.FAILURE:
                 return <ErrorMessage retryFunction={list} />;
             case State.SUCCESS:
-                return <SkillList skills={skills} />;
+                return <SkillList skills={skills} searchBar />;
         }
     }, [getState.state, skills, list]);
 
