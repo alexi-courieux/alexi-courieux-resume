@@ -30,16 +30,6 @@ export const getExperienceSkills = async (experienceId: string, language?: strin
             throw new ApiError('Invalid response data structure', response, 500);
         }
 
-        // Optionally, you can add more validation for each item in the array
-        const requiredFields = ['id', 'name', 'categories'];
-        data.forEach((item) => {
-            requiredFields.forEach((field) => {
-                if (!item[field]) {
-                    throw new ApiError(`Missing required field: ${field}`, response, 500);
-                }
-            });
-        });
-
         return data as SkillSchema[];
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -78,16 +68,7 @@ export const getSkills = async (language?: string): Promise<SkillSchema[]> => {
             throw new ApiError(`Invalid response status: ${response.status}`, response, response.status);
         }
 
-        // Validate the response data structure
-        const requiredFields = ['id', 'name', 'categories'];
-        const data = response.data;
-        requiredFields.forEach((field) => {
-            if (!data[field]) {
-                throw new ApiError(`Missing required field: ${field}`, response, 500);
-            }
-        });
-
-        return data as SkillSchema[];
+        return response.data as SkillSchema[];
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error('Error fetching skills:', {
