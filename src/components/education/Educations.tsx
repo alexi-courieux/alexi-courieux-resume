@@ -63,7 +63,7 @@ const Educations: FC = () => {
                 ));
 
         }
-    }, [educations, formatDate, getState.state, list]);
+    }, [educations, formatDate, getState.state, list, t]);
 
     return (
         <Fade in={true} timeout={500}>

@@ -1,7 +1,7 @@
 import axios, { HttpStatusCode } from 'axios';
 import ApiError from '../models/apiError';
 import axiosRetry from 'axios-retry';
-import { EducationSchema, ExperienceSchema } from '../generated/types.gen';
+import { EducationSchema } from '../generated/types.gen';
 
 if (!import.meta.env.VITE_API_URL) {
     throw new Error('VITE_API_URL is not defined in the environment variables');
