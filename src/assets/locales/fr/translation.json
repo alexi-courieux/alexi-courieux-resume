@@ -62,8 +62,12 @@
     "skill": {
       "title": "Compétences",
       "clickFilter": "Cliquez sur une catégorie pour filtrer les compétences",
-      "hideUnselected": "Masquer",
-      "loading": "Chargement des compétences"
+      "loading": "Chargement des compétences",
+      "search": "Compétence",
+      "hideUnselected": {
+        "search": "Filtrer les résultats",
+        "category": "Masquer les catégories non selectionnées"
+      }
     },
     "title": "CV Alexi Courieux",
     "skills": {

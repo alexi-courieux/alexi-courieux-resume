@@ -62,8 +62,12 @@
     "skill": {
       "title": "Skills",
       "clickFilter": "Click on a category to filter skills",
-      "hideUnselected": "Hide",
-      "loading": "Loading skills"
+      "loading": "Loading skills",
+      "search": "Skill",
+      "hideUnselected": {
+        "search": "Filter results",
+        "category": "Hide unselected"
+      }
     },
     "title": "Alexi Courieux Resume",
     "skills": {

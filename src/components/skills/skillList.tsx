@@ -1,5 +1,5 @@
 import { Autocomplete, Box, Chip, FormControlLabel, FormGroup, Switch, TextField, Typography } from "@mui/material";
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useI18n } from "../../hooks/useI18n";
 import { SkillSchema } from "../../api/generated";
 import { stringSort } from "../../utils/sort";
@@ -18,9 +18,9 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
 
     const [categories, setCategories] = useState<Category[]>([]);
     const [activeCategories, setActiveCategories] = useState<string[]>([]);
-    const [hideUnselected, setHideUnselected] = useState<boolean>(false);
+    const [hideUnselectedCategories, setHideUnselectedCategories] = useState<boolean>(false);
+    const [hideUnsearchedSkills, setHideUnsearchedSkills] = useState<boolean>(false);
     const [searchInput, setSearchInput] = useState<string>('');
-    const hint = useRef<string>('');
 
     const { t } = useI18n();
 
@@ -43,19 +43,37 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
         setCategories(newCategories);
     }, [skills]);
 
+    const searchedSkills = useMemo(() => {
+        return skills.filter(skill => skill.name.toLowerCase().includes(searchInput.toLowerCase()));
+    }, [skills, searchInput]);
+
+    const activeCategoriesSkills = useMemo(() => {
+        return skills.filter(skill => activeCategories.some(category => skill.categories.includes(category)));
+    }, [skills, activeCategories]);
+
+    const activeSkills = useMemo(() => {
+        if (searchInput) {
+            if (activeCategoriesSkills.length > 0) {
+                return searchedSkills.filter(skill => activeCategoriesSkills.includes(skill));
+            }
+            return searchedSkills;
+        }
+        return activeCategoriesSkills;
+    }, [searchInput, activeCategoriesSkills, searchedSkills]);
+
     const filteredSkills = useMemo(() => {
         let fSkills = [...skills];
-        
-        if (searchInput) {
+
+        if (hideUnselectedCategories && activeCategoriesSkills.length > 0) {
+            fSkills = activeCategoriesSkills;
+        }
+
+        if (searchInput && hideUnsearchedSkills) {
             fSkills = fSkills.filter(skill => skill.name.toLowerCase().includes(searchInput.toLowerCase()));
         }
 
-        if (activeCategories.length > 0 && hideUnselected) {
-            fSkills = fSkills.filter(skill => activeCategories.some(category => skill.categories.includes(category)));
-        }
-
         return fSkills;
-    }, [skills, searchInput, activeCategories, hideUnselected]);
+    }, [skills, hideUnselectedCategories, activeCategoriesSkills, searchInput, hideUnsearchedSkills]);
 
     const handleClickAddCategory = (categoryName: string) => {
         const newActiveCategories = [...activeCategories, categoryName];
@@ -65,6 +83,10 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
     const handleClickRemoveCategory = (categoryName: string) => {
         const newActiveCategories = activeCategories.filter((category) => category !== categoryName);
         setActiveCategories(newActiveCategories);
+    }
+
+    const HandleSearchInputChange = (e: any) => {
+        setSearchInput(e.target.value);
     }
 
     return (
@@ -82,25 +104,14 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                     }
                 })}
                 <FormGroup>
-                    <FormControlLabel control={<Switch value={hideUnselected} onChange={(e) => setHideUnselected(e.target.checked)} />} label={t("resume.skill.hideUnselected")} />
+                    <FormControlLabel control={<Switch value={hideUnselectedCategories} onChange={(e) => setHideUnselectedCategories(e.target.checked)} />} label={t("resume.skill.hideUnselected.category")} />
                 </FormGroup>
             </Box>
             <Box>
                 {searchBar && (
-                    <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
+                    <Box display="flex" justifyContent="center" alignItems="center" mb={2} gap={1}>
                         <Autocomplete
                             sx={{ width: 300 }}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Tab') {
-                                    if (hint.current) {
-                                        setSearchInput(hint.current);
-                                        e.preventDefault();
-                                    }
-                                }
-                            }}
-                            onClose={() => {
-                                hint.current = '';
-                            }}
                             onChange={(_, v) => {
                                 setSearchInput(v && v.label ? v.label : '');
                             }}
@@ -110,47 +121,25 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                             renderInput={(params) => {
                                 return (
                                     <Box sx={{ position: 'relative' }}>
-                                        <Typography
-                                            sx={{
-                                                position: 'absolute',
-                                                opacity: 0.5,
-                                                left: 14,
-                                                top: 16,
-                                                overflow: 'hidden',
-                                                whiteSpace: 'nowrap',
-                                                width: 'calc(100% - 75px)', // Adjust based on padding of TextField
-                                            }}
-                                        >
-                                            {hint.current}
-                                        </Typography>
                                         <TextField
                                             {...params}
-                                            onChange={(e) => {
-                                                const newValue = e.target.value;
-                                                setSearchInput(newValue);
-                                                const matchingOption = skills.map(s => ({ label: s.name })).find((option) =>
-                                                    option.label.startsWith(newValue),
-                                                );
-
-                                                if (newValue && matchingOption) {
-                                                    hint.current = matchingOption.label;
-                                                } else {
-                                                    hint.current = '';
-                                                }
-                                            }}
-                                            label="Skill"
+                                            onChange={HandleSearchInputChange}
+                                            label={t("resume.skill.search")}
                                             size="small"
                                         />
                                     </Box>
                                 )
                             }}
                         />
+                        <FormGroup>
+                            <FormControlLabel control={<Switch value={hideUnsearchedSkills} onChange={(e) => setHideUnsearchedSkills(e.target.checked)} />} label={t("resume.skill.hideUnselected.search")} />
+                        </FormGroup>
                     </Box>
                 )}
             </Box>
             <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center" gap={1}>
                 {filteredSkills.map((skill) => {
-                    const isActive = activeCategories.some(category => skill.categories.includes(category));
+                    const isActive = activeSkills.includes(skill);
                     return <Chip key={skill.id} label={skill.name} color="secondary" variant={isActive ? "filled" : "outlined"} />
                 })}
             </Box>
