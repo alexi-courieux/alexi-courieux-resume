@@ -50,11 +50,11 @@ function App() {
 
   return (
     <ThemeProvider>
-      <Box sx={{ position: 'fixed', top: 0, right: 0, m: 2, zIndex: 100 }}>
+      <Box sx={{ position: 'fixed', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
         <ThemeModeSwitcher />
         <LanguageSwitcher />
       </Box>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} mr={4}>
         <Typography variant="h4" color="primary">
           Alexi Courieux
         </Typography>

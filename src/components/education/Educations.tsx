@@ -36,7 +36,7 @@ const Educations: FC = () => {
                     <Fade in={true} timeout={500 * (index + 1)} key={index}>
                         <Card key={index} sx={{ marginBottom: 2 }}>
                             <CardContent>
-                                <Box display="flex" justifyContent="space-between" alignItems="stretch" flexGrow={0}>
+                                <Box display="flex" justifyContent="space-between" alignItems="stretch" flexGrow={0} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
                                     {education.imageUri && (
                                         <Box>
                                             <img src={education.imageUri} alt={`${t("resume.education.image-alt")} ${education.school}`} style={{ objectFit: "contain", maxHeight: "100px", padding: "0.5rem" }} />
