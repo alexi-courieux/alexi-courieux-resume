@@ -109,7 +109,7 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
             </Box>
             <Box>
                 {searchBar && (
-                    <Box display="flex" justifyContent="center" alignItems="center" mb={2} gap={1}>
+                    <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} justifyContent="center" alignItems="center" mb={2} gap={1} >
                         <Autocomplete
                             sx={{ width: 300 }}
                             onChange={(_, v) => {

@@ -23,6 +23,8 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  CardActions,
+  Tooltip,
 } from "@mui/material";
 import { useI18n } from "./hooks/useI18n.tsx";
 import { links } from "./assets/links.ts";
@@ -39,25 +41,10 @@ import BuildIcon from '@mui/icons-material/Build';
 function App() {
   const { t, i18n } = useI18n();
   const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [value, setValue] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const style = {
-    container: {
-      marginTop: 4,
-    },
-    linkedinIcon: {
-      fontSize: "2rem",
-      color: "#0A66C2"
-    },
-    githubIcon: {
-      fontSize: "2rem"
-    },
-    accordionContainer: {
-      marginTop: 2,
-    },
-  };
 
   useEffect(() => {
     document.title = t("resume.title");
@@ -92,49 +79,47 @@ function App() {
         </Box>
       )}
       {isMobile && (
-        <Box sx={{ position: 'fixed', top: 0, left: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
-          <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-            <Box
-              sx={{ width: 250 }}
-              role="presentation"
-              onClick={toggleDrawer(false)}
-              onKeyDown={toggleDrawer(false)}
-            >
-              <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <ThemeModeSwitcher />
-                  </ListItemIcon>
-                  <ListItemText primary={t("theme.mode")} />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <LanguageSwitcher />
-                  </ListItemIcon>
-                  <ListItemText primary={t("language.switcher")} />
-                </ListItem>
-              </List>
-            </Box>
-          </Drawer>
-        </Box>
+        <>
+          <Box sx={{ position: 'fixed', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
+            <IconButton onClick={toggleDrawer(true)} sx={{ m: 2 }}>
+              <MenuIcon fontSize='large' />
+            </IconButton>
+          </Box>
+          <Box sx={{ position: 'fixed', top: 0, left: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
+            <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+              <Box
+                sx={{ width: 250 }}
+                role="presentation"
+                onClick={toggleDrawer(false)}
+                onKeyDown={toggleDrawer(false)}
+              >
+                <List>
+                  <ListItem>
+                    <ListItemIcon>
+                      <ThemeModeSwitcher />
+                    </ListItemIcon>
+                    <ListItemText primary={ isDarkMode ? t("theme.light") : t("theme.dark") } />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemIcon>
+                      <LanguageSwitcher />
+                    </ListItemIcon>
+                  </ListItem>
+                </List>
+              </Box>
+            </Drawer>
+          </Box>
+        </>
       )}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} mr={4}>
         <Typography variant="h4" color="primary">
           Alexi Courieux
         </Typography>
         <Box>
-          <IconButton href={links.github} color="inherit">
-            <GithubIcon sx={style.githubIcon} />
-          </IconButton>
-          <IconButton href={links.linkedin} color="inherit">
-            <LinkedInIcon sx={style.linkedinIcon} />
-          </IconButton>
-          <IconButton onClick={toggleDrawer(true)} color="inherit" sx={{ ml: 2 }}>
-            <MenuIcon />
-          </IconButton>
+
         </Box>
       </Box>
-      <Container maxWidth={"xl"} sx={style.container}>
+      <Container maxWidth={"xl"} className='container'>
         <Fade in={true} timeout={1000}>
           <div>
             <Card>
@@ -148,10 +133,22 @@ function App() {
                   </Typography>
                 </Box>
               </CardContent>
+              <CardActions sx={{ justifyContent: 'flex-end' }}>
+                <Tooltip title={t("resume.about-me.github.tooltip")}>
+                  <IconButton href={links.github} color="inherit" aria-label={t("resume.about-me.github.aria-label")}>
+                    <GithubIcon fontSize='medium' />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={t("resume.about-me.linkedin.tooltip")}>
+                <IconButton href={links.linkedin} color="inherit" aria-label={t("resume.about-me.linkedin.aria-label")}>
+                  <LinkedInIcon className='linkedinIcon' fontSize='medium' />
+                </IconButton>
+                </Tooltip>
+              </CardActions>
             </Card>
             {!isMobile && (
               <>
-                <Accordion expanded={true} sx={style.accordionContainer}>
+                <Accordion expanded={true} className='accordionContainer'>
                   <AccordionSummary
                     expandIcon={<ArrowDownwardIcon />}
                     aria-controls="panel1-content"
@@ -163,7 +160,7 @@ function App() {
                     <Experiences />
                   </AccordionDetails>
                 </Accordion>
-                <Accordion expanded={true} sx={style.accordionContainer}>
+                <Accordion expanded={true} className='accordionContainer'>
                   <AccordionSummary
                     expandIcon={<ArrowDownwardIcon />}
                     aria-controls="panel2-content"
@@ -175,7 +172,7 @@ function App() {
                     <Educations />
                   </AccordionDetails>
                 </Accordion>
-                <Accordion expanded={true} sx={style.accordionContainer}>
+                <Accordion expanded={true} className='accordionContainer'>
                   <AccordionSummary
                     expandIcon={<ArrowDownwardIcon />}
                     aria-controls="panel3-content"

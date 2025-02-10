@@ -14,7 +14,7 @@ const Skills : FC = () => {
             case State.PENDING:
                 return <Loading messageKey="resume.skill.loading" />;
             case State.FAILURE:
-                return <ErrorMessage retryFunction={list} />;
+                return <ErrorMessage retryFunction={() => list()} />;
             case State.SUCCESS:
                 return <SkillList skills={skills} searchBar />;
         }

@@ -9,7 +9,7 @@
       },
       "linkedin": {
         "aria-label": "Ouvrir mon profil LinkedIn",
-        "tooltip": "Ouvrir mon profil LinkedIn"
+        "tooltip": "Voir mon profil LinkedIn"
       }
     },
     "experience": {
@@ -78,5 +78,9 @@
     "loading": "Chargement",
     "retry": "Réessayer",
     "error": "Une erreur inattendue s'est produite."
+  },
+  "theme": {
+    "dark": "Mode sombre",
+    "light": "Mode clair"
   }
 }
