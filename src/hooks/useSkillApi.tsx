@@ -23,7 +23,7 @@ const useSkillApi = ({ getOnLoad = false }: UseSkillApiProps): UseSkillApiResult
         setGetState({ state: State.PENDING, error: undefined });
         try {
             let skills: SkillSchema[];
-            if (experienceId && experienceId !== undefined) {
+            if (experienceId && experienceId !== "") {
                 skills = await getExperienceSkills(experienceId, i18n.language);
             } else {
                 skills = await getSkills(i18n.language);
