@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Fade, Typography } from "@mui/material";
+import { Box, Card, CardContent, Fade, Typography, useTheme } from "@mui/material";
 import { FC, useMemo } from "react";
 import { useI18n } from "../../hooks/useI18n";
 import useEducationApi from "../../hooks/useEducationApi";
@@ -10,6 +10,9 @@ const Educations: FC = () => {
 
     const { t, formatDate } = useI18n();
     const { educations, getState, list } = useEducationApi({ getOnLoad: true });
+
+    const theme = useTheme();
+    const isMobile = theme.breakpoints.down('md');
 
     const content = useMemo(() => {
         switch (getState.state) {
@@ -36,28 +39,48 @@ const Educations: FC = () => {
                     <Fade in={true} timeout={500 * (index + 1)} key={index}>
                         <Card key={index} sx={{ marginBottom: 2 }}>
                             <CardContent>
-                                <Box display="flex" justifyContent="space-between" alignItems="stretch" flexGrow={0} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
+                                <Box display="flex" justifyContent="space-between" alignItems="stretch" flexGrow={0} flexDirection={isMobile ? "column" : "row"}>
                                     {education.imageUri && (
                                         <Box>
-                                            <img src={education.imageUri} alt={`${t("resume.education.image-alt")} ${education.school}`} style={{ objectFit: "contain", maxHeight: "100px", padding: "0.5rem" }} />
+                                            <img src={education.imageUri} alt={`${t("resume.education.image-alt")} ${education.school}`} style={{ objectFit: "contain", maxHeight: "100px", maxWidth: "100%", padding: "0.5rem" }} />
                                         </Box>
 
                                     )}
-                                    <Box display={"flex"} justifyContent={"space-between"} alignItems={"flex-start"} flexGrow={1} p={1}>
-                                        <Box textAlign={"left"}>
-                                            <Typography variant="h5" component="div" color="textPrimary">
-                                                {education.degree}
-                                            </Typography>
-                                            <Typography variant="subtitle1" color="textSecondary">
-                                                {education.school} - {education.location}
-                                            </Typography>
+                                    {!isMobile && (
+                                        <Box display={"flex"} justifyContent={"space-between"} alignItems={"flex-start"} flexGrow={1} p={1}>
+                                            <Box textAlign={"left"}>
+                                                <Typography variant="h5" component="div" color="textPrimary">
+                                                    {education.degree}
+                                                </Typography>
+                                                <Typography variant="subtitle1" color="textSecondary">
+                                                    {education.school} - {education.location}
+                                                </Typography>
+                                            </Box>
+                                            <Box textAlign="right">
+                                                <Typography variant="subtitle1" color="textSecondary">
+                                                    {education.endDate ? formatDate(education.endDate) : t("resume.education.present")}
+                                                </Typography>
+                                            </Box>
                                         </Box>
-                                        <Box textAlign="right">
-                                            <Typography variant="subtitle1" color="textSecondary">
-                                                {education.endDate ? formatDate(education.endDate) : t("resume.education.present")}
-                                            </Typography>
+                                    )}
+                                    {isMobile && (
+                                        <Box display={"flex"} justifyContent={"space-between"} alignItems={"stretch"} flexGrow={1} p={1} flexDirection={"column"}>
+                                            <Box textAlign="right">
+                                                <Typography variant="subtitle1" color="textSecondary">
+                                                    {education.endDate ? formatDate(education.endDate) : t("resume.education.present")}
+                                                </Typography>
+                                            </Box>
+                                            <Box textAlign={"left"}>
+                                                <Typography variant="h6" component="div" color="textPrimary">
+                                                    {education.degree}
+                                                </Typography>
+                                                <Typography variant="subtitle1" color="textSecondary">
+                                                    {education.school} - {education.location}
+                                                </Typography>
+                                            </Box>
+                                            
                                         </Box>
-                                    </Box>
+                                    )}
                                 </Box>
                             </CardContent>
                         </Card>
