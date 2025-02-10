@@ -60,7 +60,7 @@ export const getSkills = async (language?: string): Promise<SkillSchema[]> => {
             params: {
                 language,
             },
-            timeout: 10 * 1000,
+            timeout: 20 * 1000,
         });
 
         // Check if the response status is 200
