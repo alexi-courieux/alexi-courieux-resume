@@ -23,7 +23,6 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  styled
 } from "@mui/material";
 import { useI18n } from "./hooks/useI18n.tsx";
 import { links } from "./assets/links.ts";
