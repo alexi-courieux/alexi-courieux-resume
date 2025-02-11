@@ -1,4 +1,4 @@
-﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Fade, Stack, Typography } from "@mui/material";
+﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Fade, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useI18n } from "../../hooks/useI18n.tsx";
 import { FC, useMemo, useState } from "react";
 import ExperienceModal from "./experienceModal.tsx";
@@ -21,6 +21,9 @@ const Experiences: FC<IProps> = ({ sx }) => {
 
   const [modalExperience, setModalExperience] = useState<ExperienceSchema | null>(null);
   const { experiences, getState, list } = useExperienceApi({ getOnLoad: true });
+  
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const content = useMemo(() => {
     const emptyCard = (
@@ -35,20 +38,21 @@ const Experiences: FC<IProps> = ({ sx }) => {
       case State.PENDING:
         return (
           <>
-            {emptyCard}
+            {!isMobile && emptyCard}
             <Card sx={{ width: "300px", height: "450px", display: "flex", flexDirection: "column" }}>
               <CardContent sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Loading messageKey="resume.experience.loading" />
               </CardContent>
             </Card>
-            {emptyCard}
+            {!isMobile && emptyCard}
           </>
         );
         break;
       case State.FAILURE:
         return (
           <>
-            {emptyCard}
+            {!isMobile && emptyCard}
+            
             <Card sx={{ width: "300px", height: "450px", display: "flex", flexDirection: "column" }}>
               <CardContent sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Fade in={true} timeout={1000}>
@@ -58,7 +62,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
                 </Fade>
               </CardContent>
             </Card>
-            {emptyCard}
+            {!isMobile && emptyCard}
           </>
         );
         break;
@@ -107,7 +111,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
       default:
         return null;
     }
-  }, [experiences, formatDate, getState.state, list, t]);
+  }, [experiences, formatDate, getState.state, isMobile, list, t]);
   
   return (
     <>
