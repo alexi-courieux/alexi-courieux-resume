@@ -98,7 +98,7 @@ function App() {
                     <ListItemIcon>
                       <ThemeModeSwitcher />
                     </ListItemIcon>
-                    <ListItemText primary={ isDarkMode ? t("theme.light") : t("theme.dark") } />
+                    <ListItemText primary={isDarkMode ? t("theme.light") : t("theme.dark")} />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
@@ -140,9 +140,9 @@ function App() {
                   </IconButton>
                 </Tooltip>
                 <Tooltip title={t("resume.about-me.linkedin.tooltip")}>
-                <IconButton href={links.linkedin} color="inherit" aria-label={t("resume.about-me.linkedin.aria-label")}>
-                  <LinkedInIcon className='linkedinIcon' fontSize='medium' />
-                </IconButton>
+                  <IconButton href={links.linkedin} color="inherit" aria-label={t("resume.about-me.linkedin.aria-label")}>
+                    <LinkedInIcon className='linkedinIcon' fontSize='medium' />
+                  </IconButton>
                 </Tooltip>
               </CardActions>
             </Card>
@@ -195,18 +195,21 @@ function App() {
         </Fade>
       </Container>
       {isMobile && (
-        <BottomNavigation
-          value={value}
-          onChange={(_, newValue) => {
-            setValue(newValue);
-          }}
-          showLabels
-          sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
-        >
-          <BottomNavigationAction label={t("resume.experience.title")} icon={<WorkIcon />} />
-          <BottomNavigationAction label={t("resume.education.title")} icon={<SchoolIcon />} />
-          <BottomNavigationAction label={t("resume.skills.title")} icon={<BuildIcon />} />
-        </BottomNavigation>
+        <>
+          <div className='mobile-footer-margin' />
+          <BottomNavigation
+            value={value}
+            onChange={(_, newValue) => {
+              setValue(newValue);
+            }}
+            showLabels
+            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+          >
+            <BottomNavigationAction label={t("resume.experience.title")} icon={<WorkIcon />} />
+            <BottomNavigationAction label={t("resume.education.title")} icon={<SchoolIcon />} />
+            <BottomNavigationAction label={t("resume.skills.title")} icon={<BuildIcon />} />
+          </BottomNavigation>
+        </>
       )}
     </>
   );
