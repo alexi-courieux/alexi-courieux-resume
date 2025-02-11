@@ -2,8 +2,10 @@ import { createContext, useState, ReactNode } from 'react';
 import { getTheme } from '../theme/theme';
 import { CssBaseline, ThemeProvider as MuiThemeProvider } from '@mui/material';
 
-
-type ThemeMode = 'light' | 'dark';
+export enum ThemeMode {
+    Light = 'light',
+    Dark = 'dark'
+}
 
 export interface ThemeContextType {
     mode: ThemeMode;
@@ -15,11 +17,11 @@ export const ThemeContext = createContext<ThemeContextType | undefined>(undefine
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [mode, setMode] = useState<ThemeMode>(() => {
         const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        return prefersDarkMode ? 'dark' : 'light';
+        return prefersDarkMode ? ThemeMode.Dark : ThemeMode.Light;
     });
 
     const toggleMode = () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        setMode((prevMode) => (prevMode === ThemeMode.Light ? ThemeMode.Dark : ThemeMode.Light));
     };
 
     return (

@@ -80,7 +80,25 @@
     "error": "An unexpected error occured."
   },
   "theme": {
-    "light": "Light mode",
-    "dark": "Dark mode"
+    "light": {
+      "label": "Light mode",
+      "tooltip": "Switch to light mode"
+    },
+    "dark": {
+      "label": "Dark mode",
+      "tooltip": "Switch to dark mode"
+    }
+  },
+  "drawerMenu": {
+    "open": {
+      "tooltip": "Accessibility menu",
+      "aria-label": "Open accessibility menu"
+    }
+  },
+  "language": {
+    "to": {
+      "en": "Switch to English",
+      "fr": "Passer en français"
+    }
   }
 }

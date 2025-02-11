@@ -80,7 +80,25 @@
     "error": "Une erreur inattendue s'est produite."
   },
   "theme": {
-    "dark": "Mode sombre",
-    "light": "Mode clair"
+    "light": {
+      "label": "Mode clair",
+      "tooltip": "Passer en mode clair"
+    },
+    "dark": {
+      "label": "Mode sombre",
+      "tooltip": "Passer en mode sombre"
+    }
+  },
+  "drawerMenu": {
+    "open": {
+      "tooltip": "Menu d'accessibilité",
+      "aria-label": "Ouvrir le menu d'accessibilité"
+    }
+  },
+  "language": {
+    "to": {
+      "en": "Switch to English",
+      "fr": "Passer en français"
+    }
   }
 }
