@@ -97,10 +97,23 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
             <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center" gap={1} mb={2}>
                 {categories.map((category) => {
                     if (activeCategories.includes(category.name)) {
-                        return <Chip key={category.name} label={category.name} color="primary" onClick={() => handleClickRemoveCategory(category.name)} onDelete={() => handleClickRemoveCategory(category.name)} />
+                        return <Chip 
+                        key={category.name} 
+                        label={category.name} 
+                        color="primary" 
+                        onClick={() => handleClickRemoveCategory(category.name)} 
+                        onDelete={() => handleClickRemoveCategory(category.name)} 
+                        aria-label={t("resume.skill.removeCategory", { category: category.name })} />
                     }
                     else {
-                        return <Chip key={category.name} label={category.name} color="primary" variant="outlined" onClick={() => handleClickAddCategory(category.name)} />
+                        return <Chip        
+                        key={category.name} 
+                        label={category.name} 
+                        color="primary" 
+                        variant="outlined" 
+                        onClick={() => handleClickAddCategory(category.name)} 
+                        aria-label={t("resume.skill.addCategory", { category: category.name })}
+                        />
                     }
                 })}
                 <FormGroup>

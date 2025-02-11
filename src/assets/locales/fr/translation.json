@@ -41,7 +41,8 @@
         "position": "Position :",
         "date": "Date :",
         "close": "Fermer les informations sur l'expérience",
-        "skills": "Compétences"
+        "skills": "Compétences",
+        "aria-label": "Ouvrir le détail de l'expérience {{CompanyName}}"
       },
       "loading": "Chargement des expériences",
       "present": "Aujourd'hui",
@@ -67,7 +68,9 @@
       "hideUnselected": {
         "search": "Filtrer les résultats",
         "category": "Masquer les catégories non selectionnées"
-      }
+      },
+      "removeCategory": "Desélectionner catégorie \"{{category}}\"",
+      "addCategory": "Sélectionnez catégorie \"{{category}}\""
     },
     "title": "CV Alexi Courieux",
     "skills": {
@@ -80,7 +83,25 @@
     "error": "Une erreur inattendue s'est produite."
   },
   "theme": {
-    "dark": "Mode sombre",
-    "light": "Mode clair"
+    "light": {
+      "label": "Mode clair",
+      "tooltip": "Passer en mode clair"
+    },
+    "dark": {
+      "label": "Mode sombre",
+      "tooltip": "Passer en mode sombre"
+    }
+  },
+  "drawerMenu": {
+    "open": {
+      "tooltip": "Menu d'accessibilité",
+      "aria-label": "Ouvrir le menu d'accessibilité"
+    }
+  },
+  "language": {
+    "to": {
+      "en": "Switch to English",
+      "fr": "Passer en français"
+    }
   }
 }

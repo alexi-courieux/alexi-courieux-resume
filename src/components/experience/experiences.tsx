@@ -74,12 +74,12 @@ const Experiences: FC<IProps> = ({ sx }) => {
                 <Card sx={{ width: "300px", height: "450px" }} key={experience.id}>
                   <CardActionArea
                     onClick={() => setModalExperience(experience)}
-                    sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+                    sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+                    aria-label={t("resume.experience.modal.aria-label", { companyName: experience.companyName })}>
                     <CardMedia
                       component="img"
                       height="160"
                       image={t(getI18nKey(experience.id, "image"))}
-                      aria-hidden={true}
                       alt={t(getI18nKey(experience.id, "image-alt"))}
                       sx={{ objectFit: "contain", padding: 2 }}
                     />

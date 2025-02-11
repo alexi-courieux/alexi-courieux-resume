@@ -21,7 +21,6 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText,
   ListItemIcon,
   CardActions,
   Tooltip,
@@ -41,7 +40,6 @@ import BuildIcon from '@mui/icons-material/Build';
 function App() {
   const { t, i18n } = useI18n();
   const theme = useTheme();
-  const isDarkMode = theme.palette.mode === 'dark';
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [value, setValue] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -81,9 +79,11 @@ function App() {
       {isMobile && (
         <>
           <Box sx={{ position: 'fixed', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
-            <IconButton onClick={toggleDrawer(true)} sx={{ m: 2 }}>
-              <MenuIcon fontSize='large' />
-            </IconButton>
+            <Tooltip title={t("drawerMenu.open.tooltip")}>
+              <IconButton onClick={toggleDrawer(true)} sx={{ m: 2 }} aria-label={t("drawerMenu.open.aria-label")}>
+                <MenuIcon fontSize='large' />
+              </IconButton>
+            </Tooltip>
           </Box>
           <Box sx={{ position: 'fixed', top: 0, left: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
             <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
@@ -96,9 +96,8 @@ function App() {
                 <List>
                   <ListItem>
                     <ListItemIcon>
-                      <ThemeModeSwitcher />
+                      <ThemeModeSwitcher showLabel/>
                     </ListItemIcon>
-                    <ListItemText primary={isDarkMode ? t("theme.light") : t("theme.dark")} />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
@@ -128,7 +127,7 @@ function App() {
                   <Typography component="span" align="left" alignSelf={"flex-start"}>
                     {t("resume.about-me.title")}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }} align="justify">
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }} align="left">
                     {t("resume.about-me.description")}
                   </Typography>
                 </Box>
@@ -154,7 +153,7 @@ function App() {
                     aria-controls="panel1-content"
                     id="panel1-header"
                   >
-                    <Typography component="span">{t("resume.experience.title")}</Typography>
+                    <Typography variant='h4'>{t("resume.experience.title")}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Experiences />
@@ -166,7 +165,7 @@ function App() {
                     aria-controls="panel2-content"
                     id="panel2-header"
                   >
-                    <Typography component="span">{t("resume.education.title")}</Typography>
+                    <Typography variant='h4'>{t("resume.education.title")}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Educations />
@@ -178,7 +177,7 @@ function App() {
                     aria-controls="panel3-content"
                     id="panel3-header"
                   >
-                    <Typography component="span">{t("resume.skills.title")}</Typography>
+                    <Typography variant='h4'>{t("resume.skills.title")}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Skills />
