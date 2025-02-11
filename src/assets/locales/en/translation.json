@@ -41,7 +41,8 @@
         "position": "Position:",
         "date": "Date:",
         "close": "Close experience details",
-        "skills": "Skills"
+        "skills": "Skills",
+        "aria-label": "Open {{companyName}} experience details"
       },
       "loading": "Loading experiences",
       "present": "Present",
@@ -67,7 +68,9 @@
       "hideUnselected": {
         "search": "Filter results",
         "category": "Hide unselected"
-      }
+      },
+      "removeCategory": "Unselect \"{{category}}\" category",
+      "addCategory": "Select \"{{category}}\" category"
     },
     "title": "Alexi Courieux Resume",
     "skills": {

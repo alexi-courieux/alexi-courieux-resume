@@ -24,13 +24,17 @@ const ThemeModeSwitcher: FC<IThemeModeSwitcherProps> = ({ showLabel }) => {
         }
     }
 
+    const toggleButton = (
+        <IconButton onClick={handleToggle} aria-label={isDarkMode ? t("theme.light.aria-label") : t("theme.dark.aria-label")}>
+            {isDarkMode ? <LightMode sx={styles.icon} /> : <DarkMode sx={styles.icon} />}
+        </IconButton>
+    );
+
     return (
         <Stack direction="row" spacing={1} alignItems="center">
             {showLabel ? (
                 <>
-                    <IconButton onClick={handleToggle} aria-label={isDarkMode ? t("theme.light.aria-label") : t("theme.dark.aria-label")}>
-                        {isDarkMode ? <LightMode sx={styles.icon} /> : <DarkMode sx={styles.icon} />}
-                    </IconButton>
+                    {toggleButton}
                     <Box onClick={handleToggle} sx={{ cursor: 'pointer' }} aria-hidden>
                         <Typography variant="body1" sx={{ textAlign: 'center' }}>
                             {isDarkMode ? t("theme.light.label") : t("theme.dark.label")}
@@ -39,9 +43,7 @@ const ThemeModeSwitcher: FC<IThemeModeSwitcherProps> = ({ showLabel }) => {
                 </>
             ) : (
                 <Tooltip title={isDarkMode ? t("theme.light.label") : t("theme.dark.label")} placement="left">
-                    <IconButton onClick={handleToggle} aria-label={isDarkMode ? t("theme.light.label") : t("theme.dark.label")}>
-                        {isDarkMode ? <LightMode sx={styles.icon} /> : <DarkMode sx={styles.icon} />}
-                    </IconButton>
+                    {toggleButton}
                 </Tooltip>
             )}
         </Stack>
