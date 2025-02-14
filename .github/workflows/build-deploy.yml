@@ -9,6 +9,7 @@ on:
         type: choice
         options:
           - production
+          - staging
       clean-ftp:
         description: 'Clean FTP server before uploading'
         required: false
@@ -44,6 +45,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/
-          server-dir: public_html/
+          server-dir: /
           state-name: app_content
           dangerous-clean-slate: ${{ github.event.inputs.clean-ftp }}
