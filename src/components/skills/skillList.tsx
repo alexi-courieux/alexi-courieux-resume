@@ -126,7 +126,7 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                         <Autocomplete
                             sx={{ width: 300 }}
                             onChange={(_, v) => {
-                                setSearchInput(v && v.label ? v.label : '');
+                                setSearchInput(v?.label ?? '');
                             }}
                             disablePortal
                             inputValue={searchInput}

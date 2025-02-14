@@ -18,7 +18,7 @@ const getI18nKey = (company: string, key: string) => {
     return `resume.experience.companies.${company}.${key}`;
 }
 
-const ExperienceModal: FC<IProps> = ({ modalExperience: modalExperience, setModalExperience }) => {
+const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) => {
     const { t, formatDate } = useI18n();
     const theme = useTheme();
     const { list: listSkills, getState: getSkillsState, skills } = useSkillApi({});

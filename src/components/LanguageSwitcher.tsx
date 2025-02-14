@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useI18n } from "../hooks/useI18n";
 import { Box, Button, Tooltip, useMediaQuery, useTheme } from "@mui/material";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
+import "flag-icons/css/flag-icons.min.css";
 const LanguageSwitcher: FC = () => {
     const { t, i18n, languages } = useI18n();
 
