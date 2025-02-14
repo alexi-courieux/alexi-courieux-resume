@@ -1,21 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { i18n, TFunction } from "i18next";
 import { I18nContext } from "./I18nContext";
 
 export interface ILanguage {
   key: string;
   flag: string;
   nativeName: string;
-}
-
-export interface IContextProps {
-  t: TFunction;
-  i18n: i18n;
-  loading: boolean;
-  onChangeLanguage: (language: string) => void;
-  languages: ILanguage[];
-  currentLanguage?: string;
 }
 
 const defaultLanguage = 'en';

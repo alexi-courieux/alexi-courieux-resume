@@ -3,7 +3,7 @@ import RequestState, { State } from "../models/requestState";
 import { useI18n } from "./useI18n";
 import { ExperienceSchema } from "../api/generated";
 import { getExperience, getExperiences } from "../api/services/experienceService";
-import { dateSort } from "../utils/sort";
+import { dateSortDesc } from "../utils/sort";
 
 interface UseExperienceApiProps {
     experienceId?: string;
@@ -26,14 +26,14 @@ const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiP
         setGetState({ state: State.PENDING, error: undefined });
         try {
             const experiences = await getExperiences(i18n.language);
-            const sortedExperiences = experiences.sort((a, b) => dateSort(a.startDate, b.startDate, true));
+            const sortedExperiences = experiences.toSorted((a, b) => dateSortDesc(a.startDate, b.startDate));
             setExperiences(sortedExperiences);
             setGetState({ state: State.SUCCESS, error: undefined });
         } catch (error) {
             console.error('Error fetching experiences:', error);
             setGetState({ state: State.FAILURE, error: error });
         }
-    }, []);
+    }, [i18n.language]);
 
     const read = useCallback(async () => {
         if (!experienceId) {
@@ -53,7 +53,7 @@ const useExperienceApi = ({ experienceId, getOnLoad = false }: UseExperienceApiP
 
     useEffect(() => {
         if (getOnLoad) {
-            if (i18nLoading || i18n === undefined || i18n.language === undefined) {
+            if (i18nLoading || i18n?.language === undefined) {
                 return;
             }
 

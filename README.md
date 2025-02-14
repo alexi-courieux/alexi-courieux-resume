@@ -89,6 +89,7 @@ npm run preview
 │   ├── contextProviders/    # Context providers for theme, i18n, ...
 │   ├── hooks/               # Custom React hooks
 │   ├── theme/               # Theme configuration
+│   ├── utils/               # Utility functions (e.g. sorting)
 │   ├── App.css              # Global CSS
 │   ├── App.tsx              # Main App component
 │   ├── index.css            # Global CSS

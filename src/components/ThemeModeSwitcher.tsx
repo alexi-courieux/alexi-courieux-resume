@@ -2,8 +2,8 @@ import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { useTheme } from "../hooks/useTheme";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { FC } from "react";
-import { ThemeMode } from "../contextProviders/ThemeContextProvider";
 import { useI18n } from "../hooks/useI18n";
+import { ThemeMode } from "../contextProviders/ThemeContext";
 
 interface IThemeModeSwitcherProps {
     showLabel?: boolean;

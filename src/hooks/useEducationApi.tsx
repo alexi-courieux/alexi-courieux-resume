@@ -32,7 +32,7 @@ const useEducationApi = ({ getOnLoad = false }: UseEducationApiProps): UseEducat
 
     useEffect(() => {
         if (getOnLoad) {
-            if (i18nLoading || i18n === undefined || i18n.language === undefined) {
+            if (i18nLoading || i18n?.language === undefined) {
                 return;
             }
 
