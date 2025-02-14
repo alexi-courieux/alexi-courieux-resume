@@ -6,6 +6,7 @@ Welcome to the repository for Alexi Courieux's resume web application. This proj
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Quality Checks](#quality-checks)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [Scripts](#scripts)
@@ -28,6 +29,11 @@ Welcome to the repository for Alexi Courieux's resume web application. This proj
 - **i18next**: An internationalization framework for JavaScript.
 - **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
 - **Vite**: A fast build tool for modern web projects.
+
+## Quality Checks
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=alexi-courieux_alexi-courieux-resume&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=alexi-courieux_alexi-courieux-resume)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=alexi-courieux_alexi-courieux-resume&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=alexi-courieux_alexi-courieux-resume)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=alexi-courieux_alexi-courieux-resume&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=alexi-courieux_alexi-courieux-resume)
 
 ## Getting Started
 
