@@ -18,7 +18,7 @@ class ApiError extends Error {
     constructor(message: string, response?: AxiosResponse, statusCode?: number, additionalData?: any) {
         super(message);
         this.response = response;
-        this.statusCode = statusCode || response?.status || 500;
+        this.statusCode = (statusCode ?? response?.status) ?? 500;
         this.additionalData = additionalData;
     }
 }

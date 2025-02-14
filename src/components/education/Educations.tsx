@@ -36,8 +36,8 @@ const Educations: FC = () => {
                 );
             case State.SUCCESS:
                 return educations.map((education, index) => (
-                    <Fade in={true} timeout={500 * (index + 1)} key={index}>
-                        <Card key={index} sx={{ marginBottom: 2 }}>
+                    <Fade in={true} timeout={500 * (index + 1)} key={education.id}>
+                        <Card key={education.id} sx={{ marginBottom: 2 }}>
                             <CardContent>
                                 <Box display="flex" justifyContent="space-between" alignItems="stretch" flexGrow={0} flexDirection={isMobile ? "column" : "row"}>
                                     {education.imageUri && (
@@ -88,7 +88,7 @@ const Educations: FC = () => {
                 ));
 
         }
-    }, [educations, formatDate, getState.state, list, t]);
+    }, [educations, formatDate, getState.state, isMobile, list, t]);
 
     return (
         <Fade in={true} timeout={500}>

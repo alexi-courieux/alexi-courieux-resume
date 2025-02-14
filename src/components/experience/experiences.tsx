@@ -47,7 +47,6 @@ const Experiences: FC<IProps> = ({ sx }) => {
             {!isMobile && emptyCard}
           </>
         );
-        break;
       case State.FAILURE:
         return (
           <>
@@ -65,7 +64,6 @@ const Experiences: FC<IProps> = ({ sx }) => {
             {!isMobile && emptyCard}
           </>
         );
-        break;
       case State.SUCCESS:
         return (
           <>
@@ -107,7 +105,6 @@ const Experiences: FC<IProps> = ({ sx }) => {
             ))}
           </>
         );
-        break;
       default:
         return null;
     }
