@@ -38,7 +38,7 @@ const useSkillApi = ({ getOnLoad = false }: UseSkillApiProps): UseSkillApiResult
 
     useEffect(() => {
         if (getOnLoad) {
-            if (i18nLoading || i18n === undefined || i18n.language === undefined) {
+            if (i18nLoading || i18n?.language === undefined) {
                 return;
             }
 

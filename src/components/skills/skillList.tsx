@@ -2,7 +2,7 @@ import { Autocomplete, Box, Chip, FormControlLabel, FormGroup, Switch, TextField
 import { FC, useEffect, useMemo, useState } from "react";
 import { useI18n } from "../../hooks/useI18n";
 import { SkillSchema } from "../../api/generated";
-import { stringSort } from "../../utils/sort";
+import { stringSortDesc } from "../../utils/sort";
 
 interface ISkillListProps {
     skills: SkillSchema[];
@@ -38,7 +38,7 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
         const newCategories = Object.keys(categoryMap).map(categoryName => ({
             name: categoryName,
             skills: categoryMap[categoryName],
-        })).sort((a, b) => stringSort(a.name, b.name));
+        })).sort((a, b) => stringSortDesc(a.name, b.name));
 
         setCategories(newCategories);
     }, [skills]);

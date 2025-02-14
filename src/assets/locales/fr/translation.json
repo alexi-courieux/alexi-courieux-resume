@@ -85,11 +85,13 @@
   "theme": {
     "light": {
       "label": "Mode clair",
-      "tooltip": "Passer en mode clair"
+      "tooltip": "Passer en mode clair",
+      "aria-label": "Passer en mode clair"
     },
     "dark": {
       "label": "Mode sombre",
-      "tooltip": "Passer en mode sombre"
+      "tooltip": "Passer en mode sombre",
+      "aria-label": "Passer en mode sombre"
     }
   },
   "drawerMenu": {

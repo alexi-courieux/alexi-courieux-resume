@@ -1,5 +1,5 @@
 ﻿import { useContext } from "react";
-import { I18nContext, IContextProps } from "../contextProviders/I18nContextProvider";
+import { I18nContext, IContextProps } from "../contextProviders/I18nContext";
 import { enGB, fr } from "date-fns/locale";
 import { format } from "date-fns";
 import { capitalizeFirstLetter } from "../utils/stringUtils";

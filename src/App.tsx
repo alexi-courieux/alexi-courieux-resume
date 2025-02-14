@@ -71,7 +71,7 @@ function App() {
   return (
     <>
       {!isMobile && (
-        <Box sx={{ position: 'fixed', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
+        <Box sx={{ position: 'fixed', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <ThemeModeSwitcher />
           <LanguageSwitcher />
         </Box>

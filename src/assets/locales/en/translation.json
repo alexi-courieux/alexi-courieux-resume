@@ -85,11 +85,13 @@
   "theme": {
     "light": {
       "label": "Light mode",
-      "tooltip": "Switch to light mode"
+      "tooltip": "Switch to light mode",
+      "aria-label": "Switch to light mode"
     },
     "dark": {
       "label": "Dark mode",
-      "tooltip": "Switch to dark mode"
+      "tooltip": "Switch to dark mode",
+      "aria-label": "Switch to dark mode"
     }
   },
   "drawerMenu": {

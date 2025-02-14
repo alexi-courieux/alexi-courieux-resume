@@ -184,5 +184,5 @@ export type ListEducationsV1EducationGetResponses = {
 export type ListEducationsV1EducationGetResponse = ListEducationsV1EducationGetResponses[keyof ListEducationsV1EducationGetResponses];
 
 export type ClientOptions = {
-    baseURL: 'http://localhost:8000' | (string & {});
+    baseURL: string;
 };
