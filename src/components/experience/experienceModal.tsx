@@ -1,4 +1,4 @@
-import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme } from "@mui/material";
+import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme as muiTheme } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { FC, useEffect } from "react";
 import SkillList from "../skills/skillList";
@@ -8,19 +8,18 @@ import Loading from "../loading";
 import { State } from "../../models/requestState";
 import ErrorMessage from "../ErrorMessage";
 import { ExperienceSchema } from "../../api/generated";
+import { useTheme } from "../../hooks/useTheme";
+import { ThemeMode } from "../../contextProviders/ThemeContext";
 
 interface IProps {
     modalExperience: ExperienceSchema| null;
     setModalExperience: (experience: ExperienceSchema | null) => void;
 }
 
-const getI18nKey = (company: string, key: string) => {
-    return `resume.experience.companies.${company}.${key}`;
-}
-
 const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) => {
     const { t, formatDate } = useI18n();
-    const theme = useTheme();
+    const theme = muiTheme();
+    const themeMode = useTheme().mode;
     const { list: listSkills, getState: getSkillsState, skills } = useSkillApi({});
 
     useEffect(() => {
@@ -73,8 +72,8 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image={t(getI18nKey(modalExperience.id, "image"))}
-                                alt={t(getI18nKey(modalExperience.id, "image-alt"))}
+                                image={themeMode === ThemeMode.Dark ? modalExperience.imageUriDark ?? modalExperience.imageUri : modalExperience.imageUri}
+                                alt={modalExperience.imageAlt}
                                 sx={{ objectFit: "contain", mb: 2, maxWidth: "200px" }}
                             />
                             <Typography variant="h4" id="modal-title" gutterBottom sx={{ flexGrow: 1, textAlign: "center" }}>

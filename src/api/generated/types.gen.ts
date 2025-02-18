@@ -8,6 +8,8 @@ export type EducationSchema = {
     startDate: string;
     endDate?: string | null;
     imageUri?: string | null;
+    imageAlt: string;
+    imageUriDark?: string | null;
 };
 
 export type ExperienceSchema = {
@@ -18,6 +20,9 @@ export type ExperienceSchema = {
     endDate?: string | null;
     shortDescription: string;
     description: string;
+    imageUri: string;
+    imageAlt: string;
+    imageUriDark?: string | null;
 };
 
 export type HttpValidationError = {
@@ -184,5 +189,5 @@ export type ListEducationsV1EducationGetResponses = {
 export type ListEducationsV1EducationGetResponse = ListEducationsV1EducationGetResponses[keyof ListEducationsV1EducationGetResponses];
 
 export type ClientOptions = {
-    baseURL: string;
+    baseURL: 'http://localhost:8000' | (string & {});
 };

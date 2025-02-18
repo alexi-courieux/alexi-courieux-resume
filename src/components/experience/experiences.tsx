@@ -1,4 +1,4 @@
-﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Fade, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
+﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Fade, Stack, Typography, useMediaQuery, useTheme as muiTheme } from "@mui/material";
 import { useI18n } from "../../hooks/useI18n.tsx";
 import { FC, useMemo, useState } from "react";
 import ExperienceModal from "./experienceModal.tsx";
@@ -7,6 +7,8 @@ import { State } from "../../models/requestState.ts";
 import Loading from "../loading.tsx";
 import ErrorMessage from "../ErrorMessage.tsx";
 import { ExperienceSchema } from "../../api/generated/types.gen.ts";
+import { useTheme } from "../../hooks/useTheme.tsx";
+import { ThemeMode } from "../../contextProviders/ThemeContext.ts";
 
 interface IProps {
   sx?: any;
@@ -15,15 +17,12 @@ interface IProps {
 const Experiences: FC<IProps> = ({ sx }) => {
   const { t, formatDate } = useI18n();
 
-  const getI18nKey = (company: string, key: string) => {
-    return `resume.experience.companies.${company}.${key}`;
-  }
-
   const [modalExperience, setModalExperience] = useState<ExperienceSchema | null>(null);
   const { experiences, getState, list } = useExperienceApi({ getOnLoad: true });
   
-  const theme = useTheme();
+  const theme = muiTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const themeMode = useTheme().mode;
 
   const content = useMemo(() => {
     const emptyCard = (
@@ -77,8 +76,8 @@ const Experiences: FC<IProps> = ({ sx }) => {
                     <CardMedia
                       component="img"
                       height="160"
-                      image={t(getI18nKey(experience.id, "image"))}
-                      alt={t(getI18nKey(experience.id, "image-alt"))}
+                      image={themeMode === ThemeMode.Dark ? experience.imageUriDark ?? experience.imageUri : experience.imageUri}
+                      alt={experience.imageAlt}
                       sx={{ objectFit: "contain", padding: 2 }}
                     />
                     <CardContent sx={{ flexGrow: 1 }}>

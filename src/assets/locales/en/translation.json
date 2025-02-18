@@ -15,28 +15,6 @@
     "experience": {
       "title": "Experiences",
       "location": "Location",
-      "companies": {
-        "exco": {
-          "image": "images/experience-exco.jpg",
-          "image-alt": "Exco FSE logo"
-        },
-        "koedia": {
-          "image": "images/experience-koedia.svg",
-          "image-alt": "Koedia logo"
-        },
-        "csm": {
-          "image": "images/experience-csm.svg",
-          "image-alt": "Caisses Sociales de Monaco logo"
-        },
-        "nbc": {
-          "image": "images/en/experience-nbc.svg",
-          "image-alt": "National Bank of Canada logo"
-        },
-        "flo": {
-          "image": "images/experience-flo.svg",
-          "image-alt": "Flo logo"
-        }
-      },
       "modal": {
         "position": "Position:",
         "date": "Date:",

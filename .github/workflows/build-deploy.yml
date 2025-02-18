@@ -6,10 +6,7 @@ on:
         description: 'Environment to deploy to'
         required: true
         default: 'production'
-        type: choice
-        options:
-          - production
-          - staging
+        type: environment
       clean-ftp:
         description: 'Clean FTP server before uploading'
         required: false
