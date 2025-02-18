@@ -1,18 +1,21 @@
-import { Box, Card, CardContent, Fade, Typography, useTheme } from "@mui/material";
+import { Box, Card, CardContent, Fade, Typography, useTheme as muiTheme } from "@mui/material";
 import { FC, useMemo } from "react";
 import { useI18n } from "../../hooks/useI18n";
 import useEducationApi from "../../hooks/useEducationApi";
 import { State } from "../../models/requestState";
 import ErrorMessage from "../ErrorMessage";
 import Loading from "../loading";
+import {useTheme } from "../../hooks/useTheme";
+import { ThemeMode } from "../../contextProviders/ThemeContext";
 
 const Educations: FC = () => {
 
     const { t, formatDate } = useI18n();
     const { educations, getState, list } = useEducationApi({ getOnLoad: true });
 
-    const theme = useTheme();
+    const theme = muiTheme();
     const isMobile = theme.breakpoints.down('md');
+    const themeMode = useTheme().mode;
 
     const content = useMemo(() => {
         switch (getState.state) {
@@ -42,7 +45,7 @@ const Educations: FC = () => {
                                 <Box display="flex" justifyContent="space-between" alignItems="stretch" flexGrow={0} flexDirection={isMobile ? "column" : "row"}>
                                     {education.imageUri && (
                                         <Box>
-                                            <img src={education.imageUri} alt={`${t("resume.education.image-alt")} ${education.school}`} style={{ objectFit: "contain", maxHeight: "100px", maxWidth: "100%", padding: "0.5rem" }} />
+                                            <img src={themeMode === ThemeMode.Dark ? education.imageUriDark ?? education.imageUri : education.imageUri} alt={education.imageAlt} style={{ objectFit: "contain", maxHeight: "100px", maxWidth: "100%", padding: "0.5rem" }} />
                                         </Box>
 
                                     )}

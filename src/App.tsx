@@ -27,15 +27,16 @@ import {
 } from "@mui/material";
 import { useI18n } from "./hooks/useI18n.tsx";
 import { links } from "./assets/links.ts";
-import Experiences from "./components/experience/experiences.tsx";
 import LanguageSwitcher from "./components/LanguageSwitcher";
-import { useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 import ThemeModeSwitcher from './components/ThemeModeSwitcher.tsx';
-import Educations from './components/education/Educations.tsx';
-import Skills from './components/skills/skills.tsx';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
 import BuildIcon from '@mui/icons-material/Build';
+
+const Experiences = lazy(() => import('./components/experience/experiences'));
+const Educations = lazy(() => import('./components/education/Educations'));
+const Skills = lazy(() => import('./components/skills/skills'));
 
 function App() {
   const { t, i18n } = useI18n();
