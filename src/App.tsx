@@ -81,7 +81,7 @@ function App() {
         <>
           <Box sx={{ position: 'fixed', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
             <Tooltip title={t("drawerMenu.open.tooltip")}>
-              <IconButton onClick={toggleDrawer(true)} sx={{ m: 2 }} aria-label={t("drawerMenu.open.aria-label")}>
+              <IconButton onClick={toggleDrawer(true)} sx={{ m: 2 }} aria-label={t("drawerMenu.open.aria-label")} data-testid="drawer-toggle">
                 <MenuIcon fontSize='large' />
               </IconButton>
             </Tooltip>
@@ -111,7 +111,7 @@ function App() {
         </>
       )}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} mr={4}>
-        <Typography variant="h1" color="primary" className='title'>
+        <Typography variant="h1" color="primary" className='title' data-testid="title">
           Alexi Courieux
         </Typography>
         <Box>
@@ -134,12 +134,12 @@ function App() {
               </CardContent>
               <CardActions sx={{ justifyContent: 'flex-end' }}>
                 <Tooltip title={t("resume.about-me.github.tooltip")}>
-                  <IconButton href={links.github} color="inherit" aria-label={t("resume.about-me.github.aria-label")}>
+                  <IconButton href={links.github} color="inherit" aria-label={t("resume.about-me.github.aria-label")} data-testid="github-link">
                     <GithubIcon fontSize='medium' />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title={t("resume.about-me.linkedin.tooltip")}>
-                  <IconButton href={links.linkedin} color="inherit" aria-label={t("resume.about-me.linkedin.aria-label")}>
+                  <IconButton href={links.linkedin} color="inherit" aria-label={t("resume.about-me.linkedin.aria-label")} data-testid="linkedin-link">
                     <LinkedInIcon className='linkedinIcon' fontSize='medium' />
                   </IconButton>
                 </Tooltip>
