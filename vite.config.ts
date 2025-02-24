@@ -1,9 +1,18 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  test: {
+    browser: {
+      enabled: true,
+      provider: 'playwright',
+      instances: [
+        { browser: 'chromium' },
+      ],
+    },
+  },
   build: {
     rollupOptions: {
       output: {
@@ -16,5 +25,13 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 500,
+  },
+  optimizeDeps: {
+    include: ['@mui/material', '@mui/icons-material', 'axios', 'axios-retry', 'i18next', 'react-i18next'],
+  },
+  server: {
+    fs: {
+      strict: false,
+    },
   },
 });
