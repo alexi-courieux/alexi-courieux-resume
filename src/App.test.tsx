@@ -1,9 +1,8 @@
-import { describe, test, expect, assert, vi, beforeEach, beforeAll, afterEach } from 'vitest';
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, RenderResult } from '@testing-library/react';
 import App from './App';
 import { Suspense } from 'react';
 import { links } from './assets/links';
-
 
 vi.mock('./components/experience/experiences', () => ({
     __esModule: true,
