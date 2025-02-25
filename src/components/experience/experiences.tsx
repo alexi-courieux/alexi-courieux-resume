@@ -1,7 +1,7 @@
 ﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Fade, Stack, Typography, useMediaQuery, useTheme as muiTheme } from "@mui/material";
 import { useI18n } from "../../hooks/useI18n.tsx";
 import { FC, useMemo, useState } from "react";
-import ExperienceModal from "./experienceModal.tsx";
+import ExperienceModal from "./ExperienceModal.tsx";
 import useExperienceApi from "../../hooks/useExperienceApi.tsx";
 import { State } from "../../models/requestState.ts";
 import Loading from "../loading.tsx";
@@ -78,6 +78,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
                       height="160"
                       image={themeMode === ThemeMode.Dark ? experience.imageUriDark ?? experience.imageUri : experience.imageUri}
                       alt={experience.imageAlt}
+                      title={experience.companyName}
                       sx={{ objectFit: "contain", padding: 2 }}
                     />
                     <CardContent sx={{ flexGrow: 1 }}>
