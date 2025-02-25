@@ -87,7 +87,7 @@ function App() {
             </Tooltip>
           </Box>
           <Box sx={{ position: 'fixed', top: 0, left: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
-            <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+            <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)} data-testid="drawer">
               <Box
                 sx={{ width: 250 }}
                 onClick={toggleDrawer(false)}
@@ -204,10 +204,11 @@ function App() {
               });            }}
             showLabels
             sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+            data-testid="bottom-navigation"
           >
-            <BottomNavigationAction label={t("resume.experience.title")} icon={<WorkIcon />} />
-            <BottomNavigationAction label={t("resume.education.title")} icon={<SchoolIcon />} />
-            <BottomNavigationAction label={t("resume.skills.title")} icon={<BuildIcon />} />
+            <BottomNavigationAction label={t("resume.experience.title")} icon={<WorkIcon />} data-testid="experience-tab-btn" />
+            <BottomNavigationAction label={t("resume.education.title")} icon={<SchoolIcon />} data-testid="education-tab-btn" />
+            <BottomNavigationAction label={t("resume.skills.title")} icon={<BuildIcon />} data-testid="skills-tab-btn" />
           </BottomNavigation>
         </>
       )}

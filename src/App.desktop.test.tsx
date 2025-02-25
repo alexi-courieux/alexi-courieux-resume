@@ -38,8 +38,7 @@ vi.mock('./hooks/useI18n', () => ({
     })
 }));
 
-
-describe('App - mobile', {}, () => {
+describe('App - mobile', { }, () => {
     let wrapper: RenderResult;
     beforeEach(async () => {
         wrapper = render(
@@ -52,26 +51,24 @@ describe('App - mobile', {}, () => {
     });
 
     afterEach(() => {
-        wrapper.unmount();
+        wrapper?.unmount();
     });
 
     
-    test('App mounts properly', async () => {
+    test('Mounts properly', async () => {
         expect(wrapper.container).toBeTruthy();
 
-        expect(wrapper.getByTestId('mocked-experiences')).toBeTruthy();
         expect(wrapper.getByTestId('title').innerText).toBe('Alexi Courieux');
         expect(wrapper.getByTestId('github-link').getAttribute('href')).toBe(links.github);
         expect(wrapper.getByTestId('linkedin-link').getAttribute('href')).toBe(links.linkedin);
-    })
-
-    test('App drawer is functional', async () => {
-        const drawerButton = wrapper.getByTestId('drawer-toggle');
-        drawerButton.click();
-
-        await vi.waitFor(() => {
-            expect(wrapper.getByTestId('mocked-language-switcher')).toBeTruthy();
-            expect(wrapper.getByTestId('mocked-theme-mode-switcher')).toBeTruthy();
-        }, {interval: 500, timeout: 3000});
+        
+        expect(wrapper.getByTestId('mocked-experiences')).toBeTruthy();
+        expect(wrapper.getByTestId('mocked-educations')).toBeTruthy();
+        expect(wrapper.getByTestId('mocked-skills')).toBeTruthy();
+        
+        expect(wrapper.queryByTestId('drawer-toggle')).toBeNull();
+        expect(wrapper.queryByTestId('bottom-navigation')).toBeNull();
+        expect(wrapper.queryByTestId('mocked-theme-mode-switcher')).toBeTruthy();
+        expect(wrapper.queryByTestId('mocked-language-switcher')).toBeTruthy();
     })
 });
