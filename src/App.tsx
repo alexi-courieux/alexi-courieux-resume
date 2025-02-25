@@ -111,7 +111,7 @@ function App() {
         </>
       )}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} mr={4}>
-        <Typography variant="h4" color="primary">
+        <Typography variant="h1" color="primary" className='title'>
           Alexi Courieux
         </Typography>
         <Box>
