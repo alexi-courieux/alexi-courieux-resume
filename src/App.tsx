@@ -28,7 +28,7 @@ import {
 import { useI18n } from "./hooks/useI18n.tsx";
 import { links } from "./assets/links.ts";
 import LanguageSwitcher from "./components/LanguageSwitcher";
-import { lazy, useEffect, useState } from 'react';
+import { lazy, startTransition, useEffect, useState } from 'react';
 import ThemeModeSwitcher from './components/ThemeModeSwitcher.tsx';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
@@ -199,8 +199,9 @@ function App() {
           <BottomNavigation
             value={value}
             onChange={(_, newValue) => {
-              setValue(newValue);
-            }}
+              startTransition(() => {
+                setValue(newValue);
+              });            }}
             showLabels
             sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
           >
