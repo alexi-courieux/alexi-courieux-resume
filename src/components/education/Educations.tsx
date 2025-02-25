@@ -45,7 +45,7 @@ const Educations: FC = () => {
                                 <Box display="flex" justifyContent="space-between" alignItems="stretch" flexGrow={0} flexDirection={isMobile ? "column" : "row"}>
                                     {education.imageUri && (
                                         <Box>
-                                            <img src={themeMode === ThemeMode.Dark ? education.imageUriDark ?? education.imageUri : education.imageUri} alt={education.imageAlt} style={{ objectFit: "contain", maxHeight: "100px", maxWidth: "100%", padding: "0.5rem" }} />
+                                            <img src={themeMode === ThemeMode.Dark ? education.imageUriDark ?? education.imageUri : education.imageUri} title={education.school} alt={education.imageAlt} style={{ objectFit: "contain", maxHeight: "100px", maxWidth: "100%", padding: "0.5rem" }} />
                                         </Box>
 
                                     )}

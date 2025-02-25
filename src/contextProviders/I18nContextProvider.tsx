@@ -26,6 +26,7 @@ export const I18nContextProvider: React.FC<I18nContextProviderProps> = ({ childr
 
   const onChangeLanguage = useCallback((language: string) => {
     i18n.changeLanguage(language);
+    document.documentElement.lang = language;
   }, [i18n]);
 
   useEffect(() => {

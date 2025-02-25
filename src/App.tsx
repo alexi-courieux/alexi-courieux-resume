@@ -28,13 +28,13 @@ import {
 import { useI18n } from "./hooks/useI18n.tsx";
 import { links } from "./assets/links.ts";
 import LanguageSwitcher from "./components/LanguageSwitcher";
-import { lazy, startTransition, useEffect, useState } from 'react';
+import { lazy, startTransition, useCallback, useEffect, useState } from 'react';
 import ThemeModeSwitcher from './components/ThemeModeSwitcher.tsx';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
 import BuildIcon from '@mui/icons-material/Build';
 
-const Experiences = lazy(() => import('./components/experience/experiences'));
+const Experiences = lazy(() => import('./components/experience/Experiences.tsx'));
 const Educations = lazy(() => import('./components/education/Educations'));
 const Skills = lazy(() => import('./components/skills/skills'));
 
@@ -42,15 +42,15 @@ function App() {
   const { t, i18n } = useI18n();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [value, setValue] = useState(0);
+  const [mobileTabIndex, setMobileTabIndex] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     document.title = t("resume.title");
   }, [i18n.language, t]);
 
-  const renderMobileContent = () => {
-    switch (value) {
+  const renderMobileContent = useCallback(() => {
+    switch (mobileTabIndex) {
       case 0:
         return <Experiences />;
       case 1:
@@ -60,7 +60,7 @@ function App() {
       default:
         return <Experiences />;
     }
-  };
+  }, [mobileTabIndex]);
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
@@ -111,7 +111,7 @@ function App() {
         </>
       )}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} mr={4}>
-        <Typography variant="h4" color="primary">
+        <Typography variant="h1" color="primary" className='title'>
           Alexi Courieux
         </Typography>
         <Box>
@@ -197,10 +197,10 @@ function App() {
         <>
           <div className='mobile-footer-margin' />
           <BottomNavigation
-            value={value}
+            value={mobileTabIndex}
             onChange={(_, newValue) => {
               startTransition(() => {
-                setValue(newValue);
+                setMobileTabIndex(newValue);
               });            }}
             showLabels
             sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
