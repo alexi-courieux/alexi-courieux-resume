@@ -2,7 +2,7 @@ import { PaletteOptions, ThemeOptions, createTheme } from '@mui/material/styles'
 
 export const baseThemeOptions: ThemeOptions = {
   typography: {
-    fontFamily: 'Lato',
+    fontFamily: 'Lato, sans-serif',
   },
   
   breakpoints: {
