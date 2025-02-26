@@ -34,7 +34,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
 import BuildIcon from '@mui/icons-material/Build';
 
-const Experiences = lazy(() => import('./components/experience/Experiences.tsx'));
+const Experiences = lazy(() => import('./components/experience/experiences.tsx'));
 const Educations = lazy(() => import('./components/education/Educations'));
 const Skills = lazy(() => import('./components/skills/skills'));
 
