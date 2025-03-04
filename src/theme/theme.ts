@@ -36,7 +36,7 @@ const darkPalette: PaletteOptions = {
     main: '#17A589',
   },
   secondary: {
-    main: '#005F6B',
+    main: '#1e7d89',
   },
   background: {
     default: '#242424',

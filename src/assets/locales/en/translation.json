@@ -20,7 +20,8 @@
         "date": "Date:",
         "close": "Close experience details",
         "skills": "Skills",
-        "aria-label": "Open {{companyName}} experience details"
+        "aria-label": "Open {{companyName}} experience details",
+        "button": "Learn More"
       },
       "loading": "Loading experiences",
       "present": "Present",
