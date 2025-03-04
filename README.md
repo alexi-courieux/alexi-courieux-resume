@@ -9,9 +9,6 @@ Welcome to the repository for Alexi Courieux's resume web application. This proj
 - [Quality Checks](#quality-checks)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
-- [Scripts](#scripts)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
