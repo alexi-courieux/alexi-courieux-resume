@@ -67,7 +67,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
         return (
           <>
             {Array.isArray(experiences) && experiences.map((experience, index) => (
-              <Fade in={true} key={experience.id} timeout={500 * (index + 1)}>
+              <Fade in={true} key={`${experience.id}-fade`} timeout={500 * (index + 1)}>
                 <Card sx={{ width: "300px", height: "450px" }} key={experience.id}>
                   <CardActionArea
                     onClick={() => setModalExperience(experience)}
