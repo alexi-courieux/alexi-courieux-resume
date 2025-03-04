@@ -1,4 +1,4 @@
-﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Fade, Stack, Typography, useMediaQuery, useTheme as muiTheme } from "@mui/material";
+﻿import { Box, Card, CardActionArea, CardContent, CardMedia, Fade, Stack, Typography, useMediaQuery, useTheme as muiTheme, Button, CardActions } from "@mui/material";
 import { useI18n } from "../../hooks/useI18n.tsx";
 import { FC, useMemo, useState } from "react";
 import ExperienceModal from "./experienceModal.tsx";
@@ -19,7 +19,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
 
   const [modalExperience, setModalExperience] = useState<ExperienceSchema | null>(null);
   const { experiences, getState, list } = useExperienceApi({ getOnLoad: true });
-  
+
   const theme = muiTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const themeMode = useTheme().mode;
@@ -28,7 +28,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
     const emptyCard = (
       <Card sx={{ width: "300px", height: "450px", display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-  
+
         </CardContent>
       </Card>
     );
@@ -50,7 +50,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
         return (
           <>
             {!isMobile && emptyCard}
-            
+
             <Card sx={{ width: "300px", height: "450px", display: "flex", flexDirection: "column" }}>
               <CardContent sx={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Fade in={true} timeout={1000}>
@@ -99,6 +99,11 @@ const Experiences: FC<IProps> = ({ sx }) => {
                         </Typography>
                       </Box>
                     </CardContent>
+                    <CardActions>
+                      <Button size="small" color="primary" sx={{ alignSelf: "flex-end" }} aria-hidden="true">
+                        {t("resume.experience.modal.button")}
+                      </Button>
+                    </CardActions>
                   </CardActionArea>
                 </Card>
               </Fade>
@@ -109,7 +114,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
         return null;
     }
   }, [experiences, formatDate, getState.state, isMobile, list, t]);
-  
+
   return (
     <>
       <Stack direction={"row"} spacing={2} flexWrap={"wrap"} useFlexGap justifyContent={"center"} sx={{ ...sx }}>
