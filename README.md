@@ -79,35 +79,40 @@ npm run preview
 ## Project Structure
 ```plaintext
 .
-├── .github/workflows/       # GitHub Actions workflows
-├── node_modules/            # Node.js modules
-├── public/                  # Public assets
-├── src/                     # Source code
-│   ├── api/                 # API services and models
-│   ├── assets/              # Static assets like images and translations
-│   ├── components/          # React components
-│   ├── contextProviders/    # Context providers for theme, i18n, ...
-│   ├── hooks/               # Custom React hooks
-│   ├── theme/               # Theme configuration
-│   ├── utils/               # Utility functions (e.g. sorting)
-│   ├── App.css              # Global CSS
-│   ├── App.tsx              # Main App component
-│   ├── index.css            # Global CSS
-│   ├── main.tsx             # Entry point
-│   └── vite-env.d.ts        # Vite environment types
-├── scripts/                 # Shell/Bash scripts
-├── .env.local               # Local environment variables
-├── .gitignore               # Git ignore file
-├── package.json             # NPM package configuration
-├── tsconfig.json            # TypeScript configuration, extends tsconfig.app.json and tsconfig.node.json
-├── tsconfig.app.json        # TypeScript configuration for the app
-├── tsconfig.node.json       # TypeScript configuration for Node.js
-├── vite.config.ts           # Vite configuration
-└── README.md                # This file
+├── .github/workflows/          # GitHub Actions workflows
+├── node_modules/               # Node.js modules
+├── public/                     # Public assets
+├── src/                        # Source code
+│   ├── api/                    # API services and models
+│   ├── assets/                 # Static assets like images and translations
+│   ├── components/             # React components
+│   ├── contextProviders/       # Context providers for theme, i18n, ...
+│   ├── hooks/                  # Custom React hooks
+│   ├── theme/                  # Theme configuration
+│   ├── utils/                  # Utility functions (e.g. sorting)
+│   ├── App.css                 # Global CSS
+│   ├── App.tsx                 # Main App component
+│   ├── index.css               # Global CSS
+│   ├── main.tsx                # Entry point
+│   └── vite-env.d.ts           # Vite environment types
+├── scripts/                    # Shell/Bash scripts
+├── .env.local                  # Local environment variables
+├── .gitignore                  # Git ignore file
+├── package.json                # NPM package configuration
+├── tsconfig.json               # TypeScript configuration (shared)
+├── tsconfig.app.json           # TypeScript configuration for the app
+├── tsconfig.node.json          # TypeScript configuration for Node.js
+├── vite.config.ts              # Vite configuration
+├── openapi-ts.config.ts        # OpenAPI TypeScript configuration
+├── generatorRuntimeConfig.ts   # OpenAPI TypeScript runtime configuration
+├── eslint.config.js            # ESLint configuration
+└── README.md                   # This file
 ```
 
 ## Generate API models
 You can generate the API models and SDK from the openApi.json file using the following command:
+
+_See [openapi-ts.config.js](./openapi-ts.config.ts) for configuration._
 ```sh
 npm run openapi-ts
 ```
