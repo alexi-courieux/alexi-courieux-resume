@@ -1,12 +1,11 @@
 import './App.css';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import WorkIcon from '@mui/icons-material/Work';
+import SchoolIcon from '@mui/icons-material/School';
+import BuildIcon from '@mui/icons-material/Build';
 import GithubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Box,
   BottomNavigation,
   BottomNavigationAction,
@@ -24,15 +23,13 @@ import {
   ListItemIcon,
   CardActions,
   Tooltip,
+  CardHeader,
 } from "@mui/material";
 import { useI18n } from "./hooks/useI18n.tsx";
 import { links } from "./assets/links.ts";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { lazy, startTransition, useCallback, useEffect, useState } from 'react';
 import ThemeModeSwitcher from './components/ThemeModeSwitcher.tsx';
-import SchoolIcon from '@mui/icons-material/School';
-import WorkIcon from '@mui/icons-material/Work';
-import BuildIcon from '@mui/icons-material/Build';
 
 const Experiences = lazy(() => import('./components/experience/experiences.tsx'));
 const Educations = lazy(() => import('./components/education/Educations'));
@@ -96,7 +93,7 @@ function App() {
                 <List>
                   <ListItem>
                     <ListItemIcon>
-                      <ThemeModeSwitcher showLabel/>
+                      <ThemeModeSwitcher showLabel />
                     </ListItemIcon>
                   </ListItem>
                   <ListItem>
@@ -111,7 +108,7 @@ function App() {
         </>
       )}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} mr={4}>
-        <Typography variant="h1" color="primary" className='title'>
+        <Typography variant="h4" component="h1" color="primary">
           Alexi Courieux
         </Typography>
         <Box>
@@ -147,42 +144,33 @@ function App() {
             </Card>
             {!isMobile && (
               <>
-                <Accordion expanded={true} className='accordionContainer'>
-                  <AccordionSummary
-                    expandIcon={<ArrowDownwardIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                  >
-                    <Typography variant='h4'>{t("resume.experience.title")}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                <Card className='categoryContainer'>
+                  <CardHeader
+                    avatar={<WorkIcon color='primary'/>}
+                    title={<Typography variant='h4' align='left' color='primary'>{t("resume.experience.title")}</Typography>}
+                  />
+                  <CardContent>
                     <Experiences />
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion expanded={true} className='accordionContainer'>
-                  <AccordionSummary
-                    expandIcon={<ArrowDownwardIcon />}
-                    aria-controls="panel2-content"
-                    id="panel2-header"
-                  >
-                    <Typography variant='h4'>{t("resume.education.title")}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                  </CardContent>
+                </Card>
+                <Card className='categoryContainer'>
+                  <CardHeader
+                    avatar={<SchoolIcon color='primary'/>}
+                    title={<Typography variant='h4' align='left' color='primary'>{t("resume.education.title")}</Typography>}
+                  />
+                  <CardContent>
                     <Educations />
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion expanded={true} className='accordionContainer'>
-                  <AccordionSummary
-                    expandIcon={<ArrowDownwardIcon />}
-                    aria-controls="panel3-content"
-                    id="panel3-header"
-                  >
-                    <Typography variant='h4'>{t("resume.skills.title")}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                  </CardContent>
+                </Card>
+                <Card className='categoryContainer'>
+                  <CardHeader
+                    avatar={<BuildIcon color='primary'/>}
+                    title={<Typography variant='h4' align='left' color='primary'>{t("resume.skills.title")}</Typography>}
+                  />
+                  <CardContent>
                     <Skills />
-                  </AccordionDetails>
-                </Accordion>
+                  </CardContent>
+                </Card>
               </>
             )}
             {isMobile && (
@@ -201,7 +189,8 @@ function App() {
             onChange={(_, newValue) => {
               startTransition(() => {
                 setMobileTabIndex(newValue);
-              });            }}
+              });
+            }}
             showLabels
             sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
           >
