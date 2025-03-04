@@ -20,7 +20,8 @@
         "date": "Date :",
         "close": "Fermer les informations sur l'expérience",
         "skills": "Compétences",
-        "aria-label": "Ouvrir le détail de l'expérience {{CompanyName}}"
+        "aria-label": "Ouvrir le détail de l'expérience {{CompanyName}}",
+        "button": "En savoir plus"
       },
       "loading": "Chargement des expériences",
       "present": "Aujourd'hui",
