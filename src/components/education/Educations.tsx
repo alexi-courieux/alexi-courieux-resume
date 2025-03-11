@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, Fade, Typography, useTheme as muiTheme } from "@mui/material";
 import { FC, useMemo } from "react";
-import { useI18n } from "../../hooks/useI18n";
-import useEducationApi from "../../hooks/useEducationApi";
+import { useI18n } from "@hooks/useI18n";
+import useEducationApi from "@hooks/useEducationApi";
 import { State } from "../../models/requestState";
 import ErrorMessage from "../ErrorMessage";
 import Loading from "../loading";
