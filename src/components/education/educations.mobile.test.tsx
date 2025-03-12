@@ -13,7 +13,10 @@ vi.mock('@hooks/useI18n', () => ({
 }));
 
 vi.mock('@hooks/useTheme', () => ({
-    mode: 'light',
+    useTheme: () => ({
+        mode: 'light',
+        toggleMode: () => {}
+    })
 }));
 
 describe('Educations - mobile', { }, () => {

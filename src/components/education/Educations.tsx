@@ -5,7 +5,7 @@ import useEducationApi from "@hooks/useEducationApi";
 import { State } from "../../models/requestState";
 import ErrorMessage from "../ErrorMessage";
 import Loading from "../loading";
-import {useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@hooks/useTheme";
 import { ThemeMode } from "../../contextProviders/ThemeContext";
 
 const Educations: FC = () => {
