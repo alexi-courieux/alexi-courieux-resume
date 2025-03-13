@@ -8,7 +8,7 @@ import Loading from "../loading";
 import { State } from "../../models/requestState";
 import ErrorMessage from "../ErrorMessage";
 import { ExperienceSchema } from "../../api/generated";
-import useTheme from "../../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
 import { ThemeMode } from "../../contextProviders/ThemeContext";
 
 interface IProps {

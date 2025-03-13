@@ -1,5 +1,5 @@
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
-import useTheme from "../hooks/useTheme";
+import { useTheme } from "../hooks/useTheme";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { FC } from "react";
 import { useI18n } from "../hooks/useI18n";

@@ -7,7 +7,7 @@ import { State } from "../../models/requestState.ts";
 import Loading from "../loading.tsx";
 import ErrorMessage from "../ErrorMessage.tsx";
 import { ExperienceSchema } from "../../api/generated/types.gen.ts";
-import useTheme from "../../hooks/useTheme.tsx";
+import { useTheme } from "../../hooks/useTheme.tsx";
 import { ThemeMode } from "../../contextProviders/ThemeContext.ts";
 
 interface IProps {
