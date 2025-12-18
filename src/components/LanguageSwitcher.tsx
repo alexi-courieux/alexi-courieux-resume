@@ -26,7 +26,7 @@ const LanguageSwitcher: FC = () => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
             {languages.map((language) => (
-                <Tooltip key={language.key} title={t(getI18nKey(language.key))} placement={isMobile ? 'top' : 'left'}>
+                <Tooltip key={language.key} title={t(getI18nKey(language.key))} placement={isMobile ? 'top' : 'bottom'}>
                     <Button
                         onClick={() => handleChange(language.key)}
                         aria-label={language.nativeName}
