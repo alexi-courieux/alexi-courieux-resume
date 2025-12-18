@@ -14,9 +14,9 @@ const LanguageSwitcher: FC = () => {
         }
         i18n.changeLanguage(language);
         document.documentElement.lang = language;
-        const url = new URL(window.location.href);
+        const url = new URL(globalThis.location.href);
         url.searchParams.set('lang', language);
-        window.history.replaceState({}, '', url);
+        globalThis.history.replaceState({}, '', url);
     };
 
     const getI18nKey = (key: string) => {
@@ -24,7 +24,7 @@ const LanguageSwitcher: FC = () => {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: isMobile ? 'row' : 'column', justifyContent: 'center', mb: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
             {languages.map((language) => (
                 <Tooltip key={language.key} title={t(getI18nKey(language.key))} placement={isMobile ? 'top' : 'left'}>
                     <Button

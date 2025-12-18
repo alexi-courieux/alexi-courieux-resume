@@ -15,7 +15,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <I18nContextProvider>
       <ThemeProvider>
-        <App />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <App />
+        </div>
       </ThemeProvider>
     </I18nContextProvider>
   </StrictMode>,
