@@ -72,9 +72,9 @@ function App() {
       <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1 }}>
         <DotGrid
           dotSize={3}
-          gap={30}
-          baseColor={theme.palette.primary.light}
-          activeColor={theme.palette.primary.main}
+          gap={50}
+          baseColor={theme.palette.secondary.main}
+          activeColor={theme.palette.secondary.main}
           proximity={80}
           shockRadius={250}
           shockStrength={5}

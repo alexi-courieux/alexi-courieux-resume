@@ -42,7 +42,7 @@ const ThemeModeSwitcher: FC<IThemeModeSwitcherProps> = ({ showLabel }) => {
                     </Box>
                 </>
             ) : (
-                <Tooltip title={isDarkMode ? t("theme.light.label") : t("theme.dark.label")} placement="left">
+                <Tooltip title={isDarkMode ? t("theme.light.label") : t("theme.dark.label")} placement="bottom">
                     {toggleButton}
                 </Tooltip>
             )}
