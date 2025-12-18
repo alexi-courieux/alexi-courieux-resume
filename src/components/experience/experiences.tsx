@@ -100,7 +100,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
                       </Box>
                     </CardContent>
                     <CardActions>
-                      <Button size="small" color="primary" sx={{ alignSelf: "flex-end" }} aria-hidden="true">
+                      <Button size="small" color="primary" sx={{ alignSelf: "flex-end" }} aria-hidden="true" tabIndex={-1}>
                         {t("resume.experience.modal.button")}
                       </Button>
                     </CardActions>

@@ -30,6 +30,7 @@ import { links } from "./assets/links.ts";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { lazy, startTransition, useCallback, useEffect, useState } from 'react';
 import ThemeModeSwitcher from './components/ThemeModeSwitcher.tsx';
+import DotGrid from './components/decorative/DotGrid.tsx';
 
 const Experiences = lazy(() => import('./components/experience/experiences.tsx'));
 const Educations = lazy(() => import('./components/education/Educations'));
@@ -68,12 +69,20 @@ function App() {
 
   return (
     <>
-      {!isMobile && (
-        <Box sx={{ position: 'fixed', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <ThemeModeSwitcher />
-          <LanguageSwitcher />
-        </Box>
-      )}
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1 }}>
+        <DotGrid
+          dotSize={3}
+          gap={30}
+          baseColor={theme.palette.primary.light}
+          activeColor={theme.palette.primary.main}
+          proximity={80}
+          shockRadius={250}
+          shockStrength={5}
+          resistance={750}
+          returnDuration={0.8}
+        />
+      </div>
+
       {isMobile && (
         <>
           <Box sx={{ position: 'fixed', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
@@ -107,14 +116,49 @@ function App() {
           </Box>
         </>
       )}
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} mr={4}>
-        <Typography variant="h4" component="h1" color="primary">
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          background: theme.palette.mode === 'dark'
+            ? 'rgba(26, 26, 26, 0.8)'
+            : 'rgba(249, 249, 249, 0.8)',
+          backdropFilter: 'blur(10px)',
+          borderBottom: `3px solid ${theme.palette.primary.main}`,
+          padding: 2,
+          boxShadow: '0 4px 20px 0 rgba(0, 0, 0, 0.1)',
+          borderLeft: 'none',
+          borderRadius: 0,
+        }}
+      >
+        <Typography
+          variant="h4"
+          component="h1"
+          color="primary"
+          sx={{
+            fontWeight: 700,
+            ml: 2,
+          }}
+        >
           Alexi Courieux
         </Typography>
+        {!isMobile && (
+          <Box sx={{ position: 'absolute', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <ThemeModeSwitcher/>
+            <LanguageSwitcher />
+          </Box>
+        )}
         <Box>
 
         </Box>
       </Box>
+      <Box sx={{ paddingTop: '80px' }} />
       <Container maxWidth={"xl"} className='container'>
         <Fade in={true} timeout={1000}>
           <div>
@@ -146,7 +190,7 @@ function App() {
               <>
                 <Card className='categoryContainer'>
                   <CardHeader
-                    avatar={<WorkIcon color='primary'/>}
+                    avatar={<WorkIcon color='primary' />}
                     title={<Typography variant='h4' align='left' color='primary'>{t("resume.experience.title")}</Typography>}
                   />
                   <CardContent>
@@ -155,7 +199,7 @@ function App() {
                 </Card>
                 <Card className='categoryContainer'>
                   <CardHeader
-                    avatar={<SchoolIcon color='primary'/>}
+                    avatar={<SchoolIcon color='primary' />}
                     title={<Typography variant='h4' align='left' color='primary'>{t("resume.education.title")}</Typography>}
                   />
                   <CardContent>
@@ -164,7 +208,7 @@ function App() {
                 </Card>
                 <Card className='categoryContainer'>
                   <CardHeader
-                    avatar={<BuildIcon color='primary'/>}
+                    avatar={<BuildIcon color='primary' />}
                     title={<Typography variant='h4' align='left' color='primary'>{t("resume.skills.title")}</Typography>}
                   />
                   <CardContent>
