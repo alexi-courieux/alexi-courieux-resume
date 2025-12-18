@@ -14,9 +14,9 @@ const LanguageSwitcher: FC = () => {
         }
         i18n.changeLanguage(language);
         document.documentElement.lang = language;
-        const url = new URL(window.location.href);
+        const url = new URL(globalThis.location.href);
         url.searchParams.set('lang', language);
-        window.history.replaceState({}, '', url);
+        globalThis.history.replaceState({}, '', url);
     };
 
     const getI18nKey = (key: string) => {
