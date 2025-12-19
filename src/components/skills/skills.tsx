@@ -4,9 +4,13 @@ import Loading from "../loading";
 import SkillList from "./skillList";
 import { State } from "../../models/requestState";
 import ErrorMessage from "../ErrorMessage";
+import { Box, SxProps, Theme } from "@mui/material";
 
+interface SkillsProps {
+    sx?: SxProps<Theme>;
+}
 
-const Skills : FC = () => {
+const Skills : FC<SkillsProps> = ({ sx }) => {
     const { skills, getState, list } = useSkillApi({getOnLoad: true});
 
     const content = useMemo(() => {
@@ -20,7 +24,7 @@ const Skills : FC = () => {
         }
     }, [getState.state, skills, list]);
 
-    return content;
+    return <Box sx={sx}>{content}</Box>;
 }
 
 export default Skills;

@@ -31,8 +31,8 @@ export const I18nContextProvider: React.FC<I18nContextProviderProps> = ({ childr
 
   useEffect(() => {
     // Check if the language is set in the URL, otherwise use the browser's language, otherwise use the default language
-    const params = new URLSearchParams(window.location.search);
-    const preferedLanguage = window.navigator.languages.find((language) => languages.some(lang => lang.key === language));
+    const params = new URLSearchParams(globalThis.location.search);
+    const preferedLanguage = globalThis.navigator.languages.find((language) => languages.some(lang => lang.key === language));
     const lang = (params.get("lang") ?? params.get("language")) ?? params.get("lng") ?? preferedLanguage ?? defaultLanguage;
 
     onChangeLanguage(lang);

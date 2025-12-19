@@ -54,7 +54,7 @@ function App() {
       case 1:
         return <Educations />;
       case 2:
-        return <Skills />;
+        return <Card><CardContent><Skills  sx={{ p: 2 }} /></CardContent></Card>;
       default:
         return <Experiences />;
     }

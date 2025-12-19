@@ -5,7 +5,7 @@ import { ThemeContext, ThemeMode } from './ThemeContext';
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [mode, setMode] = useState<ThemeMode>(() => {
-        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const prefersDarkMode = globalThis.matchMedia('(prefers-color-scheme: dark)').matches;
         return prefersDarkMode ? ThemeMode.Dark : ThemeMode.Light;
     });
 
