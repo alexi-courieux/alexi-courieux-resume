@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.5" />
     <meta name="description" content="Alexi Courieux's Resume" />
     <meta name="keywords" content="resume, cv, alexi courieux" />
     <meta name="author" content="Alexi Courieux" />
@@ -11,8 +11,8 @@
     <meta name="charset" content="UTF-8" />
     <title>Alexi Courieux's Resume</title>
     <script>
-      if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost') {
-        window.location.href = window.location.href.replace('http:', 'https:');
+      if (globalThis.location.protocol === 'http:' && globalThis.location.hostname !== 'localhost' && !/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(globalThis.location.hostname)) {
+        globalThis.location.href = globalThis.location.href.replace('http:', 'https:');
       }
     </script>
   </head>
