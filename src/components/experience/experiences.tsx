@@ -113,7 +113,7 @@ const Experiences: FC<IProps> = ({ sx }) => {
       default:
         return null;
     }
-  }, [experiences, formatDate, getState.state, isMobile, list, t]);
+  }, [experiences, formatDate, getState.state, isMobile, list, t, themeMode]);
 
   return (
     <>
