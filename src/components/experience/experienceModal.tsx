@@ -1,4 +1,4 @@
-import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme as muiTheme } from "@mui/material";
+import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme as muiTheme, useMediaQuery } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { FC, useEffect } from "react";
 import SkillList from "../skills/skillList";
@@ -19,6 +19,7 @@ interface IProps {
 const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) => {
     const { t, formatDate } = useI18n();
     const theme = muiTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const themeMode = useTheme().mode;
     const { list: listSkills, getState: getSkillsState, skills } = useSkillApi({});
 
@@ -68,7 +69,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
                 </IconButton>
                 {modalExperience && (
                     <>
-                        <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 2, alignItems: "center" }}>
+                        <Box sx={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: 2, alignItems: "center" }}>
                             <CardMedia
                                 component="img"
                                 height="140"
