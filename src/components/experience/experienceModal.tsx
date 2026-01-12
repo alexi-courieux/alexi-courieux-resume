@@ -68,7 +68,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
                 </IconButton>
                 {modalExperience && (
                     <>
-                        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                        <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 2, alignItems: "center" }}>
                             <CardMedia
                                 component="img"
                                 height="140"
