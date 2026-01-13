@@ -99,7 +99,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
                         </Typography>
                         <Box sx={{ 
                             mt: 2,
-                            transition: "height 0.3s ease-in-out, opacity 0.3s ease-in-out",
+                            transition: "height 0.3s ease-in-out",
                             overflow: "hidden"
                         }}>
                             {skillContent}
