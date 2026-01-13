@@ -62,6 +62,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
                     p: 4,
                     maxHeight: "80vh",
                     overflowY: "auto",
+                    transition: "all 0.3s ease-in-out",
                 }}
             >
                 <IconButton onClick={() => setModalExperience(null)} sx={{ position: "absolute", top: 0, right: 0, fontSize: 40 }} aria-label={t("resume.experience.modal.close")}>
@@ -96,7 +97,11 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
                         <Typography variant="h6" sx={{ mt: 2 }}>
                             {t("resume.experience.modal.skills")}
                         </Typography>
-                        <Box sx={{ mt: 2 }}>
+                        <Box sx={{ 
+                            mt: 2,
+                            transition: "all 0.3s ease-in-out",
+                            overflow: "hidden"
+                        }}>
                             {skillContent}
                         </Box>
                     </>
