@@ -1,8 +1,29 @@
 ﻿{
+  "common": {
+    "error": "An unexpected error occured.",
+    "loading": "Loading",
+    "retry": "Retry"
+  },
+  "drawerMenu": {
+    "open": {
+      "aria-label": "Open accessibility menu",
+      "tooltip": "Accessibility menu"
+    }
+  },
+  "language": {
+    "to": {
+      "en": "Switch to English",
+      "fr": "Passer en français"
+    }
+  },
   "resume": {
     "about-me": {
-      "title": "About me",
       "description": "I’m a full stack developer who loves turning ideas into smooth, functional web applications. Whether it’s building scalable backends or crafting intuitive frontends, I enjoy the mix of logic and creativity that comes with development. I’m always up for a challenge—whether that means optimizing performance, learning new technologies, or tackling a tough bug. Outside of coding, you’ll probably find me immersed in game development or exploring new game mechanics, combining my technical skills with my passion for interactive experiences.",
+      "email": {
+        "aria-label": "Contact via email",
+        "tooltip": "Contact me via email",
+        "value": "contact@alexicourieux.com"
+      },
       "github": {
         "aria-label": "Open my GitHub portfolio",
         "tooltip": "See my GitHub portfolio"
@@ -10,79 +31,63 @@
       "linkedin": {
         "aria-label": "Open my LinkedIn profile",
         "tooltip": "See my LinkedIn profile"
-      }
-    },
-    "experience": {
-      "title": "Experiences",
-      "location": "Location",
-      "modal": {
-        "position": "Position:",
-        "date": "Date:",
-        "close": "Close experience details",
-        "skills": "Skills",
-        "aria-label": "Open {{companyName}} experience details",
-        "button": "Learn More"
       },
-      "loading": "Loading experiences",
-      "present": "Present",
-      "error": "Failed to load experiences"
+      "title": "About me"
     },
     "education": {
-      "title": "Education",
-      "location": "Location",
       "date": "Date",
       "description": "Description",
       "image-alt": "logo",
+      "loading": "Loading education details",
+      "location": "Location",
       "present": "Present",
-      "loading": "Loading education details"
+      "title": "Education"
+    },
+    "experience": {
+      "error": "Failed to load experiences",
+      "loading": "Loading experiences",
+      "location": "Location",
+      "modal": {
+        "aria-label": "Open {{companyName}} experience details",
+        "button": "Learn More",
+        "close": "Close experience details",
+        "date": "Date:",
+        "position": "Position:",
+        "skills": "Skills"
+      },
+      "present": "Present",
+      "title": "Experiences"
     },
     "projects": {
       "title": "Projects"
     },
     "skill": {
-      "title": "Skills",
+      "addCategory": "Select \"{{category}}\" category",
       "clickFilter": "Click on a category to filter skills",
-      "loading": "Loading skills",
-      "search": "Skill",
       "hideUnselected": {
-        "search": "Filter results",
-        "category": "Hide unselected"
+        "category": "Hide unselected",
+        "search": "Filter results"
       },
+      "loading": "Loading skills",
       "removeCategory": "Unselect \"{{category}}\" category",
-      "addCategory": "Select \"{{category}}\" category"
+      "search": "Skill",
+      "title": "Skills"
     },
-    "title": "Alexi Courieux Resume",
     "skills": {
       "title": "Skills"
-    }
-  },
-  "common": {
-    "loading": "Loading",
-    "retry": "Retry",
-    "error": "An unexpected error occured."
+    },
+    "title": "Alexi Courieux Resume"
   },
   "theme": {
-    "light": {
-      "label": "Light mode",
-      "tooltip": "Switch to light mode",
-      "aria-label": "Switch to light mode"
-    },
     "dark": {
+      "aria-label": "Switch to dark mode",
       "label": "Dark mode",
-      "tooltip": "Switch to dark mode",
-      "aria-label": "Switch to dark mode"
-    }
-  },
-  "drawerMenu": {
-    "open": {
-      "tooltip": "Accessibility menu",
-      "aria-label": "Open accessibility menu"
-    }
-  },
-  "language": {
-    "to": {
-      "en": "Switch to English",
-      "fr": "Passer en français"
+      "tooltip": "Switch to dark mode"
+    },
+    "light": {
+      "aria-label": "Switch to light mode",
+      "label": "Light mode",
+      "tooltip": "Switch to light mode"
     }
   }
 }
