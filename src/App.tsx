@@ -5,30 +5,32 @@ import BuildIcon from '@mui/icons-material/Build';
 import GithubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MenuIcon from '@mui/icons-material/Menu';
+import EmailIcon from '@mui/icons-material/Email';
 import {
-  Box,
   BottomNavigation,
   BottomNavigationAction,
+  Box,
   Card,
+  CardActions,
   CardContent,
+  CardHeader,
   Container,
+  Drawer,
   Fade,
   IconButton,
-  Typography,
-  useMediaQuery,
-  useTheme,
-  Drawer,
+  Link,
   List,
   ListItem,
   ListItemIcon,
-  CardActions,
   Tooltip,
-  CardHeader,
+  Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
-import { useI18n } from "./hooks/useI18n.tsx";
-import { links } from "./assets/links.ts";
+import {useI18n} from "./hooks/useI18n.tsx";
+import {links} from "./assets/links.ts";
 import LanguageSwitcher from "./components/LanguageSwitcher";
-import { lazy, startTransition, useCallback, useEffect, useState } from 'react';
+import {lazy, startTransition, useCallback, useEffect, useState} from 'react';
 import ThemeModeSwitcher from './components/ThemeModeSwitcher.tsx';
 import DotGrid from './components/decorative/DotGrid.tsx';
 
@@ -37,7 +39,7 @@ const Educations = lazy(() => import('./components/education/Educations'));
 const Skills = lazy(() => import('./components/skills/skills'));
 
 function App() {
-  const { t, i18n } = useI18n();
+  const {t, i18n} = useI18n();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileTabIndex, setMobileTabIndex] = useState(0);
@@ -50,13 +52,13 @@ function App() {
   const renderMobileContent = useCallback(() => {
     switch (mobileTabIndex) {
       case 0:
-        return <Experiences />;
+        return <Experiences/>;
       case 1:
-        return <Educations />;
+        return <Educations/>;
       case 2:
-        return <Card><CardContent><Skills  sx={{ p: 2 }} /></CardContent></Card>;
+        return <Card><CardContent><Skills sx={{p: 2}}/></CardContent></Card>;
       default:
-        return <Experiences />;
+        return <Experiences/>;
     }
   }, [mobileTabIndex]);
 
@@ -69,7 +71,7 @@ function App() {
 
   return (
     <>
-      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1 }}>
+      <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1}}>
         <DotGrid
           dotSize={3}
           gap={50}
@@ -85,29 +87,29 @@ function App() {
 
       {isMobile && (
         <>
-          <Box sx={{ position: 'fixed', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
+          <Box sx={{position: 'fixed', top: 0, right: 0, m: {xs: 0, lg: 2}, zIndex: 100}}>
             <Tooltip title={t("drawerMenu.open.tooltip")}>
-              <IconButton onClick={toggleDrawer(true)} sx={{ m: 2 }} aria-label={t("drawerMenu.open.aria-label")}>
-                <MenuIcon fontSize='large' />
+              <IconButton onClick={toggleDrawer(true)} sx={{m: 2}} aria-label={t("drawerMenu.open.aria-label")}>
+                <MenuIcon fontSize='large'/>
               </IconButton>
             </Tooltip>
           </Box>
-          <Box sx={{ position: 'fixed', top: 0, left: 0, m: { xs: 0, lg: 2 }, zIndex: 100 }}>
+          <Box sx={{position: 'fixed', top: 0, left: 0, m: {xs: 0, lg: 2}, zIndex: 100}}>
             <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
               <Box
-                sx={{ width: 250 }}
+                sx={{width: 250}}
                 onClick={toggleDrawer(false)}
                 onKeyDown={toggleDrawer(false)}
               >
                 <List>
                   <ListItem>
                     <ListItemIcon>
-                      <ThemeModeSwitcher showLabel />
+                      <ThemeModeSwitcher showLabel/>
                     </ListItemIcon>
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
-                      <LanguageSwitcher />
+                      <LanguageSwitcher/>
                     </ListItemIcon>
                   </ListItem>
                 </List>
@@ -149,16 +151,25 @@ function App() {
           Alexi Courieux
         </Typography>
         {!isMobile && (
-          <Box sx={{ position: 'absolute', top: 0, right: 0, m: { xs: 0, lg: 2 }, zIndex: 100, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <Box sx={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            m: {xs: 0, lg: 2},
+            zIndex: 100,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center'
+          }}>
             <ThemeModeSwitcher/>
-            <LanguageSwitcher />
+            <LanguageSwitcher/>
           </Box>
         )}
         <Box>
 
         </Box>
       </Box>
-      <Box sx={{ paddingTop: '80px' }} />
+      <Box sx={{paddingTop: '80px'}}/>
       <Container maxWidth={"xl"} className='container'>
         <Fade in={true} timeout={1000}>
           <div>
@@ -168,20 +179,28 @@ function App() {
                   <Typography component="span" align="left" alignSelf={"flex-start"}>
                     {t("resume.about-me.title")}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }} align="left">
+                  <Typography variant="body2" sx={{color: 'text.secondary'}} align="left">
                     {t("resume.about-me.description")}
                   </Typography>
                 </Box>
               </CardContent>
-              <CardActions sx={{ justifyContent: 'flex-end' }}>
+              <CardActions sx={{justifyContent: 'flex-end'}}>
+                <Link href={links.email} sx={{mr: 'auto', ml: '0.5rem'}}>{t('resume.about-me.email.value')}</Link>
+                <Tooltip title={t("resume.about-me.email.tooltip")}>
+                  <IconButton href={`mailto:${links.email}`} color="inherit"
+                              aria-label={t("resume.about-me.email.aria-label")}>
+                    <EmailIcon fontSize='medium'/>
+                  </IconButton>
+                </Tooltip>
                 <Tooltip title={t("resume.about-me.github.tooltip")}>
                   <IconButton href={links.github} color="inherit" aria-label={t("resume.about-me.github.aria-label")}>
-                    <GithubIcon fontSize='medium' />
+                    <GithubIcon fontSize='medium'/>
                   </IconButton>
                 </Tooltip>
                 <Tooltip title={t("resume.about-me.linkedin.tooltip")}>
-                  <IconButton href={links.linkedin} color="inherit" aria-label={t("resume.about-me.linkedin.aria-label")}>
-                    <LinkedInIcon className='linkedinIcon' fontSize='medium' />
+                  <IconButton href={links.linkedin} color="inherit"
+                              aria-label={t("resume.about-me.linkedin.aria-label")}>
+                    <LinkedInIcon className='linkedinIcon' fontSize='medium'/>
                   </IconButton>
                 </Tooltip>
               </CardActions>
@@ -190,29 +209,32 @@ function App() {
               <>
                 <Card className='categoryContainer'>
                   <CardHeader
-                    avatar={<WorkIcon color='primary' />}
-                    title={<Typography variant='h4' align='left' color='primary'>{t("resume.experience.title")}</Typography>}
+                    avatar={<WorkIcon color='primary'/>}
+                    title={<Typography variant='h4' align='left'
+                                       color='primary'>{t("resume.experience.title")}</Typography>}
                   />
                   <CardContent>
-                    <Experiences />
+                    <Experiences/>
                   </CardContent>
                 </Card>
                 <Card className='categoryContainer'>
                   <CardHeader
-                    avatar={<SchoolIcon color='primary' />}
-                    title={<Typography variant='h4' align='left' color='primary'>{t("resume.education.title")}</Typography>}
+                    avatar={<SchoolIcon color='primary'/>}
+                    title={<Typography variant='h4' align='left'
+                                       color='primary'>{t("resume.education.title")}</Typography>}
                   />
                   <CardContent>
-                    <Educations />
+                    <Educations/>
                   </CardContent>
                 </Card>
                 <Card className='categoryContainer'>
                   <CardHeader
-                    avatar={<BuildIcon color='primary' />}
-                    title={<Typography variant='h4' align='left' color='primary'>{t("resume.skills.title")}</Typography>}
+                    avatar={<BuildIcon color='primary'/>}
+                    title={<Typography variant='h4' align='left'
+                                       color='primary'>{t("resume.skills.title")}</Typography>}
                   />
                   <CardContent>
-                    <Skills />
+                    <Skills/>
                   </CardContent>
                 </Card>
               </>
@@ -227,7 +249,7 @@ function App() {
       </Container>
       {isMobile && (
         <>
-          <div className='mobile-footer-margin' />
+          <div className='mobile-footer-margin'/>
           <BottomNavigation
             value={mobileTabIndex}
             onChange={(_, newValue) => {
@@ -236,11 +258,11 @@ function App() {
               });
             }}
             showLabels
-            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+            sx={{position: 'fixed', bottom: 0, left: 0, right: 0}}
           >
-            <BottomNavigationAction label={t("resume.experience.title")} icon={<WorkIcon />} />
-            <BottomNavigationAction label={t("resume.education.title")} icon={<SchoolIcon />} />
-            <BottomNavigationAction label={t("resume.skills.title")} icon={<BuildIcon />} />
+            <BottomNavigationAction label={t("resume.experience.title")} icon={<WorkIcon/>}/>
+            <BottomNavigationAction label={t("resume.education.title")} icon={<SchoolIcon/>}/>
+            <BottomNavigationAction label={t("resume.skills.title")} icon={<BuildIcon/>}/>
           </BottomNavigation>
         </>
       )}

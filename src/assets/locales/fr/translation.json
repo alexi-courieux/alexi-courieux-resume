@@ -1,8 +1,29 @@
 ﻿{
+  "common": {
+    "error": "Une erreur inattendue s'est produite.",
+    "loading": "Chargement",
+    "retry": "Réessayer"
+  },
+  "drawerMenu": {
+    "open": {
+      "aria-label": "Ouvrir le menu d'accessibilité",
+      "tooltip": "Menu d'accessibilité"
+    }
+  },
+  "language": {
+    "to": {
+      "en": "Switch to English",
+      "fr": "Passer en français"
+    }
+  },
   "resume": {
     "about-me": {
-      "title": "À propos de moi",
       "description": "Développeur full stack, j’aime donner vie à des idées en créant des applications web fluides et performantes. Que ce soit en concevant des backends robustes ou des interfaces intuitives, je trouve mon équilibre entre logique et créativité. Toujours curieux, j’aime relever de nouveaux défis : optimiser des performances, explorer de nouvelles technologies ou résoudre des bugs récalcitrants. En dehors du développement web, je me passionne pour la création et l’exploration de jeux vidéo, un terrain de jeu idéal pour allier technique et imagination.",
+      "email": {
+        "aria-label": "Envoyer un mail",
+        "tooltip": "Me contacter par email",
+        "value": "contact@alexicourieux.com"
+      },
       "github": {
         "aria-label": "Ouvrir mon profil GitHub",
         "tooltip": "Voir mon portfolio GitHub"
@@ -10,79 +31,63 @@
       "linkedin": {
         "aria-label": "Ouvrir mon profil LinkedIn",
         "tooltip": "Voir mon profil LinkedIn"
-      }
-    },
-    "experience": {
-      "title": "Expériences",
-      "location": "Lieu",
-      "modal": {
-        "position": "Position :",
-        "date": "Date :",
-        "close": "Fermer les informations sur l'expérience",
-        "skills": "Compétences",
-        "aria-label": "Ouvrir le détail de l'expérience {{CompanyName}}",
-        "button": "En savoir plus"
       },
-      "loading": "Chargement des expériences",
-      "present": "Aujourd'hui",
-      "error": "Échec du chargement des expériences"
+      "title": "À propos de moi"
     },
     "education": {
-      "title": "Formations",
-      "location": "Lieu",
       "date": "Date",
       "description": "Description",
       "image-alt": "logo",
+      "loading": "Chargement des formations",
+      "location": "Lieu",
       "present": "Aujourd'hui",
-      "loading": "Chargement des formations"
+      "title": "Formations"
+    },
+    "experience": {
+      "error": "Échec du chargement des expériences",
+      "loading": "Chargement des expériences",
+      "location": "Lieu",
+      "modal": {
+        "aria-label": "Ouvrir le détail de l'expérience {{CompanyName}}",
+        "button": "En savoir plus",
+        "close": "Fermer les informations sur l'expérience",
+        "date": "Date :",
+        "position": "Position :",
+        "skills": "Compétences"
+      },
+      "present": "Aujourd'hui",
+      "title": "Expériences"
     },
     "projects": {
       "title": "Projets"
     },
     "skill": {
-      "title": "Compétences",
+      "addCategory": "Sélectionnez catégorie \"{{category}}\"",
       "clickFilter": "Cliquez sur une catégorie pour filtrer les compétences",
-      "loading": "Chargement des compétences",
-      "search": "Compétence",
       "hideUnselected": {
-        "search": "Filtrer les résultats",
-        "category": "Masquer les catégories non selectionnées"
+        "category": "Masquer les catégories non selectionnées",
+        "search": "Filtrer les résultats"
       },
+      "loading": "Chargement des compétences",
       "removeCategory": "Desélectionner catégorie \"{{category}}\"",
-      "addCategory": "Sélectionnez catégorie \"{{category}}\""
+      "search": "Compétence",
+      "title": "Compétences"
     },
-    "title": "CV Alexi Courieux",
     "skills": {
       "title": "Compétences"
-    }
-  },
-  "common": {
-    "loading": "Chargement",
-    "retry": "Réessayer",
-    "error": "Une erreur inattendue s'est produite."
+    },
+    "title": "CV Alexi Courieux"
   },
   "theme": {
-    "light": {
-      "label": "Mode clair",
-      "tooltip": "Passer en mode clair",
-      "aria-label": "Passer en mode clair"
-    },
     "dark": {
+      "aria-label": "Passer en mode sombre",
       "label": "Mode sombre",
-      "tooltip": "Passer en mode sombre",
-      "aria-label": "Passer en mode sombre"
-    }
-  },
-  "drawerMenu": {
-    "open": {
-      "tooltip": "Menu d'accessibilité",
-      "aria-label": "Ouvrir le menu d'accessibilité"
-    }
-  },
-  "language": {
-    "to": {
-      "en": "Switch to English",
-      "fr": "Passer en français"
+      "tooltip": "Passer en mode sombre"
+    },
+    "light": {
+      "aria-label": "Passer en mode clair",
+      "label": "Mode clair",
+      "tooltip": "Passer en mode clair"
     }
   }
 }
