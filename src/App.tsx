@@ -6,10 +6,12 @@ import GithubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MenuIcon from '@mui/icons-material/Menu';
 import EmailIcon from '@mui/icons-material/Email';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {
   BottomNavigation,
   BottomNavigationAction,
   Box,
+  ButtonGroup,
   Card,
   CardActions,
   CardContent,
@@ -67,6 +69,16 @@ function App() {
       return;
     }
     setDrawerOpen(open);
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(links.email);
+      // You could add a snackbar notification here if desired
+      console.log(t('resume.about-me.email.copy-success'));
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
   };
 
   return (
@@ -184,25 +196,81 @@ function App() {
                   </Typography>
                 </Box>
               </CardContent>
-              <CardActions sx={{justifyContent: 'flex-end'}}>
-                <Link href={links.email} sx={{mr: 'auto', ml: '0.5rem'}}>{t('resume.about-me.email.value')}</Link>
-                <Tooltip title={t("resume.about-me.email.tooltip")}>
-                  <IconButton href={`mailto:${links.email}`} color="inherit"
-                              aria-label={t("resume.about-me.email.aria-label")}>
-                    <EmailIcon fontSize='medium'/>
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={t("resume.about-me.github.tooltip")}>
-                  <IconButton href={links.github} color="inherit" aria-label={t("resume.about-me.github.aria-label")}>
-                    <GithubIcon fontSize='medium'/>
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={t("resume.about-me.linkedin.tooltip")}>
-                  <IconButton href={links.linkedin} color="inherit"
-                              aria-label={t("resume.about-me.linkedin.aria-label")}>
-                    <LinkedInIcon className='linkedinIcon' fontSize='medium'/>
-                  </IconButton>
-                </Tooltip>
+              <CardActions 
+                sx={{
+                  display: 'flex',
+                  flexDirection: {xs: 'column', md: 'row'},
+                  justifyContent: 'space-between',
+                  alignItems: {xs: 'stretch', md: 'center'},
+                  gap: 1,
+                  p: 2
+                }}
+              >
+                {/* Email Button Group */}
+                <ButtonGroup 
+                  variant="text" 
+                  sx={{
+                    width: {xs: '100%', md: 'auto'},
+                    justifyContent: {xs: 'center', md: 'flex-start'}
+                  }}
+                >
+                  <Link 
+                    href={`mailto:${links.email}`} 
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      px: 2,
+                      textDecoration: 'none',
+                      color: 'inherit',
+                      '&:hover': {
+                        backgroundColor: 'action.hover'
+                      }
+                    }}
+                  >
+                    {t('resume.about-me.email.value')}
+                  </Link>
+                  <Tooltip title={t("resume.about-me.email.copy-tooltip")}>
+                    <IconButton 
+                      onClick={handleCopyEmail}
+                      color="inherit"
+                      aria-label={t("resume.about-me.email.copy-aria-label")}
+                      sx={{borderRadius: 0}}
+                    >
+                      <ContentCopyIcon fontSize='medium'/>
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title={t("resume.about-me.email.tooltip")}>
+                    <IconButton 
+                      href={`mailto:${links.email}`} 
+                      color="inherit"
+                      aria-label={t("resume.about-me.email.aria-label")}
+                      sx={{borderRadius: 0}}
+                    >
+                      <EmailIcon fontSize='medium'/>
+                    </IconButton>
+                  </Tooltip>
+                </ButtonGroup>
+
+                {/* Social Media Icons Group */}
+                <Box 
+                  sx={{
+                    display: 'flex',
+                    justifyContent: {xs: 'center', md: 'flex-end'},
+                    gap: 1
+                  }}
+                >
+                  <Tooltip title={t("resume.about-me.github.tooltip")}>
+                    <IconButton href={links.github} color="inherit" aria-label={t("resume.about-me.github.aria-label")}>
+                      <GithubIcon fontSize='medium'/>
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title={t("resume.about-me.linkedin.tooltip")}>
+                    <IconButton href={links.linkedin} color="inherit"
+                                aria-label={t("resume.about-me.linkedin.aria-label")}>
+                      <LinkedInIcon className='linkedinIcon' fontSize='medium'/>
+                    </IconButton>
+                  </Tooltip>
+                </Box>
               </CardActions>
             </Card>
             {!isMobile && (

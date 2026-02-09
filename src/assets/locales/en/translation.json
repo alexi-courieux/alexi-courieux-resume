@@ -22,7 +22,10 @@
       "email": {
         "aria-label": "Contact via email",
         "tooltip": "Contact me via email",
-        "value": "contact@alexicourieux.com"
+        "value": "contact@alexicourieux.com",
+        "copy-tooltip": "Copy email to clipboard",
+        "copy-aria-label": "Copy email address to clipboard",
+        "copy-success": "Email copied to clipboard!"
       },
       "github": {
         "aria-label": "Open my GitHub portfolio",
