@@ -22,7 +22,10 @@
       "email": {
         "aria-label": "Envoyer un mail",
         "tooltip": "Me contacter par email",
-        "value": "contact@alexicourieux.com"
+        "value": "contact@alexicourieux.com",
+        "copy-tooltip": "Copier l'email dans le presse-papier",
+        "copy-aria-label": "Copier l'adresse email dans le presse-papier",
+        "copy-success": "Email copié dans le presse-papier !"
       },
       "github": {
         "aria-label": "Ouvrir mon profil GitHub",
