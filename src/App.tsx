@@ -212,14 +212,14 @@ function App() {
                 <ButtonGroup 
                   variant="text" 
                   sx={{
-                    width: {xs: '100%', md: 'auto'},
+                    width: {xs: 'auto', md: 'auto'},
                     justifyContent: {xs: 'center', md: 'flex-start'}
                   }}
                 >
                   <Link 
                     href={getMailtoLink(links.email)} 
                     sx={{
-                      display: 'flex',
+                      display: {xs: 'none', md: 'flex'},
                       alignItems: 'center',
                       px: 2,
                       textDecoration: 'none',
