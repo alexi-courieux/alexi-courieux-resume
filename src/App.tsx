@@ -40,6 +40,9 @@ const Experiences = lazy(() => import('./components/experience/experiences.tsx')
 const Educations = lazy(() => import('./components/education/Educations'));
 const Skills = lazy(() => import('./components/skills/skills'));
 
+// Helper function to create mailto link
+const getMailtoLink = (email: string) => `mailto:${email}`;
+
 function App() {
   const {t, i18n} = useI18n();
   const theme = useTheme();
@@ -74,8 +77,7 @@ function App() {
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText(links.email);
-      // You could add a snackbar notification here if desired
-      console.log(t('resume.about-me.email.copy-success'));
+      // Successfully copied to clipboard - browser provides native feedback
     } catch (err) {
       console.error('Failed to copy email:', err);
     }
@@ -215,7 +217,7 @@ function App() {
                   }}
                 >
                   <Link 
-                    href={`mailto:${links.email}`} 
+                    href={getMailtoLink(links.email)} 
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
@@ -241,7 +243,7 @@ function App() {
                   </Tooltip>
                   <Tooltip title={t("resume.about-me.email.tooltip")}>
                     <IconButton 
-                      href={`mailto:${links.email}`} 
+                      href={getMailtoLink(links.email)} 
                       color="inherit"
                       aria-label={t("resume.about-me.email.aria-label")}
                       sx={{borderRadius: 0}}
