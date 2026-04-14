@@ -63,14 +63,17 @@
     },
     "skill": {
       "addCategory": "Sélectionnez catégorie \"{{category}}\"",
+      "categories": "Filtrer par catégorie",
       "clickFilter": "Cliquez sur une catégorie pour filtrer les compétences",
+      "filterByCategory": "Filtres par catégorie",
       "hideUnselected": {
         "category": "Masquer les catégories non selectionnées",
         "search": "Filtrer les résultats"
       },
       "loading": "Chargement des compétences",
+      "noResults": "Aucune compétence ne correspond aux filtres sélectionnés.",
       "removeCategory": "Desélectionner catégorie \"{{category}}\"",
-      "search": "Compétence",
+      "search": "Rechercher une compétence",
       "title": "Compétences"
     },
     "skills": {
