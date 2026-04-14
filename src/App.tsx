@@ -185,7 +185,7 @@ function App() {
                 </Box>
               </CardContent>
               <CardActions sx={{justifyContent: 'flex-end'}}>
-                <Link href={links.email} sx={{mr: 'auto', ml: '0.5rem'}}>{t('resume.about-me.email.value')}</Link>
+                <Link href={links.email} sx={{mr: 'auto', ml: '0.5rem', display: {xs: 'none', md: 'block'}}}>{t('resume.about-me.email.value')}</Link>
                 <Tooltip title={t("resume.about-me.email.tooltip")}>
                   <IconButton href={`mailto:${links.email}`} color="inherit"
                               aria-label={t("resume.about-me.email.aria-label")}>
