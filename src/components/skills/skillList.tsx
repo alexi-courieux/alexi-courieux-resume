@@ -1,4 +1,4 @@
-import { Box, Chip, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, Chip, Collapse, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { FC, useEffect, useMemo, useState } from "react";
 import { useI18n } from "../../hooks/useI18n";
@@ -105,6 +105,13 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                                     border: '1px solid !important',
                                     px: 1.5,
                                     textTransform: 'none',
+                                    '&.Mui-selected': {
+                                        backgroundColor: 'primary.main',
+                                        color: 'primary.contrastText',
+                                        '&:hover': {
+                                            backgroundColor: 'primary.dark',
+                                        },
+                                    },
                                 }}
                             >
                                 {category.name}
@@ -138,10 +145,46 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                 </Box>
             )}
 
-            {groupedSkills.length > 0 ? (
+            {groupedSkills.length > 0 || activeCategories.length > 0 || searchInput ? (
                 <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0 }}>
-                    {groupedSkills.map(group => (
-                        <Box component="li" key={group.name} mb={2}>
+                    {categories.map(category => {
+                        const group = groupedSkills.find(g => g.name === category.name);
+                        return (
+                            <Collapse key={category.name} in={!!group}>
+                                <Box component="li" mb={2}>
+                                    <Typography
+                                        variant="subtitle2"
+                                        color="primary"
+                                        fontWeight="bold"
+                                        mb={1}
+                                        sx={{ textTransform: 'uppercase', letterSpacing: 1, fontSize: '0.7rem' }}
+                                    >
+                                        {category.name}
+                                    </Typography>
+                                    <Box
+                                        component="ul"
+                                        sx={{ listStyle: 'none', m: 0, p: 0, display: 'flex', flexWrap: 'wrap', gap: 1 }}
+                                    >
+                                        {(group?.skills ?? []).map(skill => (
+                                            <Box component="li" key={skill.id}>
+                                                <Chip label={skill.name} color="secondary" size="small" />
+                                            </Box>
+                                        ))}
+                                    </Box>
+                                </Box>
+                            </Collapse>
+                        );
+                    })}
+                    <Collapse in={groupedSkills.length === 0}>
+                        <Typography variant="body2" color="text.secondary" textAlign="center">
+                            {t('resume.skill.noResults')}
+                        </Typography>
+                    </Collapse>
+                </Box>
+            ) : (
+                <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0 }}>
+                    {categories.map(category => (
+                        <Box component="li" key={category.name} mb={2}>
                             <Typography
                                 variant="subtitle2"
                                 color="primary"
@@ -149,13 +192,13 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                                 mb={1}
                                 sx={{ textTransform: 'uppercase', letterSpacing: 1, fontSize: '0.7rem' }}
                             >
-                                {group.name}
+                                {category.name}
                             </Typography>
                             <Box
                                 component="ul"
                                 sx={{ listStyle: 'none', m: 0, p: 0, display: 'flex', flexWrap: 'wrap', gap: 1 }}
                             >
-                                {group.skills.map(skill => (
+                                {category.skills.map(skill => (
                                     <Box component="li" key={skill.id}>
                                         <Chip label={skill.name} color="secondary" size="small" />
                                     </Box>
@@ -164,10 +207,6 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                         </Box>
                     ))}
                 </Box>
-            ) : (
-                <Typography variant="body2" color="text.secondary" textAlign="center">
-                    {t('resume.skill.noResults')}
-                </Typography>
             )}
         </Box>
     );
