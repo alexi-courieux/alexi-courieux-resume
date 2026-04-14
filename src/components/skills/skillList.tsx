@@ -1,4 +1,5 @@
-import { Autocomplete, Box, Chip, FormControlLabel, FormGroup, Switch, TextField, Typography } from "@mui/material";
+import { Box, Chip, Collapse, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { FC, useEffect, useMemo, useState } from "react";
 import { useI18n } from "../../hooks/useI18n";
 import { SkillSchema } from "../../api/generated";
@@ -18,8 +19,6 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
 
     const [categories, setCategories] = useState<Category[]>([]);
     const [activeCategories, setActiveCategories] = useState<string[]>([]);
-    const [hideUnselectedCategories, setHideUnselectedCategories] = useState<boolean>(false);
-    const [hideUnsearchedSkills, setHideUnsearchedSkills] = useState<boolean>(false);
     const [searchInput, setSearchInput] = useState<string>('');
 
     const { t } = useI18n();
@@ -43,121 +42,174 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
         setCategories(newCategories);
     }, [skills]);
 
-    const searchedSkills = useMemo(() => {
-        return skills.filter(skill => skill.name.toLowerCase().includes(searchInput.toLowerCase()));
-    }, [skills, searchInput]);
-
-    const activeCategoriesSkills = useMemo(() => {
-        return skills.filter(skill => activeCategories.some(category => skill.categories.includes(category)));
-    }, [skills, activeCategories]);
-
-    const activeSkills = useMemo(() => {
-        if (searchInput) {
-            if (activeCategoriesSkills.length > 0) {
-                return searchedSkills.filter(skill => activeCategoriesSkills.includes(skill));
-            }
-            return searchedSkills;
-        }
-        return activeCategoriesSkills;
-    }, [searchInput, activeCategoriesSkills, searchedSkills]);
-
     const filteredSkills = useMemo(() => {
         let fSkills = [...skills];
 
-        if (hideUnselectedCategories && activeCategoriesSkills.length > 0) {
-            fSkills = activeCategoriesSkills;
+        if (activeCategories.length > 0) {
+            fSkills = fSkills.filter(skill =>
+                activeCategories.some(cat => skill.categories.includes(cat))
+            );
         }
 
-        if (searchInput && hideUnsearchedSkills) {
-            fSkills = fSkills.filter(skill => skill.name.toLowerCase().includes(searchInput.toLowerCase()));
+        if (searchInput) {
+            fSkills = fSkills.filter(skill =>
+                skill.name.toLowerCase().includes(searchInput.toLowerCase())
+            );
         }
 
         return fSkills;
-    }, [skills, hideUnselectedCategories, activeCategoriesSkills, searchInput, hideUnsearchedSkills]);
+    }, [skills, activeCategories, searchInput]);
 
-    const handleClickAddCategory = (categoryName: string) => {
-        const newActiveCategories = [...activeCategories, categoryName];
-        setActiveCategories(newActiveCategories);
-    }
+    const groupedSkills = useMemo(() => {
+        const catsToShow = activeCategories.length > 0
+            ? categories.filter(c => activeCategories.includes(c.name))
+            : categories;
 
-    const handleClickRemoveCategory = (categoryName: string) => {
-        const newActiveCategories = activeCategories.filter((category) => category !== categoryName);
-        setActiveCategories(newActiveCategories);
-    }
+        return catsToShow
+            .map(category => ({
+                name: category.name,
+                skills: filteredSkills.filter(skill => skill.categories.includes(category.name)),
+            }))
+            .filter(group => group.skills.length > 0);
+    }, [categories, filteredSkills, activeCategories]);
 
-    const HandleSearchInputChange = (e: any) => {
-        setSearchInput(e.target.value);
-    }
+    const handleCategoryToggle = (_: React.MouseEvent<HTMLElement>, newCategories: string[]) => {
+        setActiveCategories(newCategories);
+    };
 
     return (
-        <>
-            <Typography variant="h6" align="center" gutterBottom>
-                {t('resume.skill.clickFilter')}
-            </Typography>
-            <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center" gap={1} mb={2}>
-                {categories.map((category) => {
-                    if (activeCategories.includes(category.name)) {
-                        return <Chip 
-                        key={category.name} 
-                        label={category.name} 
-                        color="primary" 
-                        onClick={() => handleClickRemoveCategory(category.name)} 
-                        onDelete={() => handleClickRemoveCategory(category.name)} 
-                        aria-label={t("resume.skill.removeCategory", { category: category.name })} />
-                    }
-                    else {
-                        return <Chip        
-                        key={category.name} 
-                        label={category.name} 
-                        color="primary" 
-                        variant="outlined" 
-                        onClick={() => handleClickAddCategory(category.name)} 
-                        aria-label={t("resume.skill.addCategory", { category: category.name })}
-                        />
-                    }
-                })}
-                <FormGroup>
-                    <FormControlLabel control={<Switch value={hideUnselectedCategories} onChange={(e) => setHideUnselectedCategories(e.target.checked)} />} label={t("resume.skill.hideUnselected.category")} />
-                </FormGroup>
-            </Box>
-            <Box>
-                {searchBar && (
-                    <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} justifyContent="center" alignItems="center" mb={2} gap={1} >
-                        <Autocomplete
-                            sx={{ width: 300 }}
-                            onChange={(_, v) => {
-                                setSearchInput(v?.label ?? '');
-                            }}
-                            disablePortal
-                            inputValue={searchInput}
-                            options={skills.map(skill => ({ label: skill.name }))}
-                            renderInput={(params) => {
-                                return (
-                                    <Box sx={{ position: 'relative' }}>
-                                        <TextField
-                                            {...params}
-                                            onChange={HandleSearchInputChange}
-                                            label={t("resume.skill.search")}
-                                            size="small"
-                                        />
+        <Box>
+            {categories.length > 0 && (
+                <Box mb={2} role="group" aria-label={t('resume.skill.filterByCategory')}>
+                    <Typography variant="body2" color="text.secondary" mb={1} textAlign="center">
+                        {t('resume.skill.clickFilter')}
+                    </Typography>
+                    <ToggleButtonGroup
+                        value={activeCategories}
+                        onChange={handleCategoryToggle}
+                        aria-label={t('resume.skill.categories')}
+                        sx={{ flexWrap: 'wrap', justifyContent: 'center', display: 'flex', gap: 0.5, border: 'none' }}
+                    >
+                        {categories.map(category => (
+                            <ToggleButton
+                                key={category.name}
+                                value={category.name}
+                                size="small"
+                                aria-label={
+                                    activeCategories.includes(category.name)
+                                        ? t("resume.skill.removeCategory", { category: category.name })
+                                        : t("resume.skill.addCategory", { category: category.name })
+                                }
+                                sx={{
+                                    borderRadius: '16px !important',
+                                    border: '1px solid !important',
+                                    px: 1.5,
+                                    textTransform: 'none',
+                                    '&.Mui-selected': {
+                                        backgroundColor: 'primary.main',
+                                        color: 'primary.contrastText',
+                                        '&:hover': {
+                                            backgroundColor: 'primary.dark',
+                                        },
+                                    },
+                                }}
+                            >
+                                {category.name}
+                            </ToggleButton>
+                        ))}
+                    </ToggleButtonGroup>
+                </Box>
+            )}
+
+            {searchBar && (
+                <Box display="flex" justifyContent="center" mb={3}>
+                    <TextField
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
+                        label={t("resume.skill.search")}
+                        size="small"
+                        sx={{ width: 300 }}
+                        slotProps={{
+                            input: {
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchIcon fontSize="small" />
+                                    </InputAdornment>
+                                ),
+                            },
+                            htmlInput: {
+                                'aria-label': t("resume.skill.search"),
+                            },
+                        }}
+                    />
+                </Box>
+            )}
+
+            {groupedSkills.length > 0 || activeCategories.length > 0 || searchInput ? (
+                <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0 }}>
+                    {categories.map(category => {
+                        const group = groupedSkills.find(g => g.name === category.name);
+                        return (
+                            <Collapse key={category.name} in={!!group}>
+                                <Box component="li" mb={2}>
+                                    <Typography
+                                        variant="subtitle2"
+                                        color="primary"
+                                        fontWeight="bold"
+                                        mb={1}
+                                        sx={{ textTransform: 'uppercase', letterSpacing: 1, fontSize: '0.7rem' }}
+                                    >
+                                        {category.name}
+                                    </Typography>
+                                    <Box
+                                        component="ul"
+                                        sx={{ listStyle: 'none', m: 0, p: 0, display: 'flex', flexWrap: 'wrap', gap: 1 }}
+                                    >
+                                        {(group?.skills ?? []).map(skill => (
+                                            <Box component="li" key={skill.id}>
+                                                <Chip label={skill.name} color="secondary" size="small" />
+                                            </Box>
+                                        ))}
                                     </Box>
-                                )
-                            }}
-                        />
-                        <FormGroup>
-                            <FormControlLabel control={<Switch value={hideUnsearchedSkills} onChange={(e) => setHideUnsearchedSkills(e.target.checked)} />} label={t("resume.skill.hideUnselected.search")} />
-                        </FormGroup>
-                    </Box>
-                )}
-            </Box>
-            <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center" gap={1}>
-                {filteredSkills.map((skill) => {
-                    const isActive = activeSkills.includes(skill);
-                    return <Chip key={skill.id} label={skill.name} color="secondary" variant={isActive ? "filled" : "outlined"} />
-                })}
-            </Box>
-        </>
-    )
-}
+                                </Box>
+                            </Collapse>
+                        );
+                    })}
+                    <Collapse in={groupedSkills.length === 0}>
+                        <Typography variant="body2" color="text.secondary" textAlign="center">
+                            {t('resume.skill.noResults')}
+                        </Typography>
+                    </Collapse>
+                </Box>
+            ) : (
+                <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0 }}>
+                    {categories.map(category => (
+                        <Box component="li" key={category.name} mb={2}>
+                            <Typography
+                                variant="subtitle2"
+                                color="primary"
+                                fontWeight="bold"
+                                mb={1}
+                                sx={{ textTransform: 'uppercase', letterSpacing: 1, fontSize: '0.7rem' }}
+                            >
+                                {category.name}
+                            </Typography>
+                            <Box
+                                component="ul"
+                                sx={{ listStyle: 'none', m: 0, p: 0, display: 'flex', flexWrap: 'wrap', gap: 1 }}
+                            >
+                                {category.skills.map(skill => (
+                                    <Box component="li" key={skill.id}>
+                                        <Chip label={skill.name} color="secondary" size="small" />
+                                    </Box>
+                                ))}
+                            </Box>
+                        </Box>
+                    ))}
+                </Box>
+            )}
+        </Box>
+    );
+};
 
 export default SkillList;

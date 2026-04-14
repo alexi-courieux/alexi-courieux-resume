@@ -63,14 +63,17 @@
     },
     "skill": {
       "addCategory": "Select \"{{category}}\" category",
+      "categories": "Filter by category",
       "clickFilter": "Click on a category to filter skills",
+      "filterByCategory": "Category filters",
       "hideUnselected": {
         "category": "Hide unselected",
         "search": "Filter results"
       },
       "loading": "Loading skills",
+      "noResults": "No skills match the selected filters.",
       "removeCategory": "Unselect \"{{category}}\" category",
-      "search": "Skill",
+      "search": "Search skills",
       "title": "Skills"
     },
     "skills": {
