@@ -1,5 +1,6 @@
 import { Box, Chip, Collapse, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import CancelIcon from "@mui/icons-material/Cancel";
 import { FC, useEffect, useMemo, useState } from "react";
 import { useI18n } from "../../hooks/useI18n";
 import { SkillSchema } from "../../api/generated";
@@ -114,7 +115,12 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                                     },
                                 }}
                             >
-                                {category.name}
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                                    {category.name}
+                                    {activeCategories.includes(category.name) && (
+                                        <CancelIcon sx={{ fontSize: '0.9rem' }} />
+                                    )}
+                                </Box>
                             </ToggleButton>
                         ))}
                     </ToggleButtonGroup>
