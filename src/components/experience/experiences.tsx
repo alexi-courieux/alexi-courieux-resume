@@ -58,7 +58,7 @@ const Experiences: FC<IProps> = ({ experiences, state, retry }) => {
           return (
             <Box component="li" key={experience.id} sx={{ position: "relative", pb: { xs: 4, md: 5 }, "&:last-of-type": { pb: 0 } }}>
               <Reveal delay={Math.min(index, 3) * 80}>
-                <Box sx={{ display: "grid", gridTemplateColumns: { xs: "16px 1fr", md: "190px 16px 1fr" }, columnGap: { xs: 2.5, md: 3 }, alignItems: "start" }}>
+                <Box sx={{ display: "grid", gridTemplateColumns: { xs: "16px minmax(0, 1fr)", md: "190px 16px minmax(0, 1fr)" }, columnGap: { xs: 2.5, md: 3 }, alignItems: "start" }}>
                   {/* date column (desktop) */}
                   <Typography
                     component="div"
@@ -83,7 +83,7 @@ const Experiences: FC<IProps> = ({ experiences, state, retry }) => {
                     onClick={() => setModalExperience(experience)}
                     aria-label={t("resume.experience.modal.aria-label", { companyName: experience.companyName })}
                     sx={{
-                      display: "block", width: "100%", textAlign: "left", borderRadius: 5, p: { xs: 2.5, md: 3.5 },
+                      display: "block", width: "100%", textAlign: "left", borderRadius: { xs: 4, md: 5 }, p: { xs: 2, md: 3.5 }, minWidth: 0, overflowWrap: "anywhere",
                       bgcolor: "background.paper", border: `1px solid ${theme.palette.divider}`,
                       transition: "transform .25s, border-color .25s, box-shadow .25s",
                       "&:hover, &:focus-visible": {
@@ -93,17 +93,17 @@ const Experiences: FC<IProps> = ({ experiences, state, retry }) => {
                       "&:hover .arrow, &:focus-visible .arrow": { transform: "translate(3px,-3px)", opacity: 1 },
                     }}
                   >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 2.5, mb: 2 }}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1.5, md: 2.5 }, mb: 2 }}>
                       <Box
                         sx={{
-                          width: 64, height: 64, flexShrink: 0, borderRadius: 3, p: 1, display: "grid", placeItems: "center",
+                          width: { xs: 48, md: 64 }, height: { xs: 48, md: 64 }, flexShrink: 0, borderRadius: 3, p: { xs: 0.75, md: 1 }, display: "grid", placeItems: "center",
                           bgcolor: dark ? "rgba(255,255,255,.05)" : "#fff", border: `1px solid ${theme.palette.divider}`,
                         }}
                       >
                         <Box component="img" src={logo} alt={experience.imageAlt} sx={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
                       </Box>
                       <Box sx={{ minWidth: 0, flexGrow: 1 }}>
-                        <Typography variant="h5" component="h3" sx={{ lineHeight: 1.2 }}>{experience.companyName}</Typography>
+                        <Typography variant="h5" component="h3" sx={{ lineHeight: 1.2, fontSize: { xs: "1.2rem", md: "1.5rem" } }}>{experience.companyName}</Typography>
                         <Typography color="primary" sx={{ fontWeight: 700 }}>{experience.position}</Typography>
                       </Box>
                       <ArrowOutwardIcon className="arrow" aria-hidden sx={{ opacity: 0.4, transition: "transform .25s, opacity .25s", color: "primary.main", alignSelf: "flex-start" }} />
