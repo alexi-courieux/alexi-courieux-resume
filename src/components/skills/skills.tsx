@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Loading from "../loading";
-import SkillList from "./skillList";
+import SkillsShowcase from "./skillsShowcase";
 import { State } from "../../models/requestState";
 import ErrorMessage from "../ErrorMessage";
 import { SkillSchema } from "../../api/generated";
@@ -16,7 +16,7 @@ const Skills: FC<SkillsProps> = ({ skills, state, retry }) => {
         case State.FAILURE:
             return <ErrorMessage retryFunction={retry} />;
         case State.SUCCESS:
-            return <SkillList skills={skills} />;
+            return <SkillsShowcase skills={skills} />;
         default:
             return <Loading messageKey="resume.skill.loading" />;
     }

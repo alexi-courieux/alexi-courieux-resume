@@ -76,7 +76,9 @@
       "noResults": "Aucune compétence ne correspond aux filtres sélectionnés.",
       "removeCategory": "Desélectionner catégorie \"{{category}}\"",
       "search": "Rechercher une compétence",
-      "title": "Compétences"
+      "title": "Compétences",
+      "resultCount_one": "{{count}} compétence correspondante",
+      "resultCount_other": "{{count}} compétences correspondantes"
     },
     "skills": {
       "title": "Compétences"

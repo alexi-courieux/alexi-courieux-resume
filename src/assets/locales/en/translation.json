@@ -76,7 +76,9 @@
       "noResults": "No skills match the selected filters.",
       "removeCategory": "Unselect \"{{category}}\" category",
       "search": "Search skills",
-      "title": "Skills"
+      "title": "Skills",
+      "resultCount_one": "{{count}} matching skill",
+      "resultCount_other": "{{count}} matching skills"
     },
     "skills": {
       "title": "Skills"
