@@ -5,6 +5,7 @@ import DotGrid from "./components/decorative/DotGrid.tsx";
 import Header from "./components/layout/Header.tsx";
 import Section from "./components/layout/Section.tsx";
 import Contact from "./components/layout/Contact.tsx";
+import StickyCta from "./components/layout/StickyCta.tsx";
 import Hero from "./components/hero/Hero.tsx";
 import Experiences from "./components/experience/experiences.tsx";
 import Educations from "./components/education/Educations.tsx";
@@ -71,6 +72,8 @@ function App() {
 
         <Contact/>
       </Box>
+
+      <StickyCta/>
     </Box>
   );
 }
