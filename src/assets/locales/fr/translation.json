@@ -20,7 +20,7 @@
   },
   "resume": {
     "about-me": {
-      "description": "Développeur full stack, j’aime donner vie à des idées en créant des applications web fluides et performantes. Que ce soit en concevant des backends robustes ou des interfaces intuitives, je trouve mon équilibre entre logique et créativité. Toujours curieux, j’aime relever de nouveaux défis : optimiser des performances, explorer de nouvelles technologies ou résoudre des bugs récalcitrants. En dehors du développement web, je me passionne pour la création et l’exploration de jeux vidéo, un terrain de jeu idéal pour allier technique et imagination.",
+      "description": "Besoin d'un MVP en ligne en quelques semaines, d'une application vieillissante à remettre à niveau, ou d'un développeur full stack senior pour débloquer votre équipe ? Je livre du code propre et maintenable, une communication claire et aucune mauvaise surprise. Parlez-moi de votre projet, je vous dirai franchement comment je peux vous aider.",
       "email": {
         "aria-label": "Envoyer un mail",
         "tooltip": "Me contacter par email",
@@ -114,7 +114,7 @@
       "Spécialiste React & TypeScript",
       "Artisan d'API & de backends"
     ],
-    "tagline": "Je conçois et développe des applications web rapides, accessibles et maintenables pour startups et entreprises, de l'idée à la mise en production.",
+    "tagline": "Je transforme votre idée en application web rapide et accessible, du premier croquis à la mise en production, pour lancer plus vite et dormir plus sereinement. Éprouvé dans la finance, les télécoms et les services publics.",
     "cta": {
       "contact": "Travaillons ensemble",
       "work": "Voir mes réalisations"

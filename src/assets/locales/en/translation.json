@@ -20,7 +20,7 @@
   },
   "resume": {
     "about-me": {
-      "description": "I’m a full stack developer who loves turning ideas into smooth, functional web applications. Whether it’s building scalable backends or crafting intuitive frontends, I enjoy the mix of logic and creativity that comes with development. I’m always up for a challenge—whether that means optimizing performance, learning new technologies, or tackling a tough bug. Outside of coding, you’ll probably find me immersed in game development or exploring new game mechanics, combining my technical skills with my passion for interactive experiences.",
+      "description": "Need an MVP live in weeks, a legacy app brought back to life, or a senior full stack developer to unblock your team? I deliver clean, maintainable code, clear communication and no surprises. Tell me about your project and I'll tell you honestly how I can help.",
       "email": {
         "aria-label": "Contact via email",
         "tooltip": "Contact me via email",
@@ -114,7 +114,7 @@
       "React & TypeScript specialist",
       "API & backend craftsman"
     ],
-    "tagline": "I design and build fast, accessible and maintainable web applications for startups and companies, from the first idea to production.",
+    "tagline": "I turn your idea into a fast, accessible web application, from the first sketch to production, so you launch sooner and sleep better. Battle-tested in finance, telecom and public services.",
     "cta": {
       "contact": "Work with me",
       "work": "See my work"
