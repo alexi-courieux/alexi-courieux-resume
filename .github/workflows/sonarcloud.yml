@@ -43,11 +43,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Analyze with SonarCloud
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history for accurate blame / new code detection
 
-        # You can pin the exact commit or the version.
-        # uses: SonarSource/sonarcloud-github-action@v2.2.0
-        uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
+      - name: Analyze with SonarCloud
+        # sonarcloud-github-action is deprecated (bundles Java 17); this action supports SonarCloud
+        # and auto-provisions a recent JRE.
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Generate a token on Sonarcloud.io, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
         with:
