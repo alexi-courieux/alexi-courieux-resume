@@ -4,7 +4,6 @@ import EmailIcon from "@mui/icons-material/Email";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { differenceInYears } from "date-fns";
 import { useI18n } from "../../hooks/useI18n";
 import { links } from "../../assets/links";
 import { fontMono } from "../../theme/theme";
@@ -71,10 +70,11 @@ const Hero: FC<IHeroProps> = ({ experiences, skills }) => {
     }, [t]);
     const typed = useTypewriter(roles);
 
+    // Calendar years since the earliest experience returned by the API (Dec 2016 -> "10+" in 2026).
     const years = useMemo(() => {
         if (experiences.length === 0) return null;
         const first = Math.min(...experiences.map((e) => new Date(e.startDate).getTime()));
-        return differenceInYears(new Date(), new Date(first));
+        return new Date().getFullYear() - new Date(first).getFullYear();
     }, [experiences]);
 
     const gradientText = {

@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react";
+import { FC, ReactNode, useMemo, useState } from "react";
 import { Box, InputAdornment, TextField, Typography, useTheme } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { SkillSchema } from "../../api/generated";
@@ -9,11 +9,16 @@ import Reveal from "../layout/Reveal";
 
 interface IProps {
     skills: SkillSchema[];
+    /** Denser layout without search or entrance animation, e.g. inside the experience modal. */
+    compact?: boolean;
 }
 
 const normalize = (value: string) => value.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
-const SkillsShowcase: FC<IProps> = ({ skills }) => {
+const Wrap: FC<{ compact: boolean; delay: number; children: ReactNode }> = ({ compact, delay, children }) =>
+    compact ? <>{children}</> : <Reveal delay={delay}>{children}</Reveal>;
+
+const SkillsShowcase: FC<IProps> = ({ skills, compact = false }) => {
     const { t } = useI18n();
     const theme = useTheme();
     const [query, setQuery] = useState("");
@@ -34,7 +39,7 @@ const SkillsShowcase: FC<IProps> = ({ skills }) => {
 
     return (
         <Box>
-            <Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 2, mb: 4 }}>
+            {!compact && (<Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 2, mb: 4 }}>
                 <TextField
                     type="search"
                     value={query}
@@ -49,7 +54,7 @@ const SkillsShowcase: FC<IProps> = ({ skills }) => {
                 <Typography role="status" aria-live="polite" variant="body2" color="text.secondary" sx={{ fontFamily: fontMono }}>
                     {needle !== "" && (matchCount > 0 ? t("resume.skill.resultCount", { count: matchCount }) : t("resume.skill.noResults"))}
                 </Typography>
-            </Box>
+            </Box>)}
 
             <Box component="ul" sx={{ listStyle: "none", m: 0, p: 0, borderBottom: `1px solid ${theme.palette.divider}` }}>
                 {categories.map((category, index) => {
@@ -59,14 +64,14 @@ const SkillsShowcase: FC<IProps> = ({ skills }) => {
                             component="li"
                             key={category.name}
                             sx={{
-                                display: "grid", gridTemplateColumns: { xs: "1fr", md: "240px 1fr" }, columnGap: 4, rowGap: 1,
-                                py: { xs: 2.5, md: 3 }, borderTop: `1px solid ${theme.palette.divider}`,
+                                display: "grid", gridTemplateColumns: compact ? { xs: "1fr", sm: "150px 1fr" } : { xs: "1fr", md: "240px 1fr" }, columnGap: compact ? 3 : 4, rowGap: 1,
+                                py: compact ? 1.75 : { xs: 2.5, md: 3 }, borderTop: `1px solid ${theme.palette.divider}`,
                                 opacity: hasMatch ? 1 : 0.35, transition: "opacity .3s",
                                 "&:hover .category-name": { color: "primary.main" },
                                 "&:hover .category-name::before": { width: 28 },
                             }}
                         >
-                            <Reveal delay={Math.min(index, 5) * 50}>
+                            <Wrap compact={compact} delay={Math.min(index, 5) * 50}>
                                 <Typography
                                     variant="h3"
                                     className="category-name"
@@ -80,8 +85,8 @@ const SkillsShowcase: FC<IProps> = ({ skills }) => {
                                         {category.skills.length}
                                     </Box>
                                 </Typography>
-                            </Reveal>
-                            <Reveal delay={Math.min(index, 5) * 50 + 60}>
+                            </Wrap>
+                            <Wrap compact={compact} delay={Math.min(index, 5) * 50 + 60}>
                                 <Box component="ul" sx={{ listStyle: "none", m: 0, p: 0, display: "flex", flexWrap: "wrap", columnGap: 0, rowGap: 0.5 }}>
                                     {category.skills.map((skill) => {
                                         const match = needle !== "" && matches(skill);
@@ -107,7 +112,7 @@ const SkillsShowcase: FC<IProps> = ({ skills }) => {
                                         );
                                     })}
                                 </Box>
-                            </Reveal>
+                            </Wrap>
                         </Box>
                     );
                 })}

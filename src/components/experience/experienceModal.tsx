@@ -1,7 +1,7 @@
 import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme as muiTheme, useMediaQuery } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { FC, useEffect } from "react";
-import SkillList from "../skills/skillList";
+import SkillsShowcase from "../skills/skillsShowcase";
 import { useI18n } from "../../hooks/useI18n";
 import useSkillApi from "../../hooks/useSkillApi";
 import Loading from "../loading";
@@ -38,7 +38,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
             skillContent = <ErrorMessage retryFunction={() => listSkills(modalExperience?.id)} />;
             break;
         case State.SUCCESS:
-            skillContent = <SkillList skills={skills} />;
+            skillContent = <SkillsShowcase skills={skills} compact />;
             break;
     }
 
