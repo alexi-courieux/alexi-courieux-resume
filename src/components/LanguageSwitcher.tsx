@@ -1,16 +1,14 @@
 import { FC } from "react";
 import { useI18n } from "../hooks/useI18n";
-import { Box, Button, Tooltip, useMediaQuery, useTheme } from "@mui/material";
-import "flag-icons/css/flag-icons.min.css";
+import { Box, ButtonBase, Tooltip } from "@mui/material";
+import { fontMono } from "../theme/theme";
+
 const LanguageSwitcher: FC = () => {
     const { t, i18n, languages } = useI18n();
 
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
     const handleChange = (language: string) => {
         if (language === i18n.language) {
-            return
+            return;
         }
         i18n.changeLanguage(language);
         document.documentElement.lang = language;
@@ -19,22 +17,34 @@ const LanguageSwitcher: FC = () => {
         globalThis.history.replaceState({}, '', url);
     };
 
-    const getI18nKey = (key: string) => {
-        return `language.to.${key}`;
-    };
-
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-            {languages.map((language) => (
-                <Tooltip key={language.key} title={t(getI18nKey(language.key))} placement={isMobile ? 'top' : 'bottom'}>
-                    <Button
+        <Box
+            role="group"
+            aria-label={t("language.label")}
+            sx={{ display: 'inline-flex', p: '3px', gap: '2px', borderRadius: 999, border: 1, borderColor: 'divider', ml: 1 }}
+        >
+            {languages.map((language) => {
+                const selected = language.key === i18n.language;
+                return (
+                    <Tooltip key={language.key} title={t(`language.to.${language.key}`)}>
+                    <ButtonBase
+                        lang={language.key}
                         onClick={() => handleChange(language.key)}
+                        aria-pressed={selected}
                         aria-label={language.nativeName}
-                        sx={{ fontSize: '2rem', width: isMobile ? '100%' : 'auto' }}>
-                        <span className={`fi fi-${language.flag}`}></span>
-                    </Button>
-                </Tooltip>
-            ))}
+                        sx={{
+                            px: 1.25, py: 0.5, borderRadius: 999, fontFamily: fontMono, fontSize: '0.8rem', fontWeight: 700,
+                            textTransform: 'uppercase', transition: 'background-color .2s, color .2s',
+                            bgcolor: selected ? 'primary.main' : 'transparent',
+                            color: selected ? 'background.default' : 'text.secondary',
+                            '&:hover': { bgcolor: selected ? 'primary.main' : 'action.hover', color: selected ? 'background.default' : 'text.primary' },
+                        }}
+                    >
+                        {language.key}
+                    </ButtonBase>
+                    </Tooltip>
+                );
+            })}
         </Box>
     );
 };

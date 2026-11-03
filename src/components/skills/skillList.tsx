@@ -173,7 +173,7 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                                     >
                                         {(group?.skills ?? []).map(skill => (
                                             <Box component="li" key={skill.id}>
-                                                <Chip label={skill.name} color="secondary" size="small" />
+                                                <Chip label={skill.name} color="secondary" variant="outlined" sx={{ fontWeight: 600, transition: "transform .2s, background-color .2s", "&:hover": { transform: "translateY(-2px)", bgcolor: "action.hover" } }} />
                                             </Box>
                                         ))}
                                     </Box>
@@ -206,7 +206,7 @@ const SkillList: FC<ISkillListProps> = ({ skills, searchBar = false }) => {
                             >
                                 {category.skills.map(skill => (
                                     <Box component="li" key={skill.id}>
-                                        <Chip label={skill.name} color="secondary" size="small" />
+                                        <Chip label={skill.name} color="secondary" variant="outlined" sx={{ fontWeight: 600, transition: "transform .2s, background-color .2s", "&:hover": { transform: "translateY(-2px)", bgcolor: "action.hover" } }} />
                                     </Box>
                                 ))}
                             </Box>

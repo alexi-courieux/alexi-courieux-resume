@@ -1,8 +1,9 @@
-﻿{
+{
   "common": {
     "error": "Une erreur inattendue s'est produite.",
     "loading": "Chargement",
-    "retry": "Réessayer"
+    "retry": "Réessayer",
+    "skipToContent": "Aller au contenu principal"
   },
   "drawerMenu": {
     "open": {
@@ -14,7 +15,8 @@
     "to": {
       "en": "Switch to English",
       "fr": "Passer en français"
-    }
+    },
+    "label": "Langue"
   },
   "resume": {
     "about-me": {
@@ -79,7 +81,15 @@
     "skills": {
       "title": "Compétences"
     },
-    "title": "CV Alexi Courieux"
+    "title": "CV Alexi Courieux",
+    "nav": "Navigation principale",
+    "backToTop": "Retour en haut",
+    "contact": {
+      "nav": "Contact",
+      "eyebrow": "// parlons-en",
+      "title": "Un projet en tête ?",
+      "footer": "Fait avec React, MUI, de l'amour & beaucoup trop de thé"
+    }
   },
   "theme": {
     "dark": {
@@ -91,6 +101,26 @@
       "aria-label": "Passer en mode clair",
       "label": "Mode clair",
       "tooltip": "Passer en mode clair"
+    }
+  },
+  "hero": {
+    "available": "Disponible pour des missions freelance",
+    "greeting": "Salut, moi c'est",
+    "roles": [
+      "Développeur web freelance",
+      "Ingénieur full stack",
+      "Spécialiste React & TypeScript",
+      "Artisan d'API & de backends"
+    ],
+    "tagline": "Je conçois et développe des applications web rapides, accessibles et maintenables pour startups et entreprises, de l'idée à la mise en production.",
+    "cta": {
+      "contact": "Travaillons ensemble",
+      "work": "Voir mes réalisations"
+    },
+    "stats": {
+      "years": "ans d'expérience",
+      "companies": "entreprises",
+      "skills": "technologies"
     }
   }
 }

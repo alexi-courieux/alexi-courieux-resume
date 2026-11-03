@@ -1,30 +1,25 @@
-import { FC, useMemo } from "react";
-import useSkillApi from "../../hooks/useSkillApi";
+import { FC } from "react";
 import Loading from "../loading";
 import SkillList from "./skillList";
 import { State } from "../../models/requestState";
 import ErrorMessage from "../ErrorMessage";
-import { Box, SxProps, Theme } from "@mui/material";
+import { SkillSchema } from "../../api/generated";
 
 interface SkillsProps {
-    sx?: SxProps<Theme>;
+    skills: SkillSchema[];
+    state: State;
+    retry: () => void;
 }
 
-const Skills : FC<SkillsProps> = ({ sx }) => {
-    const { skills, getState, list } = useSkillApi({getOnLoad: true});
-
-    const content = useMemo(() => {
-        switch (getState.state) {
-            case State.PENDING:
-                return <Loading messageKey="resume.skill.loading" />;
-            case State.FAILURE:
-                return <ErrorMessage retryFunction={() => list()} />;
-            case State.SUCCESS:
-                return <SkillList skills={skills} />;
-        }
-    }, [getState.state, skills, list]);
-
-    return <Box sx={sx}>{content}</Box>;
-}
+const Skills: FC<SkillsProps> = ({ skills, state, retry }) => {
+    switch (state) {
+        case State.FAILURE:
+            return <ErrorMessage retryFunction={retry} />;
+        case State.SUCCESS:
+            return <SkillList skills={skills} />;
+        default:
+            return <Loading messageKey="resume.skill.loading" />;
+    }
+};
 
 export default Skills;

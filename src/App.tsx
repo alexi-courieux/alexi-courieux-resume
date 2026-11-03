@@ -1,272 +1,77 @@
-import './App.css';
-import WorkIcon from '@mui/icons-material/Work';
-import SchoolIcon from '@mui/icons-material/School';
-import BuildIcon from '@mui/icons-material/Build';
-import GithubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import MenuIcon from '@mui/icons-material/Menu';
-import EmailIcon from '@mui/icons-material/Email';
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Box,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Container,
-  Drawer,
-  Fade,
-  IconButton,
-  Link,
-  List,
-  ListItem,
-  ListItemIcon,
-  Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import {useI18n} from "./hooks/useI18n.tsx";
-import {links} from "./assets/links.ts";
-import LanguageSwitcher from "./components/LanguageSwitcher";
-import {lazy, startTransition, useCallback, useEffect, useState} from 'react';
-import ThemeModeSwitcher from './components/ThemeModeSwitcher.tsx';
-import DotGrid from './components/decorative/DotGrid.tsx';
-
-const Experiences = lazy(() => import('./components/experience/experiences.tsx'));
-const Educations = lazy(() => import('./components/education/Educations'));
-const Skills = lazy(() => import('./components/skills/skills'));
+import { useEffect, useMemo } from "react";
+import { Box, useTheme } from "@mui/material";
+import { useI18n } from "./hooks/useI18n.tsx";
+import DotGrid from "./components/decorative/DotGrid.tsx";
+import Header from "./components/layout/Header.tsx";
+import Section from "./components/layout/Section.tsx";
+import Contact from "./components/layout/Contact.tsx";
+import Hero from "./components/hero/Hero.tsx";
+import Experiences from "./components/experience/experiences.tsx";
+import Educations from "./components/education/Educations.tsx";
+import Skills from "./components/skills/skills.tsx";
+import useExperienceApi from "./hooks/useExperienceApi.tsx";
+import useSkillApi from "./hooks/useSkillApi.tsx";
+import { State } from "./models/requestState.ts";
 
 function App() {
   const {t, i18n} = useI18n();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [mobileTabIndex, setMobileTabIndex] = useState(0);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const experienceApi = useExperienceApi({getOnLoad: true});
+  const skillApi = useSkillApi({getOnLoad: true});
 
   useEffect(() => {
     document.title = t("resume.title");
   }, [i18n.language, t]);
 
-  const renderMobileContent = useCallback(() => {
-    switch (mobileTabIndex) {
-      case 0:
-        return <Experiences/>;
-      case 1:
-        return <Educations/>;
-      case 2:
-        return <Card><CardContent><Skills sx={{p: 2}}/></CardContent></Card>;
-      default:
-        return <Experiences/>;
-    }
-  }, [mobileTabIndex]);
-
-  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-    if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
-      return;
-    }
-    setDrawerOpen(open);
-  };
+  const experiences = useMemo(
+    () => (Array.isArray(experienceApi.experiences) ? experienceApi.experiences : []),
+    [experienceApi.experiences],
+  );
 
   return (
-    <>
-      <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1}}>
+    <Box id="app">
+      <Box aria-hidden sx={{position: 'fixed', inset: 0, zIndex: -1, opacity: theme.palette.mode === 'dark' ? 0.55 : 0.4}}>
         <DotGrid
           dotSize={3}
-          gap={50}
-          baseColor={theme.palette.secondary.main}
-          activeColor={theme.palette.secondary.main}
-          proximity={80}
+          gap={44}
+          baseColor={theme.palette.mode === 'dark' ? '#2a3050' : '#c9cde6'}
+          activeColor={theme.palette.primary.main}
+          proximity={110}
           shockRadius={250}
           shockStrength={5}
           resistance={750}
           returnDuration={0.8}
         />
-      </div>
-
-      {isMobile && (
-        <>
-          <Box sx={{position: 'fixed', top: 0, right: 0, m: {xs: 0, lg: 2}, zIndex: 100}}>
-            <Tooltip title={t("drawerMenu.open.tooltip")}>
-              <IconButton onClick={toggleDrawer(true)} sx={{m: 2}} aria-label={t("drawerMenu.open.aria-label")}>
-                <MenuIcon fontSize='large'/>
-              </IconButton>
-            </Tooltip>
-          </Box>
-          <Box sx={{position: 'fixed', top: 0, left: 0, m: {xs: 0, lg: 2}, zIndex: 100}}>
-            <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-              <Box
-                sx={{width: 250}}
-                onClick={toggleDrawer(false)}
-                onKeyDown={toggleDrawer(false)}
-              >
-                <List>
-                  <ListItem>
-                    <ListItemIcon>
-                      <ThemeModeSwitcher showLabel/>
-                    </ListItemIcon>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <LanguageSwitcher/>
-                    </ListItemIcon>
-                  </ListItem>
-                </List>
-              </Box>
-            </Drawer>
-          </Box>
-        </>
-      )}
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          background: theme.palette.mode === 'dark'
-            ? 'rgba(26, 26, 26, 0.8)'
-            : 'rgba(249, 249, 249, 0.8)',
-          backdropFilter: 'blur(10px)',
-          borderBottom: `3px solid ${theme.palette.primary.main}`,
-          padding: 2,
-          boxShadow: '0 4px 20px 0 rgba(0, 0, 0, 0.1)',
-          borderLeft: 'none',
-          borderRadius: 0,
-        }}
-      >
-        <Typography
-          variant="h4"
-          component="h1"
-          color="primary"
-          sx={{
-            fontWeight: 700,
-            ml: 2,
-          }}
-        >
-          Alexi Courieux
-        </Typography>
-        {!isMobile && (
-          <Box sx={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            m: {xs: 0, lg: 2},
-            zIndex: 100,
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}>
-            <ThemeModeSwitcher/>
-            <LanguageSwitcher/>
-          </Box>
-        )}
-        <Box>
-
-        </Box>
       </Box>
-      <Box sx={{paddingTop: '80px'}}/>
-      <Container maxWidth={"xl"} className='container'>
-        <Fade in={true} timeout={1000}>
-          <div>
-            <Card>
-              <CardContent>
-                <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" gap={2}>
-                  <Typography component="span" align="left" alignSelf={"flex-start"}>
-                    {t("resume.about-me.title")}
-                  </Typography>
-                  <Typography variant="body2" sx={{color: 'text.secondary'}} align="left">
-                    {t("resume.about-me.description")}
-                  </Typography>
-                </Box>
-              </CardContent>
-              <CardActions sx={{justifyContent: 'flex-end'}}>
-                <Link href={links.email} sx={{mr: 'auto', ml: '0.5rem', display: {xs: 'none', md: 'block'}}}>{t('resume.about-me.email.value')}</Link>
-                <Tooltip title={t("resume.about-me.email.tooltip")}>
-                  <IconButton href={`mailto:${links.email}`} color="inherit"
-                              aria-label={t("resume.about-me.email.aria-label")}>
-                    <EmailIcon fontSize='medium'/>
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={t("resume.about-me.github.tooltip")}>
-                  <IconButton href={links.github} color="inherit" aria-label={t("resume.about-me.github.aria-label")}>
-                    <GithubIcon fontSize='medium'/>
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={t("resume.about-me.linkedin.tooltip")}>
-                  <IconButton href={links.linkedin} color="inherit"
-                              aria-label={t("resume.about-me.linkedin.aria-label")}>
-                    <LinkedInIcon className='linkedinIcon' fontSize='medium'/>
-                  </IconButton>
-                </Tooltip>
-              </CardActions>
-            </Card>
-            {!isMobile && (
-              <>
-                <Card className='categoryContainer'>
-                  <CardHeader
-                    avatar={<WorkIcon color='primary'/>}
-                    title={<Typography variant='h4' align='left'
-                                       color='primary'>{t("resume.experience.title")}</Typography>}
-                  />
-                  <CardContent>
-                    <Experiences/>
-                  </CardContent>
-                </Card>
-                <Card className='categoryContainer'>
-                  <CardHeader
-                    avatar={<SchoolIcon color='primary'/>}
-                    title={<Typography variant='h4' align='left'
-                                       color='primary'>{t("resume.education.title")}</Typography>}
-                  />
-                  <CardContent>
-                    <Educations/>
-                  </CardContent>
-                </Card>
-                <Card className='categoryContainer'>
-                  <CardHeader
-                    avatar={<BuildIcon color='primary'/>}
-                    title={<Typography variant='h4' align='left'
-                                       color='primary'>{t("resume.skills.title")}</Typography>}
-                  />
-                  <CardContent>
-                    <Skills/>
-                  </CardContent>
-                </Card>
-              </>
-            )}
-            {isMobile && (
-              <Box mt={2}>
-                {renderMobileContent()}
-              </Box>
-            )}
-          </div>
-        </Fade>
-      </Container>
-      {isMobile && (
-        <>
-          <div className='mobile-footer-margin'/>
-          <BottomNavigation
-            value={mobileTabIndex}
-            onChange={(_, newValue) => {
-              startTransition(() => {
-                setMobileTabIndex(newValue);
-              });
-            }}
-            showLabels
-            sx={{position: 'fixed', bottom: 0, left: 0, right: 0}}
-          >
-            <BottomNavigationAction label={t("resume.experience.title")} icon={<WorkIcon/>}/>
-            <BottomNavigationAction label={t("resume.education.title")} icon={<SchoolIcon/>}/>
-            <BottomNavigationAction label={t("resume.skills.title")} icon={<BuildIcon/>}/>
-          </BottomNavigation>
-        </>
-      )}
-    </>
+
+      <Header/>
+
+      <Box component="main" id="main" tabIndex={-1} sx={{outline: 'none'}}>
+        <Hero experiences={experiences} skills={skillApi.skills}/>
+
+        <Section id="experience" index="01" title={t("resume.experience.title")}>
+          <Experiences
+            experiences={experiences}
+            state={experienceApi.getState.state}
+            retry={() => experienceApi.list()}
+          />
+        </Section>
+
+        <Section id="education" index="02" title={t("resume.education.title")}>
+          <Educations/>
+        </Section>
+
+        <Section id="skills" index="03" title={t("resume.skills.title")}>
+          <Skills
+            skills={skillApi.skills}
+            state={skillApi.getState.state === State.IDLE ? State.PENDING : skillApi.getState.state}
+            retry={() => skillApi.list()}
+          />
+        </Section>
+
+        <Contact/>
+      </Box>
+    </Box>
   );
 }
 

@@ -56,20 +56,29 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     width: { xs: "90%", md: "60%" },
-                    bgcolor: theme.palette.background.default,
+                    bgcolor: theme.palette.background.paper,
+                    border: `1px solid ${theme.palette.divider}`,
                     boxShadow: 24,
-                    borderRadius: 2,
-                    p: 4,
+                    borderRadius: 4,
                     maxHeight: "80vh",
-                    overflowY: "auto",
-                    transition: "height 0.3s ease-in-out",
+                    display: "flex",
+                    flexDirection: "column",
+                    p: 3,
                 }}
             >
-                <IconButton onClick={() => setModalExperience(null)} sx={{ position: "absolute", top: 0, right: 0, fontSize: 40 }} aria-label={t("resume.experience.modal.close")}>
+                <IconButton onClick={() => setModalExperience(null)} sx={{ position: "absolute", top: 20, right: 44, zIndex: 1 }} aria-label={t("resume.experience.modal.close")}>
                     <CloseIcon />
                 </IconButton>
                 {modalExperience && (
-                    <>
+                    <Box
+                        sx={{
+                            p: 2,
+                            overflowY: "auto",
+                            minHeight: 0,
+                            // default scrollbar, but the scroll area is inset by the corner radius so rounded corners never clip it
+                            scrollbarGutter: "stable",
+                        }}
+                    >
                         <Box sx={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: 2, alignItems: "center" }}>
                             <CardMedia
                                 component="img"
@@ -104,7 +113,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
                         }}>
                             {skillContent}
                         </Box>
-                    </>
+                    </Box>
                 )}
             </Box>
         </Modal>

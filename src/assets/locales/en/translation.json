@@ -1,8 +1,9 @@
-﻿{
+{
   "common": {
     "error": "An unexpected error occured.",
     "loading": "Loading",
-    "retry": "Retry"
+    "retry": "Retry",
+    "skipToContent": "Skip to main content"
   },
   "drawerMenu": {
     "open": {
@@ -14,7 +15,8 @@
     "to": {
       "en": "Switch to English",
       "fr": "Passer en français"
-    }
+    },
+    "label": "Language"
   },
   "resume": {
     "about-me": {
@@ -79,7 +81,15 @@
     "skills": {
       "title": "Skills"
     },
-    "title": "Alexi Courieux Resume"
+    "title": "Alexi Courieux Resume",
+    "nav": "Main navigation",
+    "backToTop": "Back to top",
+    "contact": {
+      "nav": "Contact",
+      "eyebrow": "// let's talk",
+      "title": "Have a project in mind?",
+      "footer": "Built with React, MUI, love & too much tea"
+    }
   },
   "theme": {
     "dark": {
@@ -91,6 +101,26 @@
       "aria-label": "Switch to light mode",
       "label": "Light mode",
       "tooltip": "Switch to light mode"
+    }
+  },
+  "hero": {
+    "available": "Available for freelance projects",
+    "greeting": "Hi, I am",
+    "roles": [
+      "Freelance web developer",
+      "Full stack engineer",
+      "React & TypeScript specialist",
+      "API & backend craftsman"
+    ],
+    "tagline": "I design and build fast, accessible and maintainable web applications for startups and companies, from the first idea to production.",
+    "cta": {
+      "contact": "Work with me",
+      "work": "See my work"
+    },
+    "stats": {
+      "years": "years of experience",
+      "companies": "companies",
+      "skills": "technologies"
     }
   }
 }
