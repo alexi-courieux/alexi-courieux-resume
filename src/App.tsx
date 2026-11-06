@@ -35,7 +35,7 @@ function App() {
         <DotGrid
           dotSize={3}
           gap={44}
-          baseColor={theme.palette.mode === 'dark' ? '#2a3050' : '#c9cde6'}
+          baseColor={theme.palette.mode === 'dark' ? '#254033' : '#c5d9cc'}
           activeColor={theme.palette.primary.main}
           proximity={110}
           shockRadius={250}

@@ -12,7 +12,7 @@ interface ILogoProps {
 const Logo: FC<ILogoProps> = ({ size = 40 }) => {
     const theme = useTheme();
     const id = useId();
-    const ink = theme.palette.mode === "dark" ? "#080a12" : "#ffffff";
+    const ink = theme.palette.mode === "dark" ? "#08110c" : "#ffffff";
 
     return (
         <svg width={size} height={size} viewBox="0 0 40 40" aria-hidden focusable="false">

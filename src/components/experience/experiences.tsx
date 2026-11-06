@@ -72,7 +72,7 @@ const Experiences: FC<IProps> = ({ experiences, state, retry }) => {
                     sx={{
                       mt: 3.4, width: 16, height: 16, borderRadius: "50%", bgcolor: "background.default",
                       border: `3px solid ${theme.palette.primary.main}`,
-                      boxShadow: `0 0 0 5px ${dark ? "rgba(143,155,255,.15)" : "rgba(67,56,202,.12)"}`,
+                      boxShadow: `0 0 0 5px ${dark ? "rgba(127,207,160,.15)" : "rgba(47,111,85,.12)"}`,
                       position: "relative", zIndex: 1,
                       transition: "background-color .2s",
                       ...(experience.endDate ? {} : { bgcolor: "primary.main" }),

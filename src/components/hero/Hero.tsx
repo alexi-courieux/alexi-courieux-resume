@@ -138,7 +138,7 @@ const Hero: FC<IHeroProps> = ({ experiences, skills }) => {
                         size="large"
                         startIcon={<EmailIcon />}
                         sx={{
-                            px: 3.5, py: 1.4, fontSize: "1.05rem", color: dark ? "#080a12" : "#fff",
+                            px: 3.5, py: 1.4, fontSize: "1.05rem", color: dark ? "#08110c" : "#fff",
                             background: `linear-gradient(100deg, ${primary.main}, ${secondary.main})`,
                             boxShadow: `0 10px 40px -10px ${primary.main}`,
                             transition: "transform .2s, box-shadow .2s",

@@ -39,7 +39,7 @@ const StickyCta: FC = () => {
             aria-hidden={!visible}
             sx={{
                 position: "fixed", zIndex: 40, bottom: { xs: 16, md: 28 }, right: { xs: 16, md: 28 },
-                px: 3, py: 1.2, fontSize: "1rem", color: dark ? "#080a12" : "#fff",
+                px: 3, py: 1.2, fontSize: "1rem", color: dark ? "#08110c" : "#fff",
                 background: `linear-gradient(100deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                 boxShadow: `0 12px 36px -8px ${theme.palette.primary.main}`,
                 opacity: visible ? 1 : 0,

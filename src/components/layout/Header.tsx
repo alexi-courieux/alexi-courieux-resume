@@ -51,7 +51,7 @@ const Header: FC = () => {
             sx={{
                 position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
                 backdropFilter: scrolled ? "blur(16px) saturate(160%)" : "none",
-                bgcolor: scrolled ? (dark ? "rgba(8,10,18,0.72)" : "rgba(246,247,251,0.78)") : "transparent",
+                bgcolor: scrolled ? (dark ? "rgba(8,17,12,0.72)" : "rgba(243,247,244,0.78)") : "transparent",
                 borderBottom: `1px solid ${scrolled ? theme.palette.divider : "transparent"}`,
                 transition: "background-color .3s, border-color .3s",
             }}

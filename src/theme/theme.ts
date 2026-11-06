@@ -22,19 +22,19 @@ export const baseThemeOptions: ThemeOptions = {
 
 const lightPalette: PaletteOptions = {
   mode: 'light',
-  primary: { main: '#4338ca' },
-  secondary: { main: '#0e7490' },
-  background: { default: '#f6f7fb', paper: '#ffffff' },
-  text: { primary: '#12142a', secondary: '#4a4f6a' },
-  divider: 'rgba(18, 20, 42, 0.12)',
+  primary: { main: '#2f6f55' },
+  secondary: { main: '#2c7a7b' },
+  background: { default: '#f3f7f4', paper: '#ffffff' },
+  text: { primary: '#14231c', secondary: '#44574d' },
+  divider: 'rgba(20, 35, 28, 0.12)',
 };
 
 const darkPalette: PaletteOptions = {
   mode: 'dark',
-  primary: { main: '#8f9bff' },
-  secondary: { main: '#2dd4e6' },
-  background: { default: '#080a12', paper: '#10131e' },
-  text: { primary: '#eef0fb', secondary: '#a5abc6' },
+  primary: { main: '#7fcfa0' },
+  secondary: { main: '#6cc4b8' },
+  background: { default: '#08110c', paper: '#0f1a14' },
+  text: { primary: '#e9f2ec', secondary: '#a3b5aa' },
   divider: 'rgba(255, 255, 255, 0.1)',
 };
 
@@ -55,7 +55,7 @@ export const getTheme = (mode: 'light' | 'dark') => {
               transitionDuration: '0.01ms !important',
             },
           },
-          '::selection': { background: mode === 'dark' ? '#8f9bff' : '#4338ca', color: mode === 'dark' ? '#080a12' : '#ffffff' },
+          '::selection': { background: mode === 'dark' ? '#7fcfa0' : '#2f6f55', color: mode === 'dark' ? '#08110c' : '#ffffff' },
         },
       },
       MuiCard: {

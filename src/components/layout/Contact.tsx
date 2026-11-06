@@ -42,7 +42,7 @@ const Contact: FC = () => {
                                 size="large"
                                 startIcon={<EmailIcon />}
                                 sx={{
-                                    px: 4, py: 1.5, fontSize: { xs: "0.95rem", md: "1.1rem" }, color: dark ? "#080a12" : "#fff", maxWidth: "100%",
+                                    px: 4, py: 1.5, fontSize: { xs: "0.95rem", md: "1.1rem" }, color: dark ? "#08110c" : "#fff", maxWidth: "100%",
                                     background: `linear-gradient(100deg, ${primary.main}, ${secondary.main})`,
                                     boxShadow: `0 10px 40px -10px ${primary.main}`,
                                     transition: "transform .2s",
