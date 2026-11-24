@@ -93,6 +93,10 @@
       "title": "Skills"
     },
     "title": "Alexi Courieux Resume",
+    "seo": {
+      "title": "Alexi Courieux - Freelance full stack developer",
+      "description": "Freelance full stack developer with 10+ years of experience (Java, Spring, AWS, React). I build fast, accessible web applications from the first sketch to production."
+    },
     "nav": "Main navigation",
     "backToTop": "Back to top",
     "contact": {

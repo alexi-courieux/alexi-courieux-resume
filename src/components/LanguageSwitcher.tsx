@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useI18n } from "../hooks/useI18n";
 import { Box, ButtonBase, Tooltip } from "@mui/material";
+import { buildLanguageUrl } from "../utils/languageUrl";
 
 const LanguageSwitcher: FC = () => {
     const { t, i18n, languages } = useI18n();
@@ -11,9 +12,7 @@ const LanguageSwitcher: FC = () => {
         }
         i18n.changeLanguage(language);
         document.documentElement.lang = language;
-        const url = new URL(globalThis.location.href);
-        url.searchParams.set('lang', language);
-        globalThis.history.replaceState({}, '', url);
+        globalThis.history.replaceState(null, '', buildLanguageUrl(language, true));
     };
 
     return (

@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install Chromium for prerendering
+        run: npx playwright install --with-deps chromium
+
       - name: Build project
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}

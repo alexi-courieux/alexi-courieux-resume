@@ -93,6 +93,10 @@
       "title": "Compétences"
     },
     "title": "CV Alexi Courieux",
+    "seo": {
+      "title": "Alexi Courieux - Développeur full stack freelance",
+      "description": "Développeur full stack freelance avec plus de 10 ans d'expérience (Java, Spring, AWS, React). Je développe des applications web rapides et accessibles, du premier croquis à la mise en production."
+    },
     "nav": "Navigation principale",
     "backToTop": "Retour en haut",
     "contact": {

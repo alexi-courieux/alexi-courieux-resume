@@ -22,7 +22,7 @@ function App() {
   const projectApi = useProjectList();
 
   useEffect(() => {
-    document.title = t("resume.title");
+    document.title = t("resume.seo.title");
   }, [i18n.language, t]);
 
   const experiences = useMemo(

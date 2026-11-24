@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { I18nContext } from "./I18nContext";
+import { buildLanguageUrl } from "../utils/languageUrl";
 
 export interface ILanguage {
   key: string;
@@ -30,10 +31,22 @@ export const I18nContextProvider: React.FC<I18nContextProviderProps> = ({ childr
   }, [i18n]);
 
   useEffect(() => {
-    // Check if the language is set in the URL, otherwise use the browser's language, otherwise use the default language
+    // Language resolution order: /en or /fr in the path, legacy ?lang= parameter,
+    // browser language, default language. The URL is then normalised to /<lang>/.
+    const keys = languages.map((lang) => lang.key);
+    const pathLanguage = /^\/([a-z]{2})(?:\/|$)/.exec(globalThis.location.pathname)?.[1];
     const params = new URLSearchParams(globalThis.location.search);
-    const preferedLanguage = globalThis.navigator.languages.find((language) => languages.some(lang => lang.key === language));
-    const lang = (params.get("lang") ?? params.get("language")) ?? params.get("lng") ?? preferedLanguage ?? defaultLanguage;
+    const legacyLanguage = params.get("lang") ?? params.get("language") ?? params.get("lng");
+    const browserLanguage = globalThis.navigator.languages
+      .map((language) => language.slice(0, 2).toLowerCase())
+      .find((language) => keys.includes(language));
+
+    const candidate = [pathLanguage, legacyLanguage, browserLanguage].find((language) => language && keys.includes(language));
+    const lang = candidate ?? defaultLanguage;
+
+    if (pathLanguage !== lang) {
+      globalThis.history.replaceState(null, "", buildLanguageUrl(lang, true));
+    }
 
     onChangeLanguage(lang);
 
