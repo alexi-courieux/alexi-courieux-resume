@@ -88,9 +88,8 @@
     "backToTop": "Back to top",
     "contact": {
       "nav": "Contact",
-      "eyebrow": "// let's talk",
-      "title": "Have a project in mind?",
-      "footer": "Built with React, MUI, love & too much tea"
+      "title": "Send me your project",
+      "footer": "Built with React and MUI"
     }
   },
   "theme": {
@@ -107,14 +106,9 @@
   },
   "hero": {
     "available": "Available for freelance projects",
-    "greeting": "Hi, I am",
-    "roles": [
-      "Freelance web developer",
-      "Full stack engineer",
-      "React & TypeScript specialist",
-      "API & backend craftsman"
-    ],
-    "tagline": "I turn your idea into a fast, accessible web application, from the first sketch to production, so you launch sooner and sleep better. Battle-tested in finance, telecom and public services.",
+    "name": "Alexi Courieux.",
+    "title": "Freelance full stack developer.",
+    "tagline": "I build fast, accessible web applications from the first sketch to production. I have shipped them in finance, telecom and public services.",
     "cta": {
       "contact": "Work with me",
       "work": "See my work"

@@ -1,14 +1,14 @@
 import { FC, useEffect, useState } from "react";
-import { Button, useTheme } from "@mui/material";
-import EmailIcon from "@mui/icons-material/Email";
+import { Box, Button } from "@mui/material";
 import { useI18n } from "../../hooks/useI18n";
 import { links } from "../../assets/links";
 
-/** Floating contact button: shown once the hero has scrolled away, hidden again when the contact section is on screen. */
+/**
+ * Phone action bar. On desktop the header carries the action, so this renders only under 900px.
+ * Shown once the hero has scrolled away, hidden again while the contact section is on screen.
+ */
 const StickyCta: FC = () => {
     const { t } = useI18n();
-    const theme = useTheme();
-    const dark = theme.palette.mode === "dark";
     const [heroVisible, setHeroVisible] = useState(true);
     const [contactVisible, setContactVisible] = useState(false);
 
@@ -30,27 +30,23 @@ const StickyCta: FC = () => {
     const visible = !heroVisible && !contactVisible;
 
     return (
-        <Button
-            href={links.email}
-            variant="contained"
-            startIcon={<EmailIcon />}
+        <Box
             // hidden state: out of the tab order and the accessibility tree
-            tabIndex={visible ? 0 : -1}
             aria-hidden={!visible}
+            {...(visible ? {} : { inert: "" })}
             sx={{
-                position: "fixed", zIndex: 40, bottom: { xs: 16, md: 28 }, right: { xs: 16, md: 28 },
-                px: 3, py: 1.2, fontSize: "1rem", color: dark ? "#08110c" : "#fff",
-                background: `linear-gradient(100deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                boxShadow: `0 12px 36px -8px ${theme.palette.primary.main}`,
-                opacity: visible ? 1 : 0,
-                transform: visible ? "none" : "translateY(24px)",
-                pointerEvents: visible ? "auto" : "none",
-                transition: "opacity .3s, transform .3s",
-                "&:hover": { transform: visible ? "translateY(-2px)" : undefined },
+                display: { xs: "block", md: "none" },
+                position: "fixed", zIndex: 40, left: 0, right: 0, bottom: 0,
+                p: 2, pb: "max(16px, env(safe-area-inset-bottom))",
+                bgcolor: "background.default", borderTop: 1, borderColor: "divider",
+                transform: visible ? "none" : "translateY(100%)",
+                transition: "transform .3s",
             }}
         >
-            {t("hero.cta.contact")}
-        </Button>
+            <Button href={links.email} variant="contained" fullWidth>
+                {t("hero.cta.contact")}
+            </Button>
+        </Box>
     );
 };
 

@@ -88,9 +88,8 @@
     "backToTop": "Retour en haut",
     "contact": {
       "nav": "Contact",
-      "eyebrow": "// parlons-en",
-      "title": "Un projet en tête ?",
-      "footer": "Fait avec React, MUI, de l'amour & beaucoup trop de thé"
+      "title": "Envoyez-moi votre projet",
+      "footer": "Réalisé avec React et MUI"
     }
   },
   "theme": {
@@ -107,14 +106,9 @@
   },
   "hero": {
     "available": "Disponible pour des missions freelance",
-    "greeting": "Salut, moi c'est",
-    "roles": [
-      "Développeur web freelance",
-      "Ingénieur full stack",
-      "Spécialiste React & TypeScript",
-      "Artisan d'API & de backends"
-    ],
-    "tagline": "Je transforme votre idée en application web rapide et accessible, du premier croquis à la mise en production, pour lancer plus vite et dormir plus sereinement. Éprouvé dans la finance, les télécoms et les services publics.",
+    "name": "Alexi Courieux.",
+    "title": "Développeur full stack freelance.",
+    "tagline": "Je développe des applications web rapides et accessibles, du premier croquis à la mise en production. J'en ai livré dans la finance, les télécoms et les services publics.",
     "cta": {
       "contact": "Travaillons ensemble",
       "work": "Voir mes réalisations"

@@ -27,21 +27,19 @@ a {
   color: inherit;
 }
 
+/* Default; theme.ts overrides it per colour mode. */
+:root {
+  --focus: #2a6a50;
+}
+
+/* One focus ring, 2px in the accent, never animated. */
 :focus-visible {
-  outline: 3px solid currentColor;
+  outline: 2px solid var(--focus, currentColor);
   outline-offset: 3px;
 }
 
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(30px, -40px, 0) scale(1.08); }
-}
-
-@keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
-  100% { box-shadow: 0 0 0 10px transparent; }
+/* The hero enters once on load. Reduced motion collapses it to an instant (theme.ts). */
+@keyframes enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
 }

@@ -8,8 +8,7 @@ import ErrorMessage from "../ErrorMessage.tsx";
 import { ExperienceSchema } from "../../api/generated/types.gen.ts";
 import { useTheme } from "../../hooks/useTheme.tsx";
 import { ThemeMode } from "../../contextProviders/ThemeContext.ts";
-import Reveal from "../layout/Reveal.tsx";
-import { fontMono } from "../../theme/theme.ts";
+import { radius } from "../../theme/theme.ts";
 
 interface IProps {
   experiences: ExperienceSchema[];
@@ -30,9 +29,9 @@ const Experiences: FC<IProps> = ({ experiences, state, retry }) => {
 
   if (state !== State.SUCCESS) {
     return (
-      <Box role="status" aria-label={t("resume.experience.loading")} sx={{ display: "grid", gap: 3 }}>
+      <Box role="status" aria-label={t("resume.experience.loading")} sx={{ display: "grid", gap: 2 }}>
         {[0, 1, 2].map((i) => (
-          <Skeleton key={i} variant="rounded" height={170} sx={{ borderRadius: 5 }} />
+          <Skeleton key={i} variant="rounded" height={170} sx={{ borderRadius: `${radius.card}px` }} />
         ))}
       </Box>
     );
@@ -40,81 +39,46 @@ const Experiences: FC<IProps> = ({ experiences, state, retry }) => {
 
   return (
     <>
-      <Box
-        component="ol"
-        sx={{
-          listStyle: "none", m: 0, p: 0, position: "relative",
-          // timeline rail
-          "&::before": {
-            content: '""', position: "absolute", top: 8, bottom: 8, left: { xs: 7, md: 221 }, width: 2,
-            background: `linear-gradient(to bottom, ${theme.palette.primary.main}, ${theme.palette.secondary.main}, transparent)`,
-            opacity: 0.55,
-          },
-        }}
-      >
-        {experiences.map((experience, index) => {
+      <Box component="ol" sx={{ listStyle: "none", m: 0, p: 0, display: "grid", gap: 2 }}>
+        {experiences.map((experience) => {
           const logo = themeMode === ThemeMode.Dark ? experience.imageUriDark ?? experience.imageUri : experience.imageUri;
           const dates = `${formatDate(experience.startDate, "MMMM yyyy", true)} – ${experience.endDate ? formatDate(experience.endDate, "MMMM yyyy", true) : t("resume.experience.present")}`;
           return (
-            <Box component="li" key={experience.id} sx={{ position: "relative", pb: { xs: 4, md: 5 }, "&:last-of-type": { pb: 0 } }}>
-              <Reveal delay={Math.min(index, 3) * 80}>
-                <Box sx={{ display: "grid", gridTemplateColumns: { xs: "16px minmax(0, 1fr)", md: "190px 16px minmax(0, 1fr)" }, columnGap: { xs: 2.5, md: 3 }, alignItems: "start" }}>
-                  {/* date column (desktop) */}
-                  <Typography
-                    component="div"
-                    sx={{ display: { xs: "none", md: "block" }, textAlign: "right", fontFamily: fontMono, fontSize: "0.85rem", color: "text.secondary", pt: 3.2 }}
+            <Box component="li" key={experience.id}>
+              <ButtonBase
+                onClick={() => setModalExperience(experience)}
+                aria-label={t("resume.experience.modal.aria-label", { companyName: experience.companyName })}
+                sx={{
+                  display: "block", width: "100%", textAlign: "left", borderRadius: `${radius.card}px`, p: { xs: 2.5, md: 4 }, minWidth: 0, overflowWrap: "anywhere",
+                  bgcolor: "background.paper", border: `1px solid ${theme.palette.divider}`,
+                  transition: "transform .2s, border-color .2s",
+                  "&:hover, &:focus-visible": { transform: "translateY(-2px)", borderColor: "text.primary" },
+                  "&:hover .arrow, &:focus-visible .arrow": { transform: "translate(3px,-3px)", opacity: 1 },
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 2, md: 3 }, mb: 2.5 }}>
+                  <Box
+                    sx={{
+                      width: { xs: 48, md: 64 }, height: { xs: 48, md: 64 }, flexShrink: 0, borderRadius: `${radius.control}px`, p: 1, display: "grid", placeItems: "center",
+                      bgcolor: dark ? "rgba(255,255,255,.06)" : "#fff", border: `1px solid ${theme.palette.divider}`,
+                    }}
                   >
+                    <Box component="img" src={logo} alt={experience.imageAlt} sx={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+                  </Box>
+                  <Box sx={{ minWidth: 0, flexGrow: 1 }}>
+                    <Typography variant="h5" component="h3" sx={{ lineHeight: 1.2, fontSize: { xs: "1.2rem", md: "1.5rem" } }}>{experience.companyName}</Typography>
+                    <Typography sx={{ fontWeight: 700 }}>{experience.position}</Typography>
+                  </Box>
+                  <Typography color="text.secondary" sx={{ display: { xs: "none", md: "block" }, fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap" }}>
                     {dates}
                   </Typography>
-                  {/* node */}
-                  <Box
-                    aria-hidden
-                    sx={{
-                      mt: 3.4, width: 16, height: 16, borderRadius: "50%", bgcolor: "background.default",
-                      border: `3px solid ${theme.palette.primary.main}`,
-                      boxShadow: `0 0 0 5px ${dark ? "rgba(127,207,160,.15)" : "rgba(47,111,85,.12)"}`,
-                      position: "relative", zIndex: 1,
-                      transition: "background-color .2s",
-                      ...(experience.endDate ? {} : { bgcolor: "primary.main" }),
-                    }}
-                  />
-                  {/* card */}
-                  <ButtonBase
-                    onClick={() => setModalExperience(experience)}
-                    aria-label={t("resume.experience.modal.aria-label", { companyName: experience.companyName })}
-                    sx={{
-                      display: "block", width: "100%", textAlign: "left", borderRadius: { xs: 4, md: 5 }, p: { xs: 2, md: 3.5 }, minWidth: 0, overflowWrap: "anywhere",
-                      bgcolor: "background.paper", border: `1px solid ${theme.palette.divider}`,
-                      transition: "transform .25s, border-color .25s, box-shadow .25s",
-                      "&:hover, &:focus-visible": {
-                        transform: "translateY(-4px)", borderColor: "primary.main",
-                        boxShadow: `0 20px 50px -24px ${theme.palette.primary.main}`,
-                      },
-                      "&:hover .arrow, &:focus-visible .arrow": { transform: "translate(3px,-3px)", opacity: 1 },
-                    }}
-                  >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1.5, md: 2.5 }, mb: 2 }}>
-                      <Box
-                        sx={{
-                          width: { xs: 48, md: 64 }, height: { xs: 48, md: 64 }, flexShrink: 0, borderRadius: 3, p: { xs: 0.75, md: 1 }, display: "grid", placeItems: "center",
-                          bgcolor: dark ? "rgba(255,255,255,.05)" : "#fff", border: `1px solid ${theme.palette.divider}`,
-                        }}
-                      >
-                        <Box component="img" src={logo} alt={experience.imageAlt} sx={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
-                      </Box>
-                      <Box sx={{ minWidth: 0, flexGrow: 1 }}>
-                        <Typography variant="h5" component="h3" sx={{ lineHeight: 1.2, fontSize: { xs: "1.2rem", md: "1.5rem" } }}>{experience.companyName}</Typography>
-                        <Typography color="primary" sx={{ fontWeight: 700 }}>{experience.position}</Typography>
-                      </Box>
-                      <ArrowOutwardIcon className="arrow" aria-hidden sx={{ opacity: 0.4, transition: "transform .25s, opacity .25s", color: "primary.main", alignSelf: "flex-start" }} />
-                    </Box>
-                    <Typography sx={{ display: { md: "none" }, fontFamily: fontMono, fontSize: "0.8rem", color: "text.secondary", mb: 1.5 }}>
-                      {dates}
-                    </Typography>
-                    <Typography color="text.secondary">{experience.shortDescription}</Typography>
-                  </ButtonBase>
+                  <ArrowOutwardIcon className="arrow" aria-hidden sx={{ opacity: 0.5, transition: "transform .2s, opacity .2s", alignSelf: "flex-start" }} />
                 </Box>
-              </Reveal>
+                <Typography color="text.secondary" sx={{ display: { md: "none" }, fontSize: "0.95rem", mb: 1.5 }}>
+                  {dates}
+                </Typography>
+                <Typography>{experience.shortDescription}</Typography>
+              </ButtonBase>
             </Box>
           );
         })}
