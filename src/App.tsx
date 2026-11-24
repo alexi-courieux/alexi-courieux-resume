@@ -7,16 +7,19 @@ import Contact from "./components/layout/Contact.tsx";
 import StickyCta from "./components/layout/StickyCta.tsx";
 import Hero from "./components/hero/Hero.tsx";
 import Experiences from "./components/experience/experiences.tsx";
+import Projects from "./components/portfolio/Projects.tsx";
 import Educations from "./components/education/Educations.tsx";
 import Skills from "./components/skills/skills.tsx";
 import useExperienceApi from "./hooks/useExperienceApi.tsx";
 import useSkillApi from "./hooks/useSkillApi.tsx";
+import { useProjectList } from "./hooks/usePortfolioApi.tsx";
 import { State } from "./models/requestState.ts";
 
 function App() {
   const {t, i18n} = useI18n();
   const experienceApi = useExperienceApi({getOnLoad: true});
   const skillApi = useSkillApi({getOnLoad: true});
+  const projectApi = useProjectList();
 
   useEffect(() => {
     document.title = t("resume.title");
@@ -39,6 +42,14 @@ function App() {
             experiences={experiences}
             state={experienceApi.getState.state}
             retry={() => experienceApi.list()}
+          />
+        </Section>
+
+        <Section id="projects" title={t("resume.projects.title")}>
+          <Projects
+            projects={projectApi.projects}
+            state={projectApi.getState.state === State.IDLE ? State.PENDING : projectApi.getState.state}
+            retry={() => projectApi.list()}
           />
         </Section>
 

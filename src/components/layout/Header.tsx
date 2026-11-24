@@ -9,6 +9,7 @@ import { fontDisplay } from "../../theme/theme";
 
 const NAV = [
     { id: "experience", key: "resume.experience.title" },
+    { id: "projects", key: "resume.projects.title" },
     { id: "education", key: "resume.education.title" },
     { id: "skills", key: "resume.skills.title" },
     { id: "contact", key: "resume.contact.nav" },

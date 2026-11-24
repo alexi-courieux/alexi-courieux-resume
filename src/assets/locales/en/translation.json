@@ -61,7 +61,16 @@
       "title": "Experiences"
     },
     "projects": {
-      "title": "Projects"
+      "title": "Projects",
+      "loading": "Loading projects",
+      "featured": "Featured",
+      "modal": {
+        "aria-label": "Open {{title}} project details",
+        "close": "Close project details",
+        "visit": "Visit project",
+        "repository": "Source code",
+        "skills": "Skills"
+      }
     },
     "skill": {
       "addCategory": "Select \"{{category}}\" category",

@@ -61,7 +61,16 @@
       "title": "Expériences"
     },
     "projects": {
-      "title": "Projets"
+      "title": "Projets",
+      "loading": "Chargement des projets",
+      "featured": "À la une",
+      "modal": {
+        "aria-label": "Ouvrir le détail du projet {{title}}",
+        "close": "Fermer les informations sur le projet",
+        "visit": "Voir le projet",
+        "repository": "Code source",
+        "skills": "Compétences"
+      }
     },
     "skill": {
       "addCategory": "Sélectionnez catégorie \"{{category}}\"",
