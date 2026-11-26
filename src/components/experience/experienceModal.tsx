@@ -1,3 +1,4 @@
+import { assetUrl } from "../../utils/assetUrl.ts";
 import { Modal, Box, CardMedia, Typography, Divider, IconButton, useTheme as muiTheme, useMediaQuery } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { FC, useEffect } from "react";
@@ -82,7 +83,7 @@ const ExperienceModal: FC<IProps> = ({ modalExperience , setModalExperience }) =
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image={themeMode === ThemeMode.Dark ? modalExperience.imageUriDark ?? modalExperience.imageUri : modalExperience.imageUri}
+                                image={assetUrl(themeMode === ThemeMode.Dark ? modalExperience.imageUriDark ?? modalExperience.imageUri : modalExperience.imageUri)}
                                 alt={modalExperience.imageAlt}
                                 sx={{ objectFit: "contain", mb: 2, maxWidth: "200px" }}
                             />

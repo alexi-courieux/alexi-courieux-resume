@@ -1,3 +1,4 @@
+import { assetUrl } from "../../utils/assetUrl.ts";
 import { Box, Chip, ButtonBase, Skeleton, Typography, useTheme as muiTheme } from "@mui/material";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { FC, useState } from "react";
@@ -45,7 +46,7 @@ const Projects: FC<IProps> = ({ projects, state, retry }) => {
                 "&:hover .arrow, &:focus-visible .arrow": { transform: "translate(3px,-3px)", opacity: 1 },
               }}
             >
-              <Box component="img" src={project.thumbnailUri} alt={project.thumbnailAlt} loading="lazy"
+              <Box component="img" src={assetUrl(project.thumbnailUri)} alt={project.thumbnailAlt} loading="lazy"
                 sx={{ width: "100%", aspectRatio: "16 / 9", objectFit: "cover", display: "block", borderBottom: `1px solid ${theme.palette.divider}` }} />
               <Box sx={{ p: { xs: 2.5, md: 3 }, display: "flex", flexDirection: "column", gap: 1.5, flexGrow: 1 }}>
                 <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1 }}>

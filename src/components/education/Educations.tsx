@@ -1,3 +1,4 @@
+import { assetUrl } from "../../utils/assetUrl.ts";
 import { Box, Skeleton, Typography, useTheme as muiTheme } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import { FC } from "react";
@@ -46,7 +47,7 @@ const Educations: FC = () => {
                             >
                                 <Box
                                     component="img"
-                                    src={themeMode === ThemeMode.Dark ? education.imageUriDark ?? education.imageUri : education.imageUri}
+                                    src={assetUrl(themeMode === ThemeMode.Dark ? education.imageUriDark ?? education.imageUri : education.imageUri)}
                                     // Decorative: the school's name is printed in text right beside the logo.
                                     alt=""
                                     sx={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}

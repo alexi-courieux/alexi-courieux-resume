@@ -1,4 +1,5 @@
 ﻿import { Box, ButtonBase, Skeleton, Typography, useTheme as muiTheme } from "@mui/material";
+import { assetUrl } from "../../utils/assetUrl.ts";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { FC, useState } from "react";
 import { useI18n } from "../../hooks/useI18n.tsx";
@@ -41,7 +42,7 @@ const Experiences: FC<IProps> = ({ experiences, state, retry }) => {
     <>
       <Box component="ol" sx={{ listStyle: "none", m: 0, p: 0, display: "grid", gap: 2 }}>
         {experiences.map((experience) => {
-          const logo = themeMode === ThemeMode.Dark ? experience.imageUriDark ?? experience.imageUri : experience.imageUri;
+          const logo = assetUrl(themeMode === ThemeMode.Dark ? experience.imageUriDark ?? experience.imageUri : experience.imageUri);
           const dates = `${formatDate(experience.startDate, "MMMM yyyy", true)} – ${experience.endDate ? formatDate(experience.endDate, "MMMM yyyy", true) : t("resume.experience.present")}`;
           return (
             <Box component="li" key={experience.id}>
