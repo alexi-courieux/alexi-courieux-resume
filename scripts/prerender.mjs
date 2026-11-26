@@ -92,25 +92,81 @@ async function snapshot() {
   let browser;
   try {
     browser = await chromium.launch();
-    for (const lang of LANGS) {
-      const page = await browser.newPage({ locale: lang, viewport: { width: 1280, height: 900 } });
+    // API responses are cached once they succeed and replayed for every later page load: both colour schemes get the
+    // same data, and the API (rate limited: it answers 429 to bursts, without Retry-After) is hit as little as possible.
+    const apiCache = new Map();
+    // Renders the page in one colour scheme and returns its #root markup and the emotion CSS behind it.
+    const captureOnce = async (lang, colorScheme) => {
+      const page = await browser.newPage({ locale: lang, colorScheme, viewport: { width: 1280, height: 900 } });
       try {
+        await page.route((url) => url.pathname.startsWith("/api/"), async (route) => {
+          const key = route.request().url();
+          if (!apiCache.has(key)) {
+            const response = await route.fetch();
+            if (!response.ok()) return route.fulfill({ response });
+            apiCache.set(key, { status: response.status(), headers: response.headers(), body: await response.body() });
+          }
+          await route.fulfill(apiCache.get(key));
+        });
         await page.goto(`http://localhost:${port}/${lang}/`, { waitUntil: "networkidle", timeout: 60_000 });
         // Content is considered ready once experiences, projects and skills are loaded (no spinner or error left).
         await page.waitForFunction(
           () => document.querySelector("#experience") && document.querySelector("#skills")
-            && !document.querySelector('[role="progressbar"], [role="alert"]'),
+            && !document.querySelector('[role="progressbar"], [role="alert"], .MuiSkeleton-root'),
           undefined,
-          { timeout: 30_000 },
+          { timeout: 60_000 },
         );
-        const html = await page.evaluate(() => document.getElementById("root").innerHTML);
-        shells[lang] = shells[lang].replace('<div id="root"></div>', () => `<div id="root">${html}</div>`);
+        // A failed API call renders ErrorMessage (no role="alert"): never bake an error into the static page.
+        if (await page.$('#root [data-testid="ErrorIcon"]')) throw new Error(`the page rendered an API error (${colorScheme})`);
+        return await page.evaluate(() => ({
+          html: document.getElementById("root").innerHTML,
+          // MUI/emotion injects its rules through CSSOM (insertRule) in production, so they are not in the markup:
+          // they must be copied, otherwise the snapshot paints unstyled (e.g. full-size SVG icons) until JS boots.
+          css: [...document.querySelectorAll("style[data-emotion]")]
+            .flatMap((style) => [...(style.sheet?.cssRules ?? [])].map((rule) => rule.cssText))
+            .join("\n"),
+        }));
+      } finally {
+        await page.unrouteAll({ behavior: "ignoreErrors" });
+        await page.close();
+      }
+    };
+    // Retries a failed capture after a growing pause; each attempt only re-requests the API calls not cached yet.
+    const RETRY_DELAYS_MS = [10_000, 30_000, 60_000];
+    const capture = async (lang, colorScheme) => {
+      for (let attempt = 0; ; attempt++) {
+        try {
+          return await captureOnce(lang, colorScheme);
+        } catch (error) {
+          if (attempt >= RETRY_DELAYS_MS.length) throw error;
+          console.warn(`[prerender] ${lang} ${colorScheme}: ${error.message.split("\n")[0]}, retrying in ${RETRY_DELAYS_MS[attempt] / 1000}s`);
+          await new Promise((done) => setTimeout(done, RETRY_DELAYS_MS[attempt]));
+        }
+      }
+    };
+    const styleTag = (scheme, css) =>
+      `<style data-prerender="${scheme}">@media (prefers-color-scheme: ${scheme}) {\n${css.replaceAll("</style", "<\\/style")}\n}</style>`;
+
+    for (const lang of LANGS) {
+      try {
+        const light = await capture(lang, "light");
+        const dark = await capture(lang, "dark");
+        // The app picks its theme from prefers-color-scheme, and light and dark render different class names and
+        // logos. The light markup stays in #root (what crawlers read); the dark one waits in a <template> and is
+        // swapped in synchronously, before first paint, when the visitor's system is dark. Each CSS set only applies
+        // in its own scheme, so global rules (body background...) do not collide.
+        const swap = `<template id="prerender-dark">${dark.html}</template>
+    <script>
+      if (matchMedia("(prefers-color-scheme: dark)").matches) document.getElementById("root").innerHTML = document.getElementById("prerender-dark").innerHTML;
+      document.getElementById("prerender-dark").remove();
+    </script>`;
+        shells[lang] = shells[lang]
+          .replace("</head>", () => `  ${styleTag("light", light.css)}\n    ${styleTag("dark", dark.css)}\n  </head>`)
+          .replace('<div id="root"></div>', () => `<div id="root">${light.html}</div>\n    ${swap}`);
         await writeFile(join(DIST, lang, "index.html"), shells[lang]);
-        console.log(`[prerender] ${lang}: content snapshot injected`);
+        console.log(`[prerender] ${lang}: light and dark content snapshots injected`);
       } catch (error) {
         console.warn(`[prerender] ${lang}: snapshot failed (${error.message.split("\n")[0]}), keeping head-only shell`);
-      } finally {
-        await page.close();
       }
     }
   } catch (error) {
